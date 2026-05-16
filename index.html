@@ -1,0 +1,1405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Research Forge — Cultural Musings</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&family=JetBrains+Mono:wght@300;400;600&family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300&display=swap" rel="stylesheet">
+<style>
+:root {
+  --forge-bg: #070910;
+  --forge-surface: #0c0f1a;
+  --forge-surface2: #111522;
+  --forge-border: rgba(197,160,89,0.12);
+  --forge-border2: rgba(255,255,255,0.05);
+  --forge-gold: #c5a059;
+  --forge-gold2: #e8c97a;
+  --forge-teal: #2dd4a0;
+  --forge-red: #f87171;
+  --forge-blue: #60a5fa;
+  --forge-purple: #a78bfa;
+  --forge-text: #c8cad8;
+  --forge-muted: #444860;
+  --forge-dim: #252840;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; overflow: hidden; }
+body {
+  font-family: 'Montserrat', sans-serif;
+  background: var(--forge-bg);
+  color: var(--forge-text);
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── HEADER ── */
+.forge-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 10px 20px;
+  border-bottom: 1px solid var(--forge-border);
+  background: rgba(8,10,22,0.98);
+  flex-shrink: 0;
+  z-index: 50;
+}
+.forge-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.forge-logo-icon {
+  width: 32px; height: 32px;
+  background: linear-gradient(135deg, var(--forge-gold), #8b5e1c);
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.7rem; color: #070910; font-weight: 900;
+}
+.forge-logo-text { font-size: 0.75rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--forge-gold); }
+.forge-logo-sub { font-size: 0.42rem; font-family: 'JetBrains Mono', monospace; color: var(--forge-muted); letter-spacing: 2px; text-transform: uppercase; margin-top: 1px; }
+
+.forge-mode-toggle {
+  display: flex;
+  gap: 4px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--forge-border);
+  border-radius: 3px;
+  padding: 3px;
+  margin-left: auto;
+}
+.mode-btn {
+  padding: 5px 12px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.5rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: all 0.2s;
+  background: none;
+  color: var(--forge-muted);
+}
+.mode-btn.active {
+  background: var(--forge-gold);
+  color: #070910;
+}
+.mode-btn:hover:not(.active) { color: var(--forge-gold); }
+
+.forge-ref-chips {
+  display: flex;
+  gap: 6px;
+  flex-shrink: 0;
+}
+.ref-chip {
+  padding: 4px 10px;
+  border: 1px solid var(--forge-border);
+  border-radius: 2px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.42rem;
+  color: var(--forge-muted);
+  cursor: pointer;
+  transition: all 0.2s;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.ref-chip:hover { color: var(--forge-gold); border-color: rgba(197,160,89,0.4); }
+.ref-chip .chip-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--forge-teal); }
+
+/* ── MAIN LAYOUT ── */
+.forge-body {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+/* ── LEFT: QUERY PANEL ── */
+.forge-query {
+  width: 340px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid var(--forge-border);
+  background: rgba(8,10,22,0.9);
+  overflow-y: auto;
+}
+
+.fq-section {
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--forge-border2);
+}
+.fq-label {
+  font-size: 0.48rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--forge-gold);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.fq-label::after { content: ''; flex: 1; height: 1px; background: var(--forge-border); }
+
+/* Query textarea */
+.forge-query-input {
+  width: 100%;
+  min-height: 100px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.07);
+  padding: 10px 12px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.85rem;
+  color: var(--forge-text);
+  resize: vertical;
+  outline: none;
+  line-height: 1.6;
+  transition: border-color 0.2s;
+}
+.forge-query-input:focus { border-color: rgba(197,160,89,0.4); }
+.forge-query-input::placeholder { color: #2a2d40; font-style: italic; }
+
+/* Source chips */
+.source-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 8px;
+}
+.src-chip {
+  padding: 4px 9px;
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 2px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.42rem;
+  color: var(--forge-muted);
+  cursor: pointer;
+  transition: all 0.2s;
+  user-select: none;
+}
+.src-chip:hover { color: var(--forge-text); border-color: rgba(255,255,255,0.15); }
+.src-chip.selected { border-color: var(--forge-teal); color: var(--forge-teal); background: rgba(45,212,160,0.05); }
+
+/* Depth slider */
+.depth-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 6px;
+}
+.depth-slider {
+  flex: 1;
+  accent-color: var(--forge-gold);
+}
+.depth-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.5rem;
+  color: var(--forge-gold);
+  min-width: 60px;
+  text-align: right;
+}
+
+/* Generate button */
+.forge-gen-btn {
+  width: 100%;
+  padding: 12px;
+  background: linear-gradient(135deg, rgba(197,160,89,0.15), rgba(197,160,89,0.05));
+  border: 1px solid rgba(197,160,89,0.4);
+  color: var(--forge-gold);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.55rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.25s;
+  position: relative;
+  overflow: hidden;
+  margin-top: 10px;
+}
+.forge-gen-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(197,160,89,0.1), transparent);
+  transform: translateX(-100%);
+  transition: transform 0.5s;
+}
+.forge-gen-btn:hover::before { transform: translateX(100%); }
+.forge-gen-btn:hover:not(:disabled) { background: rgba(197,160,89,0.2); border-color: var(--forge-gold); }
+.forge-gen-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+
+/* No-API mode info */
+.noapi-info {
+  background: rgba(45,212,160,0.04);
+  border: 1px solid rgba(45,212,160,0.15);
+  padding: 10px 12px;
+  border-radius: 2px;
+  font-size: 0.5rem;
+  color: #2dd490;
+  line-height: 1.7;
+  margin-top: 8px;
+}
+.noapi-info .ni-title { font-weight: 700; letter-spacing: 1px; text-transform: uppercase; font-size: 0.48rem; margin-bottom: 4px; }
+
+/* Log */
+.forge-log {
+  flex: 1;
+  padding: 10px 12px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.46rem;
+  line-height: 1.8;
+  overflow-y: auto;
+  min-height: 80px;
+  max-height: 160px;
+}
+.log-line { display: flex; gap: 6px; }
+.log-time { color: #282c3a; flex-shrink: 0; }
+.log-line.ok .log-msg { color: var(--forge-teal); }
+.log-line.warn .log-msg { color: #f59e0b; }
+.log-line.err .log-msg { color: var(--forge-red); }
+.log-line.info .log-msg { color: #60a5fa; }
+
+/* ── CENTER: RESULTS ── */
+.forge-results {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.fr-tabs {
+  display: flex;
+  border-bottom: 1px solid var(--forge-border);
+  background: rgba(255,255,255,0.01);
+  flex-shrink: 0;
+}
+.fr-tab {
+  padding: 10px 18px;
+  font-size: 0.48rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--forge-muted);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s;
+  background: none;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  font-family: 'Montserrat', sans-serif;
+}
+.fr-tab.active { color: var(--forge-gold); border-bottom-color: var(--forge-gold); }
+.fr-tab:hover:not(.active) { color: var(--forge-text); }
+
+.fr-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(197,160,89,0.15) transparent;
+}
+
+/* Empty state */
+.fr-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  opacity: 0.35;
+  gap: 12px;
+}
+.fr-empty-icon {
+  width: 60px; height: 60px;
+  background: linear-gradient(135deg, var(--forge-gold), #5a3e12);
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.4rem;
+}
+.fr-empty-text { font-size: 0.55rem; letter-spacing: 2px; text-transform: uppercase; color: var(--forge-muted); }
+
+/* Result content */
+.result-block {
+  background: var(--forge-surface);
+  border: 1px solid var(--forge-border);
+  border-radius: 3px;
+  margin-bottom: 16px;
+  overflow: hidden;
+  animation: fadeSlideIn 0.3s ease;
+}
+@keyframes fadeSlideIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+.rb-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--forge-border2);
+  background: rgba(255,255,255,0.02);
+}
+.rb-badge {
+  padding: 2px 8px;
+  border-radius: 2px;
+  font-size: 0.42rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-family: 'JetBrains Mono', monospace;
+}
+.rb-badge.synthesis { background: rgba(197,160,89,0.15); color: var(--forge-gold); }
+.rb-badge.sources { background: rgba(45,212,160,0.12); color: var(--forge-teal); }
+.rb-badge.noapi { background: rgba(96,165,250,0.12); color: var(--forge-blue); }
+.rb-badge.github { background: rgba(167,139,250,0.12); color: var(--forge-purple); }
+.rb-title { font-size: 0.6rem; font-weight: 600; color: var(--forge-text); flex: 1; }
+.rb-source { font-family: 'JetBrains Mono', monospace; font-size: 0.42rem; color: var(--forge-muted); }
+.rb-body { padding: 14px 16px; font-size: 0.65rem; line-height: 1.8; color: var(--forge-text); }
+.rb-body h2, .rb-body h3 { color: var(--forge-gold2); margin: 12px 0 6px; font-size: 0.7rem; }
+.rb-body p { margin-bottom: 8px; }
+.rb-body ul, .rb-body ol { margin: 6px 0 10px 16px; }
+.rb-body li { margin-bottom: 4px; }
+.rb-body code { background: rgba(255,255,255,0.05); padding: 1px 5px; font-family: 'JetBrains Mono', monospace; font-size: 0.55rem; color: #a78bfa; }
+.rb-body strong { color: var(--forge-gold2); }
+.rb-body blockquote { border-left: 2px solid var(--forge-gold); padding-left: 12px; color: var(--forge-muted); font-style: italic; margin: 8px 0; }
+.rb-body a { color: var(--forge-teal); text-decoration: none; }
+.rb-body a:hover { text-decoration: underline; }
+
+/* Source cards grid */
+.source-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 10px; padding: 12px; }
+.source-card {
+  background: rgba(255,255,255,0.02);
+  border: 1px solid var(--forge-border2);
+  border-radius: 2px;
+  padding: 12px;
+  transition: all 0.2s;
+}
+.source-card:hover { border-color: rgba(197,160,89,0.25); background: rgba(255,255,255,0.04); }
+.sc-domain { font-family: 'JetBrains Mono', monospace; font-size: 0.42rem; color: var(--forge-teal); margin-bottom: 5px; }
+.sc-title { font-size: 0.55rem; font-weight: 600; color: var(--forge-text); margin-bottom: 5px; line-height: 1.4; }
+.sc-snippet { font-size: 0.5rem; color: var(--forge-muted); line-height: 1.6; }
+.sc-link { display: inline-block; margin-top: 6px; font-size: 0.42rem; color: var(--forge-gold); text-decoration: none; }
+.sc-link:hover { text-decoration: underline; }
+
+/* Loading animation */
+.forge-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px;
+  gap: 16px;
+}
+.loading-hex {
+  width: 50px; height: 50px;
+  background: linear-gradient(135deg, rgba(197,160,89,0.3), rgba(197,160,89,0.05));
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  animation: spin 2s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.loading-text { font-family: 'JetBrains Mono', monospace; font-size: 0.5rem; color: var(--forge-gold); letter-spacing: 2px; }
+.loading-sub { font-size: 0.45rem; color: var(--forge-muted); font-family: 'JetBrains Mono', monospace; }
+
+/* ── RIGHT: KEY VAULT ── */
+.forge-keys {
+  width: 280px;
+  flex-shrink: 0;
+  background: rgba(8,10,22,0.95);
+  border-left: 1px solid var(--forge-border);
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(197,160,89,0.15) transparent;
+  display: flex;
+  flex-direction: column;
+}
+.forge-keys::-webkit-scrollbar { width: 3px; }
+.forge-keys::-webkit-scrollbar-thumb { background: rgba(197,160,89,0.15); border-radius: 2px; }
+
+.fk-header {
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--forge-border);
+  background: rgba(255,255,255,0.02);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+.fk-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.55rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--forge-gold);
+  margin-bottom: 3px;
+}
+.fk-subtitle {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.42rem;
+  color: #333;
+  line-height: 1.6;
+}
+
+.fk-body { padding: 8px 10px; flex: 1; }
+
+.key-slot-20 {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-bottom: 4px;
+  padding: 3px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.025);
+}
+.ks20-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.42rem;
+  color: #2a2d3a;
+  min-width: 16px;
+  text-align: right;
+  flex-shrink: 0;
+}
+.ks20-input {
+  flex: 1;
+  background: rgba(255,255,255,0.025);
+  border: 1px solid rgba(255,255,255,0.06);
+  padding: 5px 6px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.44rem;
+  color: #666;
+  outline: none;
+  transition: border-color 0.2s, background 0.2s;
+  min-width: 0;
+  border-radius: 1px;
+}
+.ks20-input:focus { border-color: rgba(197,160,89,0.5); background: rgba(255,255,255,0.05); color: var(--forge-text); }
+.ks20-input::placeholder { color: #1e2030; font-size: 0.38rem; }
+.ks20-input.ks-locked {
+  color: transparent;
+  text-shadow: 0 0 8px rgba(45,212,160,0.55);
+  border-color: rgba(45,212,160,0.2);
+  background: rgba(5,18,14,0.5);
+  pointer-events: none;
+  user-select: none;
+}
+.ks20-btn {
+  width: 20px; height: 20px;
+  background: none;
+  border: 1px solid rgba(255,255,255,0.06);
+  color: #2a2d3a;
+  font-size: 0.55rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border-radius: 1px;
+}
+.ks20-btn:hover { border-color: rgba(197,160,89,0.4); color: var(--forge-gold); }
+.ks20-btn.ks-locked { border-color: rgba(45,212,160,0.3); color: #2dd4a0; }
+
+.fk-stats {
+  padding: 10px 12px;
+  border-top: 1px solid var(--forge-border);
+  background: rgba(255,255,255,0.01);
+  position: sticky;
+  bottom: 0;
+}
+.fks-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px; }
+.fks-label { font-family: 'Montserrat', sans-serif; font-size: 0.44rem; letter-spacing: 1px; text-transform: uppercase; color: #333; }
+.fks-val { font-family: 'JetBrains Mono', monospace; font-size: 0.5rem; color: var(--forge-teal); }
+
+.fk-clear-btn {
+  width: 100%;
+  margin-top: 6px;
+  padding: 6px;
+  background: rgba(248,113,113,0.04);
+  border: 1px solid rgba(248,113,113,0.12);
+  color: #333;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.44rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s;
+  border-radius: 1px;
+}
+.fk-clear-btn:hover { color: var(--forge-red); border-color: rgba(248,113,113,0.35); }
+
+/* ── STATUS BAR ── */
+.forge-status-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 16px;
+  border-top: 1px solid var(--forge-border);
+  background: rgba(5,7,15,0.95);
+  flex-shrink: 0;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.42rem;
+}
+.provider-pill {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 8px;
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 2px;
+  font-size: 0.4rem;
+  color: var(--forge-muted);
+  transition: all 0.2s;
+}
+.provider-pill.vault-pill { color: var(--forge-gold); border-color: rgba(197,160,89,0.25); }
+.pill-dot { width: 5px; height: 5px; border-radius: 50%; background: #2a2d3a; }
+.pill-dot.ok { background: var(--forge-teal); box-shadow: 0 0 4px var(--forge-teal); }
+.pill-dot.empty { background: #333; }
+.fsb-sep { color: #222; }
+.fsb-item { color: var(--forge-muted); }
+.fsb-total { color: var(--forge-gold); margin-left: auto; }
+
+/* scrollbar */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-thumb { background: rgba(197,160,89,0.12); border-radius: 2px; }
+
+/* ── MODAL ── */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,5,0.85);
+  z-index: 200;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(4px);
+}
+.modal-overlay.open { display: flex; }
+.modal-box {
+  background: var(--forge-surface2);
+  border: 1px solid var(--forge-border);
+  width: 480px;
+  max-width: 95vw;
+  padding: 24px;
+}
+.modal-title { font-size: 0.7rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--forge-gold); margin-bottom: 10px; }
+.modal-body { font-size: 0.6rem; color: var(--forge-muted); line-height: 1.8; margin-bottom: 16px; }
+.modal-close {
+  padding: 8px 20px;
+  background: rgba(197,160,89,0.1);
+  border: 1px solid rgba(197,160,89,0.3);
+  color: var(--forge-gold);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.5rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.modal-close:hover { background: rgba(197,160,89,0.2); }
+
+/* Utility */
+.hidden { display: none !important; }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="forge-header">
+  <div class="forge-logo">
+    <div class="forge-logo-icon">⬡</div>
+    <div>
+      <div class="forge-logo-text">Research Forge</div>
+      <div class="forge-logo-sub">Cultural Musings · Computational Codex</div>
+    </div>
+  </div>
+
+  <div class="forge-ref-chips">
+    <a class="ref-chip" href="https://www.culturalmusings.com" target="_blank"><span class="chip-dot"></span>culturalmusings.com</a>
+    <a class="ref-chip" href="https://computationalcodex.culturalmusings.com" target="_blank"><span class="chip-dot"></span>computationalcodex</a>
+    <a class="ref-chip" href="https://github.com/ramachandra1975" target="_blank"><span class="chip-dot"></span>github/ramachandra1975</a>
+  </div>
+
+  <div class="forge-mode-toggle">
+    <button class="mode-btn active" id="modeNoApi" onclick="switchMode('noapi')">⬡ No-API Mode</button>
+    <button class="mode-btn" id="modeApi" onclick="switchMode('api')">⚡ API Mode</button>
+  </div>
+</div>
+
+<!-- BODY -->
+<div class="forge-body">
+
+  <!-- LEFT: QUERY PANEL -->
+  <div class="forge-query">
+
+    <div class="fq-section">
+      <div class="fq-label">Query</div>
+      <textarea class="forge-query-input" id="queryInput" placeholder="Enter your research question… e.g. 'What is the physics of 108 karanas in Natya Shastra?'" rows="5"></textarea>
+    </div>
+
+    <div class="fq-section">
+      <div class="fq-label">Sources</div>
+      <div class="source-chips" id="sourceChips">
+        <div class="src-chip selected" data-src="culturalmusings">culturalmusings.com</div>
+        <div class="src-chip selected" data-src="computationalcodex">computationalcodex</div>
+        <div class="src-chip selected" data-src="github">github/ramachandra1975</div>
+        <div class="src-chip" data-src="wikipedia">wikipedia</div>
+        <div class="src-chip" data-src="scholar">google scholar</div>
+        <div class="src-chip" data-src="archive">archive.org</div>
+        <div class="src-chip" data-src="jstor">jstor</div>
+        <div class="src-chip" data-src="arxiv">arxiv</div>
+      </div>
+    </div>
+
+    <div class="fq-section">
+      <div class="fq-label">Research Depth</div>
+      <div class="depth-row">
+        <input type="range" class="depth-slider" id="depthSlider" min="1" max="5" value="3" oninput="updateDepth(this.value)">
+        <span class="depth-label" id="depthLabel">Deep (3)</span>
+      </div>
+    </div>
+
+    <div class="fq-section" id="noApiSection">
+      <div class="noapi-info">
+        <div class="ni-title">⬡ No-API Mode</div>
+        Forge curated reference links from selected sources. Opens search pages and provides direct research links — no API key required. Best for exploration.
+      </div>
+      <button class="forge-gen-btn" id="generateBtn" onclick="doResearch()">⬡ Generate Research Links</button>
+    </div>
+
+    <div class="fq-section hidden" id="apiSection">
+      <div class="noapi-info" style="background:rgba(197,160,89,0.04);border-color:rgba(197,160,89,0.2);color:var(--forge-gold)">
+        <div class="ni-title">⚡ API Mode</div>
+        Uses your API key (Groq / Gemini / OpenRouter / Anthropic) to synthesize a full research report with citations.
+      </div>
+      <button class="forge-gen-btn" id="generateBtnApi" onclick="doApiResearch()">⚡ Synthesize with AI</button>
+    </div>
+
+    <!-- LOG -->
+    <div class="fq-section" style="flex:1;padding-bottom:0">
+      <div class="fq-label">Log</div>
+      <div class="forge-log" id="forgeLog">
+        <div class="log-line info"><span class="log-time">00:00</span><span class="log-msg">Research Forge initialized. Select mode and enter query.</span></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- CENTER: RESULTS -->
+  <div class="forge-results">
+    <div class="fr-tabs">
+      <button class="fr-tab active" onclick="switchTab('synthesis')">Synthesis</button>
+      <button class="fr-tab" onclick="switchTab('sources')">Sources</button>
+      <button class="fr-tab" onclick="switchTab('github')">GitHub</button>
+      <button class="fr-tab" onclick="switchTab('export')">Export</button>
+    </div>
+    <div class="fr-content" id="frContent">
+      <div class="fr-empty" id="emptyState">
+        <div class="fr-empty-icon">⬡</div>
+        <div class="fr-empty-text">Awaiting Research Query</div>
+        <div style="font-size:0.42rem;color:#252840;font-family:'JetBrains Mono',monospace;text-align:center;line-height:1.8">
+          Enter a query · Select sources · Choose mode<br>culturalmusings.com · github/ramachandra1975
+        </div>
+      </div>
+      <div id="resultContent" style="display:none"></div>
+    </div>
+  </div>
+
+  <!-- RIGHT: KEY VAULT -->
+  <div class="forge-keys">
+    <div class="fk-header">
+      <div class="fk-title">⬡ Key Vault</div>
+      <div class="fk-subtitle" id="fk-subtitle-text">Paste Groq/Gemini/OpenRouter/Anthropic keys. Auto-detected. Persists on reload.</div>
+    </div>
+    <div class="fk-body" id="forgeKeyBody">
+      <!-- 20 slots rendered by JS -->
+    </div>
+    <div class="fk-stats">
+      <div class="fks-row">
+        <span class="fks-label">Active Keys</span>
+        <span class="fks-val" id="fkActiveCount">0</span>
+      </div>
+      <div class="fks-row">
+        <span class="fks-label">Requests</span>
+        <span class="fks-val" id="fkReqCount">0</span>
+      </div>
+      <div class="fks-row">
+        <span class="fks-label">Last Used</span>
+        <span class="fks-val" id="fkCurProvider">—</span>
+      </div>
+      <button class="fk-clear-btn" onclick="clearAllKeys()">⬡ Clear All Keys</button>
+    </div>
+  </div>
+
+</div>
+
+<!-- STATUS BAR -->
+<div class="forge-status-bar" id="forgeStatusBar">
+  <span class="provider-pill vault-pill idle" id="vaultPill"><span class="pill-dot empty" id="vaultDot"></span>Key Vault 0/20</span>
+  <span class="fsb-sep">·</span>
+  <span class="fsb-item" id="fsbMode">Mode: No-API</span>
+  <span class="fsb-sep">·</span>
+  <span class="fsb-item">culturalmusings.com</span>
+  <span class="fsb-sep">·</span>
+  <span class="fsb-item">github/ramachandra1975</span>
+  <span class="fsb-total" id="fkTotalLabel">0 keys active</span>
+</div>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modal">
+  <div class="modal-box">
+    <div class="modal-title" id="modalTitle">Notice</div>
+    <div class="modal-body" id="modalBody"></div>
+    <button class="modal-close" onclick="closeModal()">Close</button>
+  </div>
+</div>
+
+<script>
+/* ════════════════════════════════════
+   STATE
+════════════════════════════════════ */
+let _currentMode = 'noapi';
+let _currentTab = 'synthesis';
+let _selectedSources = new Set(['culturalmusings','computationalcodex','github']);
+let _researchDepth = 3;
+let _researchResults = {};
+
+const VAULT_KEY = 'forge_vault_v1';
+const SLOT_COUNT = 20;
+let _vault = Array.from({length: SLOT_COUNT}, () => ({key:'', used:0, errors:0}));
+let _vaultRequests = 0;
+let _vaultCurrentSlot = '—';
+
+/* ════════════════════════════════════
+   VAULT ENGINE
+════════════════════════════════════ */
+function vaultSave() {
+  const data = _vault.map(s => ({key: s.key}));
+  try { localStorage.setItem(VAULT_KEY, JSON.stringify(data)); } catch(e) {}
+}
+function vaultLoad() {
+  try {
+    const raw = localStorage.getItem(VAULT_KEY);
+    if (!raw) return;
+    const data = JSON.parse(raw);
+    data.forEach((item, i) => { if (i < SLOT_COUNT && item.key) _vault[i].key = item.key; });
+  } catch(e) {}
+}
+function vaultGetActive() {
+  return _vault.map((s,i) => ({...s, index:i})).filter(s => s.key && s.errors < 3);
+}
+function vaultGetNext() {
+  const active = vaultGetActive();
+  if (!active.length) return null;
+  return active.reduce((a,b) => a.used <= b.used ? a : b);
+}
+function vaultMarkError(index) {
+  _vault[index].errors++;
+  vaultUpdateStatusBar();
+}
+function vaultMarkUsed(index) {
+  _vault[index].used++;
+  _vault[index].errors = 0;
+  _vaultRequests++;
+  _vaultCurrentSlot = `Slot ${index + 1}`;
+  const el = document.getElementById('fkReqCount');
+  if (el) el.textContent = _vaultRequests;
+  const pEl = document.getElementById('fkCurProvider');
+  if (pEl) pEl.textContent = _vaultCurrentSlot;
+  vaultUpdateStatusBar();
+}
+
+async function callAI(prompt, maxTokens=2000) {
+  const slot = vaultGetNext();
+  if (!slot) throw new Error('No API keys available. Add keys in the Key Vault panel.');
+  const key = slot.key;
+  const index = slot.index;
+  try {
+    let result;
+    if (key.startsWith('gsk_') || key.startsWith('gsk-')) {
+      result = await _callGroq(key, prompt, maxTokens);
+    } else if (key.startsWith('AIzaSy') || key.startsWith('AIza')) {
+      result = await _callGemini(key, prompt, maxTokens);
+    } else if (key.startsWith('sk-or')) {
+      result = await _callOpenRouter(key, prompt, maxTokens);
+    } else if (key.startsWith('sk-ant')) {
+      result = await _callAnthropic(key, prompt, maxTokens);
+    } else {
+      try { result = await _callGroq(key, prompt, maxTokens); }
+      catch(e2) { result = await _callOpenRouter(key, prompt, maxTokens); }
+    }
+    vaultMarkUsed(index);
+    return result;
+  } catch(err) {
+    forgeLog(`Slot ${index+1} error: ${err.message}`, 'err');
+    vaultMarkError(index);
+    const next = vaultGetNext();
+    if (next && next.index !== index) return callAI(prompt, maxTokens);
+    throw new Error('All available keys failed. ' + err.message);
+  }
+}
+
+async function _callGroq(key, prompt, maxTokens) {
+  const r = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+    method:'POST',
+    headers:{'Content-Type':'application/json','Authorization':`Bearer ${key}`},
+    body: JSON.stringify({model:'llama-3.3-70b-versatile', max_tokens: Math.min(maxTokens,8000), messages:[{role:'user',content:prompt}]})
+  });
+  if (!r.ok) throw new Error(`Groq HTTP ${r.status}`);
+  const d = await r.json();
+  return d.choices?.[0]?.message?.content || '';
+}
+async function _callGemini(key, prompt, maxTokens) {
+  const r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${key}`,{
+    method:'POST', headers:{'Content-Type':'application/json'},
+    body: JSON.stringify({contents:[{parts:[{text:prompt}]}], generationConfig:{maxOutputTokens:Math.min(maxTokens,8192)}})
+  });
+  if (!r.ok) throw new Error(`Gemini HTTP ${r.status}`);
+  const d = await r.json();
+  return d.candidates?.[0]?.content?.parts?.[0]?.text || '';
+}
+async function _callOpenRouter(key, prompt, maxTokens) {
+  const r = await fetch('https://openrouter.ai/api/v1/chat/completions',{
+    method:'POST',
+    headers:{'Content-Type':'application/json','Authorization':`Bearer ${key}`,'HTTP-Referer':'https://culturalmusings.com','X-Title':'Research Forge'},
+    body: JSON.stringify({model:'meta-llama/llama-3.3-70b-instruct:free', max_tokens:Math.min(maxTokens,8000), messages:[{role:'user',content:prompt}]})
+  });
+  if (!r.ok) throw new Error(`OpenRouter HTTP ${r.status}`);
+  const d = await r.json();
+  return d.choices?.[0]?.message?.content || '';
+}
+async function _callAnthropic(key, prompt, maxTokens) {
+  const r = await fetch('https://api.anthropic.com/v1/messages',{
+    method:'POST',
+    headers:{'Content-Type':'application/json','x-api-key':key,'anthropic-version':'2023-06-01'},
+    body: JSON.stringify({model:'claude-3-haiku-20240307', max_tokens:Math.min(maxTokens,4096), messages:[{role:'user',content:prompt}]})
+  });
+  if (!r.ok) throw new Error(`Anthropic HTTP ${r.status}`);
+  const d = await r.json();
+  return d.content?.[0]?.text || '';
+}
+
+/* ════════════════════════════════════
+   KEY PANEL UI
+════════════════════════════════════ */
+function buildKeyPanel() {
+  const body = document.getElementById('forgeKeyBody');
+  if (!body) return;
+  body.innerHTML = Array.from({length: SLOT_COUNT}, (_, i) => {
+    const slot = _vault[i];
+    const isLocked = !!slot.key;
+    const displayVal = isLocked ? (slot.key.slice(0,4) + '••••••••' + slot.key.slice(-3)) : '';
+    return `<div class="key-slot-20" id="kslot-row-${i}">
+      <span class="ks20-num">${String(i+1).padStart(2,'0')}</span>
+      <input type="text" class="ks20-input${isLocked?' ks-locked':''}" id="kslot-${i}"
+        value="${displayVal}" placeholder="Paste key…" autocomplete="off" spellcheck="false"
+        ${isLocked?'readonly':''}
+        onpaste="vaultHandlePaste(event,${i})"
+        onkeydown="vaultHandleEnter(event,${i})">
+      <button class="ks20-btn${isLocked?' ks-locked':''}" id="kslot-btn-${i}"
+        title="${isLocked?'Click to remove':'Press Enter or paste key'}"
+        onclick="vaultToggleSlot(${i})">${isLocked?'✓':'+'}</button>
+    </div>`;
+  }).join('');
+  vaultUpdateStatusBar();
+}
+
+function vaultHandlePaste(e, i) {
+  e.preventDefault();
+  const raw = (e.clipboardData||window.clipboardData).getData('text').trim();
+  if (raw.length >= 8) vaultLockSlot(i, raw);
+}
+function vaultHandleEnter(e, i) {
+  if (e.key === 'Enter') {
+    const inp = document.getElementById('kslot-'+i);
+    if (inp && inp.value.trim().length >= 8) vaultLockSlot(i, inp.value.trim());
+  }
+}
+function vaultToggleSlot(i) {
+  if (_vault[i].key) {
+    if (!confirm(`Remove key from Slot ${i+1}?`)) return;
+    _vault[i] = {key:'', used:0, errors:0};
+    const inp = document.getElementById('kslot-'+i);
+    const btn = document.getElementById('kslot-btn-'+i);
+    if (inp) { inp.value=''; inp.classList.remove('ks-locked'); inp.removeAttribute('readonly'); }
+    if (btn) { btn.textContent='+'; btn.classList.remove('ks-locked'); }
+    vaultSave(); vaultUpdateStatusBar();
+    forgeLog(`Slot ${i+1} key removed`, 'warn');
+  }
+}
+function vaultLockSlot(i, key) {
+  _vault[i].key = key; _vault[i].errors = 0;
+  const inp = document.getElementById('kslot-'+i);
+  const btn = document.getElementById('kslot-btn-'+i);
+  if (inp) { inp.value = key.slice(0,4)+'••••••••'+key.slice(-3); inp.classList.add('ks-locked'); inp.setAttribute('readonly',''); }
+  if (btn) { btn.textContent='✓'; btn.classList.add('ks-locked'); btn.title='Click to remove key'; }
+  vaultSave(); vaultUpdateStatusBar();
+  forgeLog(`Slot ${i+1} locked ✓`, 'ok');
+}
+function clearAllKeys() {
+  if (!confirm('Clear all 20 API keys?')) return;
+  _vault.forEach((s,i)=>{
+    s.key=''; s.used=0; s.errors=0;
+    const inp=document.getElementById('kslot-'+i), btn=document.getElementById('kslot-btn-'+i);
+    if(inp){inp.value='';inp.classList.remove('ks-locked');inp.removeAttribute('readonly');}
+    if(btn){btn.textContent='+';btn.classList.remove('ks-locked');}
+  });
+  vaultSave(); vaultUpdateStatusBar();
+  forgeLog('All vault keys cleared','warn');
+}
+function vaultUpdateStatusBar() {
+  const active = vaultGetActive().length;
+  const pill = document.getElementById('vaultPill');
+  const dot = document.getElementById('vaultDot');
+  if (pill) { pill.innerHTML = `<span class="pill-dot ${active>0?'ok':'empty'}" id="vaultDot"></span>Key Vault ${active}/20`; pill.className = `provider-pill vault-pill ${active>0?'active':'idle'}`; }
+  const cnt = document.getElementById('fkActiveCount'); if(cnt) cnt.textContent = active;
+  const tot = document.getElementById('fkTotalLabel'); if(tot) tot.textContent = `${active} key${active!==1?'s':''} active`;
+  const btn = document.getElementById('generateBtnApi'); if(btn) btn.disabled = active === 0 && _currentMode==='api';
+}
+
+/* ════════════════════════════════════
+   UI HELPERS
+════════════════════════════════════ */
+let _logStart = Date.now();
+function forgeLog(msg, type='info') {
+  const el = document.getElementById('forgeLog');
+  const secs = Math.floor((Date.now()-_logStart)/1000);
+  const mm = String(Math.floor(secs/60)).padStart(2,'0');
+  const ss = String(secs%60).padStart(2,'0');
+  const line = document.createElement('div');
+  line.className = `log-line ${type}`;
+  line.innerHTML = `<span class="log-time">${mm}:${ss}</span><span class="log-msg">${msg}</span>`;
+  el.appendChild(line);
+  el.scrollTop = el.scrollHeight;
+}
+
+function switchMode(mode) {
+  _currentMode = mode;
+  document.getElementById('modeNoApi').classList.toggle('active', mode==='noapi');
+  document.getElementById('modeApi').classList.toggle('active', mode==='api');
+  document.getElementById('noApiSection').classList.toggle('hidden', mode!=='noapi');
+  document.getElementById('apiSection').classList.toggle('hidden', mode!=='api');
+  document.getElementById('fsbMode').textContent = `Mode: ${mode==='noapi'?'No-API':'API'}`;
+  forgeLog(`Switched to ${mode==='noapi'?'No-API':'API'} mode`, 'info');
+}
+
+function switchTab(tab) {
+  _currentTab = tab;
+  document.querySelectorAll('.fr-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.fr-tab').forEach(t => { if(t.textContent.toLowerCase().includes(tab)) t.classList.add('active'); });
+  renderCurrentTab();
+}
+
+function updateDepth(v) {
+  _researchDepth = parseInt(v);
+  const labels = {1:'Surface (1)', 2:'Standard (2)', 3:'Deep (3)', 4:'Expert (4)', 5:'Exhaustive (5)'};
+  document.getElementById('depthLabel').textContent = labels[v] || `Depth ${v}`;
+}
+
+document.querySelectorAll('.src-chip').forEach(chip => {
+  chip.addEventListener('click', () => {
+    const src = chip.dataset.src;
+    chip.classList.toggle('selected');
+    if (chip.classList.contains('selected')) _selectedSources.add(src);
+    else _selectedSources.delete(src);
+  });
+});
+
+function showModal(title, body) {
+  document.getElementById('modalTitle').textContent = title;
+  document.getElementById('modalBody').innerHTML = body;
+  document.getElementById('modal').classList.add('open');
+}
+function closeModal() { document.getElementById('modal').classList.remove('open'); }
+
+function showLoading(msg) {
+  document.getElementById('emptyState').style.display = 'none';
+  document.getElementById('resultContent').style.display = 'none';
+  const c = document.getElementById('frContent');
+  let loader = document.getElementById('frLoader');
+  if (!loader) { loader = document.createElement('div'); loader.id='frLoader'; loader.className='forge-loading'; c.appendChild(loader); }
+  loader.innerHTML = `<div class="loading-hex"></div><div class="loading-text">${msg}</div><div class="loading-sub">Depth level ${_researchDepth} · ${[..._selectedSources].length} sources</div>`;
+  loader.style.display = 'flex';
+}
+function hideLoading() {
+  const l = document.getElementById('frLoader');
+  if (l) l.style.display = 'none';
+}
+function showResults() {
+  hideLoading();
+  document.getElementById('emptyState').style.display = 'none';
+  document.getElementById('resultContent').style.display = 'block';
+}
+
+/* ════════════════════════════════════
+   SOURCE DEFINITIONS
+════════════════════════════════════ */
+const SOURCE_DEFS = {
+  culturalmusings: {
+    label: 'culturalmusings.com',
+    base: 'https://www.culturalmusings.com',
+    searchUrl: q => `https://www.culturalmusings.com/?s=${encodeURIComponent(q)}`,
+    color: 'var(--forge-gold)',
+    desc: 'Primary reference: Cultural Musings — Indian classical arts, history, and theory.',
+    links: [
+      {title:'Home', url:'https://www.culturalmusings.com'},
+      {title:'About', url:'https://www.culturalmusings.com/about'},
+      {title:'Articles', url:'https://www.culturalmusings.com/articles'},
+    ]
+  },
+  computationalcodex: {
+    label: 'Computational Codex',
+    base: 'https://computationalcodex.culturalmusings.com',
+    searchUrl: q => `https://computationalcodex.culturalmusings.com/?s=${encodeURIComponent(q)}`,
+    color: 'var(--forge-teal)',
+    desc: 'Computational Codex — Structured knowledge base for classical arts research.',
+    links: [
+      {title:'Codex Home', url:'https://computationalcodex.culturalmusings.com'},
+    ]
+  },
+  github: {
+    label: 'GitHub / ramachandra1975',
+    base: 'https://github.com/ramachandra1975',
+    searchUrl: q => `https://github.com/search?q=user:ramachandra1975+${encodeURIComponent(q)}&type=repositories`,
+    color: 'var(--forge-purple)',
+    desc: 'GitHub repositories by ramachandra1975 — code and structured data for cultural research.',
+    links: [
+      {title:'GitHub Profile', url:'https://github.com/ramachandra1975'},
+      {title:'Repositories', url:'https://github.com/ramachandra1975?tab=repositories'},
+    ]
+  },
+  wikipedia: {
+    label: 'Wikipedia',
+    base: 'https://en.wikipedia.org',
+    searchUrl: q => `https://en.wikipedia.org/wiki/Special:Search?search=${encodeURIComponent(q)}`,
+    color: 'var(--forge-blue)',
+    desc: 'Wikipedia — general encyclopaedic reference.'
+  },
+  scholar: {
+    label: 'Google Scholar',
+    base: 'https://scholar.google.com',
+    searchUrl: q => `https://scholar.google.com/scholar?q=${encodeURIComponent(q)}`,
+    color: '#4ade80',
+    desc: 'Google Scholar — academic papers and citations.'
+  },
+  archive: {
+    label: 'Archive.org',
+    base: 'https://archive.org',
+    searchUrl: q => `https://archive.org/search?query=${encodeURIComponent(q)}`,
+    color: '#fb923c',
+    desc: 'Internet Archive — historical texts, scanned manuscripts, and media.'
+  },
+  jstor: {
+    label: 'JSTOR',
+    base: 'https://www.jstor.org',
+    searchUrl: q => `https://www.jstor.org/action/doBasicSearch?Query=${encodeURIComponent(q)}`,
+    color: '#e879f9',
+    desc: 'JSTOR — peer-reviewed academic journal articles.'
+  },
+  arxiv: {
+    label: 'arXiv',
+    base: 'https://arxiv.org',
+    searchUrl: q => `https://arxiv.org/search/?searchtype=all&query=${encodeURIComponent(q)}`,
+    color: '#f87171',
+    desc: 'arXiv — preprints in physics, mathematics, computer science.'
+  }
+};
+
+/* ════════════════════════════════════
+   NO-API RESEARCH MODE
+════════════════════════════════════ */
+function doResearch() {
+  const q = document.getElementById('queryInput').value.trim();
+  if (!q) { showModal('Query Required', 'Please enter a research query before generating links.'); return; }
+  if (_selectedSources.size === 0) { showModal('No Sources', 'Please select at least one source.'); return; }
+
+  forgeLog(`No-API research: "${q.slice(0,60)}…"`, 'info');
+  forgeLog(`Sources: ${[..._selectedSources].join(', ')}`, 'info');
+  showLoading('Generating Research Links…');
+
+  setTimeout(() => {
+    _researchResults = buildNoApiResults(q);
+    showResults();
+    renderCurrentTab();
+    forgeLog('Research links generated ✓', 'ok');
+  }, 600);
+}
+
+function buildNoApiResults(q) {
+  const results = { synthesis: '', sources: [], github: [], query: q };
+
+  // Build synthesis HTML
+  const srcList = [..._selectedSources].map(s => SOURCE_DEFS[s]).filter(Boolean);
+  results.synthesis = `
+    <div class="result-block">
+      <div class="rb-header">
+        <span class="rb-badge noapi">No-API Mode</span>
+        <span class="rb-title">${escHtml(q)}</span>
+        <span class="rb-source">${srcList.length} sources · Depth ${_researchDepth}</span>
+      </div>
+      <div class="rb-body">
+        <h2>Research Guide</h2>
+        <p>Below are curated search links for your query across selected sources. Click any link to open the search results in a new tab.</p>
+        <h3>Primary References (Cultural Musings)</h3>
+        <ul>
+          <li><a href="https://www.culturalmusings.com" target="_blank">culturalmusings.com — Main Portal</a></li>
+          <li><a href="https://computationalcodex.culturalmusings.com" target="_blank">Computational Codex — Structured Research Database</a></li>
+          <li><a href="https://www.culturalmusings.com/?s=${encodeURIComponent(q)}" target="_blank">Search culturalmusings.com for: ${escHtml(q)}</a></li>
+          <li><a href="https://computationalcodex.culturalmusings.com/?s=${encodeURIComponent(q)}" target="_blank">Search Computational Codex for: ${escHtml(q)}</a></li>
+        </ul>
+        <h3>GitHub (ramachandra1975)</h3>
+        <ul>
+          <li><a href="https://github.com/ramachandra1975" target="_blank">GitHub Profile — ramachandra1975</a></li>
+          <li><a href="https://github.com/ramachandra1975?tab=repositories" target="_blank">All Repositories</a></li>
+          <li><a href="https://github.com/search?q=user:ramachandra1975+${encodeURIComponent(q)}&type=repositories" target="_blank">Search repositories for: ${escHtml(q)}</a></li>
+        </ul>
+        ${_researchDepth >= 2 ? `
+        <h3>Academic Sources</h3>
+        <ul>
+          <li><a href="https://scholar.google.com/scholar?q=${encodeURIComponent(q)}" target="_blank">Google Scholar: ${escHtml(q)}</a></li>
+          <li><a href="https://www.jstor.org/action/doBasicSearch?Query=${encodeURIComponent(q)}" target="_blank">JSTOR: ${escHtml(q)}</a></li>
+          <li><a href="https://arxiv.org/search/?searchtype=all&query=${encodeURIComponent(q)}" target="_blank">arXiv: ${escHtml(q)}</a></li>
+          <li><a href="https://archive.org/search?query=${encodeURIComponent(q)}" target="_blank">Internet Archive: ${escHtml(q)}</a></li>
+        </ul>` : ''}
+        ${_researchDepth >= 3 ? `
+        <h3>Extended Search Strategies</h3>
+        <ul>
+          <li><a href="https://en.wikipedia.org/wiki/Special:Search?search=${encodeURIComponent(q)}" target="_blank">Wikipedia: ${escHtml(q)}</a></li>
+          <li><a href="https://www.google.com/search?q=${encodeURIComponent(q)}+site:culturalmusings.com" target="_blank">Google: ${escHtml(q)} (site:culturalmusings.com)</a></li>
+          <li><a href="https://www.google.com/search?q=${encodeURIComponent(q)}+filetype:pdf" target="_blank">Google: PDF papers on ${escHtml(q)}</a></li>
+          <li><a href="https://www.google.com/search?q=${encodeURIComponent(q)}+Natya+Shastra" target="_blank">Google: ${escHtml(q)} + Natya Shastra</a></li>
+        </ul>` : ''}
+        ${_researchDepth >= 4 ? `
+        <h3>Deep Research Links</h3>
+        <ul>
+          <li><a href="https://www.google.com/search?q=${encodeURIComponent(q)}+Bharatanatyam" target="_blank">Search: ${escHtml(q)} + Bharatanatyam</a></li>
+          <li><a href="https://www.google.com/search?q=${encodeURIComponent(q)}+Chidambaram+temple" target="_blank">Search: ${escHtml(q)} + Chidambaram temple</a></li>
+          <li><a href="https://www.google.com/search?q=${encodeURIComponent(q)}+108+karanas" target="_blank">Search: ${escHtml(q)} + 108 karanas</a></li>
+          <li><a href="https://www.google.com/search?q=${encodeURIComponent(q)}+computational+analysis" target="_blank">Search: ${escHtml(q)} + computational analysis</a></li>
+        </ul>` : ''}
+        ${_researchDepth >= 5 ? `
+        <h3>Manuscript & Archive Research</h3>
+        <ul>
+          <li><a href="https://archive.org/search?query=${encodeURIComponent(q)}+Natya+Shastra" target="_blank">Archive.org: Natya Shastra manuscripts related to ${escHtml(q)}</a></li>
+          <li><a href="https://archive.org/search?query=${encodeURIComponent('Bharata Muni')}+${encodeURIComponent(q)}" target="_blank">Archive.org: Bharata Muni + ${escHtml(q)}</a></li>
+          <li><a href="https://scholar.google.com/scholar?q=${encodeURIComponent(q)}+%22Natya+Shastra%22&as_ylo=2010" target="_blank">Scholar: Recent papers (2010+) on ${escHtml(q)} + Natya Shastra</a></li>
+          <li><a href="https://www.jstor.org/action/doBasicSearch?Query=${encodeURIComponent(q)}+%22Indian+classical%22" target="_blank">JSTOR: ${escHtml(q)} in Indian classical contexts</a></li>
+        </ul>` : ''}
+        <blockquote>
+          Tip: Switch to <strong>API Mode</strong> and add a Groq / Gemini / OpenRouter key to get a full AI-synthesized research report with analysis.
+        </blockquote>
+      </div>
+    </div>`;
+
+  // Build source cards
+  results.sources = srcList.map(s => ({
+    domain: s.label,
+    title: `Search ${s.label} for "${q}"`,
+    snippet: s.desc,
+    url: s.searchUrl(q),
+    color: s.color
+  }));
+
+  // GitHub result
+  results.github = [
+    { title: 'ramachandra1975 — GitHub Profile', url: 'https://github.com/ramachandra1975', desc: 'View all repositories, contributions, and projects by ramachandra1975.' },
+    { title: `Search: "${q}" in ramachandra1975 repos`, url: `https://github.com/search?q=user:ramachandra1975+${encodeURIComponent(q)}&type=repositories`, desc: 'Repository search scoped to ramachandra1975.' },
+    { title: 'Computational Codex Repository', url: 'https://github.com/ramachandra1975', desc: 'Cultural Musings computational project — computational codex for classical arts.' }
+  ];
+
+  return results;
+}
+
+/* ════════════════════════════════════
+   API RESEARCH MODE
+════════════════════════════════════ */
+async function doApiResearch() {
+  const q = document.getElementById('queryInput').value.trim();
+  if (!q) { showModal('Query Required', 'Please enter a research query.'); return; }
+  if (vaultGetActive().length === 0) { showModal('No API Keys', 'Please add at least one API key in the Key Vault panel on the right.'); return; }
+
+  forgeLog(`API research: "${q.slice(0,60)}…"`, 'info');
+  showLoading('Synthesizing with AI…');
+
+  const srcNames = [..._selectedSources].map(s => SOURCE_DEFS[s]?.label || s).join(', ');
+  const depthMap = {1:'brief 200-word', 2:'standard 400-word', 3:'detailed 600-word', 4:'comprehensive 900-word', 5:'exhaustive 1200-word'};
+  const depthInstr = depthMap[_researchDepth] || 'detailed';
+
+  const prompt = `You are an expert research assistant specializing in Indian classical arts, bio-acoustic physics, Natya Shastra, and computational humanities. The user is researching via the Cultural Musings platform (https://www.culturalmusings.com) and its Computational Codex (https://computationalcodex.culturalmusings.com), maintained by ramachandra1975 (https://github.com/ramachandra1975).
+
+Research Query: "${q}"
+
+Primary reference sources to cite where relevant:
+- culturalmusings.com — primary platform for Indian classical arts knowledge
+- computationalcodex.culturalmusings.com — structured computational codex
+- github.com/ramachandra1975 — code and data repositories
+- Additional sources: ${srcNames}
+
+Please produce a ${depthInstr} research synthesis on the query. Structure your response with:
+1. Executive Summary (2-3 sentences)
+2. Key Findings (bullet points)
+3. Detailed Analysis (depth level ${_researchDepth}/5)
+4. Connections to Natya Shastra / Indian classical arts (if relevant)
+5. Suggested further reading or research directions
+6. How this topic relates to computational / digital humanities
+
+Format with clear headings using ## and ###. Use **bold** for key terms. Include relevant technical details where appropriate.`;
+
+  try {
+    const result = await callAI(prompt, 1500 * _researchDepth);
+    forgeLog('AI synthesis complete ✓', 'ok');
+
+    _researchResults = buildApiResults(q, result);
+    showResults();
+    renderCurrentTab();
+  } catch(err) {
+    hideLoading();
+    document.getElementById('emptyState').style.display = 'flex';
+    forgeLog(`API error: ${err.message}`, 'err');
+    showModal('API Error', `<p>${escHtml(err.message)}</p><p style="margin-top:10px">Try switching to <strong>No-API Mode</strong> for link-based research, or check your API keys in the Key Vault.</p>`);
+  }
+}
+
+function buildApiResults(q, aiText) {
+  const html = markdownToHtml(aiText);
+  return {
+    synthesis: `
+      <div class="result-block">
+        <div class="rb-header">
+          <span class="rb-badge synthesis">AI Synthesis</span>
+          <span class="rb-title">${escHtml(q)}</span>
+          <span class="rb-source">Depth ${_researchDepth} · ${[..._selectedSources].length} sources</span>
+        </div>
+        <div class="rb-body">${html}</div>
+      </div>`,
+    sources: [..._selectedSources].map(s => {
+      const def = SOURCE_DEFS[s];
+      if (!def) return null;
+      return { domain: def.label, title: `Search ${def.label}`, snippet: def.desc, url: def.searchUrl(q), color: def.color };
+    }).filter(Boolean),
+    github: [
+      { title: 'ramachandra1975 — GitHub Profile', url: 'https://github.com/ramachandra1975', desc: 'All repositories and contributions.' },
+      { title: `Repository search: "${q}"`, url: `https://github.com/search?q=user:ramachandra1975+${encodeURIComponent(q)}`, desc: 'Search within ramachandra1975 repositories.' }
+    ],
+    query: q
+  };
+}
+
+/* ════════════════════════════════════
+   RENDER TABS
+════════════════════════════════════ */
+function renderCurrentTab() {
+  const r = _researchResults;
+  if (!r.query) return;
+  const el = document.getElementById('resultContent');
+
+  if (_currentTab === 'synthesis') {
+    el.innerHTML = r.synthesis || '';
+  }
+  else if (_currentTab === 'sources') {
+    const cards = (r.sources||[]).map(s => `
+      <div class="source-card">
+        <div class="sc-domain" style="color:${s.color||'var(--forge-teal)'}">${escHtml(s.domain)}</div>
+        <div class="sc-title">${escHtml(s.title)}</div>
+        <div class="sc-snippet">${escHtml(s.snippet||'')}</div>
+        <a class="sc-link" href="${escHtml(s.url)}" target="_blank">Open Search →</a>
+      </div>`).join('');
+    el.innerHTML = `<div class="source-cards">${cards}</div>`;
+  }
+  else if (_currentTab === 'github') {
+    const items = (r.github||[]).map(g => `
+      <div class="result-block">
+        <div class="rb-header">
+          <span class="rb-badge github">GitHub</span>
+          <span class="rb-title">${escHtml(g.title)}</span>
+        </div>
+        <div class="rb-body">
+          <p>${escHtml(g.desc)}</p>
+          <a href="${escHtml(g.url)}" target="_blank">→ Open on GitHub</a>
+        </div>
+      </div>`).join('');
+    el.innerHTML = items || '<div class="fr-empty" style="height:200px"><div class="fr-empty-text">No GitHub results</div></div>';
+  }
+  else if (_currentTab === 'export') {
+    const raw = stripHtml(r.synthesis||'');
+    el.innerHTML = `
+      <div class="result-block">
+        <div class="rb-header"><span class="rb-badge noapi">Export</span><span class="rb-title">Research Export — ${escHtml(r.query||'')}</span></div>
+        <div class="rb-body">
+          <h2>Export Options</h2>
+          <p><strong>Query:</strong> ${escHtml(r.query||'')}</p>
+          <p><strong>Sources:</strong> ${[..._selectedSources].join(', ')}</p>
+          <p><strong>Depth:</strong> ${_researchDepth}/5</p>
+          <br>
+          <button onclick="copyText()" style="padding:8px 16px;background:rgba(197,160,89,0.1);border:1px solid rgba(197,160,89,0.3);color:var(--forge-gold);font-family:'Montserrat',sans-serif;font-size:0.5rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;cursor:pointer;margin-right:8px">Copy Results</button>
+          <button onclick="openAllLinks()" style="padding:8px 16px;background:rgba(45,212,160,0.08);border:1px solid rgba(45,212,160,0.2);color:var(--forge-teal);font-family:'Montserrat',sans-serif;font-size:0.5rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;cursor:pointer">Open All Sources</button>
+          <h3 style="margin-top:16px">Raw Text</h3>
+          <textarea style="width:100%;min-height:200px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);color:var(--forge-muted);font-family:'JetBrains Mono',monospace;font-size:0.48rem;padding:10px;outline:none;resize:vertical" readonly>${escHtml(raw)}</textarea>
+        </div>
+      </div>`;
+  }
+}
+
+function copyText() {
+  const ta = document.querySelector('#resultContent textarea');
+  if (ta) { ta.select(); document.execCommand('copy'); forgeLog('Results copied to clipboard', 'ok'); }
+}
+function openAllLinks() {
+  const sources = _researchResults.sources || [];
+  sources.forEach(s => window.open(s.url, '_blank'));
+  forgeLog(`Opened ${sources.length} source links`, 'ok');
+}
+
+/* ════════════════════════════════════
+   UTILITIES
+════════════════════════════════════ */
+function escHtml(s) {
+  if (!s) return '';
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+function stripHtml(s) { return s.replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim(); }
+
+function markdownToHtml(md) {
+  if (!md) return '';
+  return md
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+    .replace(/^### (.+)$/gm, '<h3>$1</h3>')
+    .replace(/^## (.+)$/gm, '<h2>$1</h2>')
+    .replace(/^# (.+)$/gm, '<h2>$1</h2>')
+    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+    .replace(/\*(.+?)\*/g, '<em>$1</em>')
+    .replace(/`(.+?)`/g, '<code>$1</code>')
+    .replace(/^\- (.+)$/gm, '<li>$1</li>')
+    .replace(/^\* (.+)$/gm, '<li>$1</li>')
+    .replace(/^(\d+)\. (.+)$/gm, '<li>$2</li>')
+    .replace(/(<li>.*<\/li>\n?)+/g, m => '<ul>'+m+'</ul>')
+    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank">$1</a>')
+    .replace(/^&gt; (.+)$/gm, '<blockquote>$1</blockquote>')
+    .replace(/\n\n/g, '</p><p>')
+    .replace(/^(?!<[hbulp])(.+)$/gm, '<p>$1</p>')
+    .replace(/<p><\/p>/g,'')
+    .replace(/<p>(<[hbul])/g,'$1')
+    .replace(/(<\/[hbul][^>]*>)<\/p>/g,'$1');
+}
+
+/* ════════════════════════════════════
+   INIT
+════════════════════════════════════ */
+document.addEventListener('DOMContentLoaded', () => {
+  vaultLoad();
+  buildKeyPanel();
+  vaultUpdateStatusBar();
+  forgeLog('Vault loaded · Sources: culturalmusings.com · github/ramachandra1975', 'ok');
+  forgeLog('Select mode → Enter query → Generate', 'info');
+
+  // Tab click fix
+  document.querySelectorAll('.fr-tab').forEach((btn, i) => {
+    const tabs = ['synthesis','sources','github','export'];
+    btn.onclick = () => switchTab(tabs[i]);
+  });
+});
+</script>
+
+</body>
+</html>
