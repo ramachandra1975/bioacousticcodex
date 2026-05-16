@@ -3,852 +3,2064 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Research Forge — Cultural Musings</title>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&family=JetBrains+Mono:wght@300;400;600&family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300&display=swap" rel="stylesheet">
+<title>Nāda Brahman — Bio-Acoustic Codex</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Noto+Sans+Devanagari:wght@400;600&display=swap" rel="stylesheet">
 <style>
-:root {
-  --forge-bg: #070910;
-  --forge-surface: #0c0f1a;
-  --forge-surface2: #111522;
-  --forge-border: rgba(197,160,89,0.12);
-  --forge-border2: rgba(255,255,255,0.05);
-  --forge-gold: #c5a059;
-  --forge-gold2: #e8c97a;
-  --forge-teal: #2dd4a0;
-  --forge-red: #f87171;
-  --forge-blue: #60a5fa;
-  --forge-purple: #a78bfa;
-  --forge-text: #c8cad8;
-  --forge-muted: #444860;
-  --forge-dim: #252840;
-}
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html, body { height: 100%; overflow: hidden; }
-body {
-  font-family: 'Montserrat', sans-serif;
-  background: var(--forge-bg);
-  color: var(--forge-text);
-  display: flex;
-  flex-direction: column;
-}
+  :root {
+    --parchment: #F5E4C0;
+    --parchment-dark: #E8D4A0;
+    --parchment-light: #FDF6E3;
+    --ink: #2D1500;
+    --ink-light: #5C3A1A;
+    --saffron: #C4821A;
+    --saffron-light: #E8A830;
+    --saffron-dark: #8B5A0A;
+    --crimson: #7A1A1A;
+    --crimson-light: #A02020;
+    --gold: #D4A017;
+    --gold-dark: #9B7010;
+    --bronze: #8B5E3C;
+    --terracotta: #B05030;
+    --forest: #3D6B35;
+    --forest-light: #5A9050;
+    --sandal: #1A0A00;
+    --sandal-mid: #3D2010;
+    --card-bg: #FDF3DC;
+    --border: #C4962A;
+    --border-light: #DEB85A;
+    --shadow: rgba(45,21,0,0.25);
+  }
 
-/* ── HEADER ── */
-.forge-header {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  padding: 10px 20px;
-  border-bottom: 1px solid var(--forge-border);
-  background: rgba(8,10,22,0.98);
-  flex-shrink: 0;
-  z-index: 50;
-}
-.forge-logo {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-.forge-logo-icon {
-  width: 32px; height: 32px;
-  background: linear-gradient(135deg, var(--forge-gold), #8b5e1c);
-  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 0.7rem; color: #070910; font-weight: 900;
-}
-.forge-logo-text { font-size: 0.75rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--forge-gold); }
-.forge-logo-sub { font-size: 0.42rem; font-family: 'JetBrains Mono', monospace; color: var(--forge-muted); letter-spacing: 2px; text-transform: uppercase; margin-top: 1px; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
 
-.forge-mode-toggle {
-  display: flex;
-  gap: 4px;
-  background: rgba(255,255,255,0.03);
-  border: 1px solid var(--forge-border);
-  border-radius: 3px;
-  padding: 3px;
-  margin-left: auto;
-}
-.mode-btn {
-  padding: 5px 12px;
-  font-family: 'Montserrat', sans-serif;
-  font-size: 0.5rem;
-  font-weight: 700;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  border: none;
-  border-radius: 2px;
-  cursor: pointer;
-  transition: all 0.2s;
-  background: none;
-  color: var(--forge-muted);
-}
-.mode-btn.active {
-  background: var(--forge-gold);
-  color: #070910;
-}
-.mode-btn:hover:not(.active) { color: var(--forge-gold); }
+  body {
+    font-family: 'EB Garamond', Georgia, serif;
+    background: var(--parchment);
+    color: var(--ink);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
 
-.forge-ref-chips {
-  display: flex;
-  gap: 6px;
-  flex-shrink: 0;
-}
-.ref-chip {
-  padding: 4px 10px;
-  border: 1px solid var(--forge-border);
-  border-radius: 2px;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.42rem;
-  color: var(--forge-muted);
-  cursor: pointer;
-  transition: all 0.2s;
-  text-decoration: none;
-  display: flex;
-  align-items: center;
-  gap: 4px;
-}
-.ref-chip:hover { color: var(--forge-gold); border-color: rgba(197,160,89,0.4); }
-.ref-chip .chip-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--forge-teal); }
+  /* ═══════════ BACKGROUND TEXTURE ═══════════ */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(196,130,26,0.08) 39px, rgba(196,130,26,0.08) 40px),
+      repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(196,130,26,0.05) 39px, rgba(196,130,26,0.05) 40px);
+    pointer-events: none;
+    z-index: 0;
+  }
 
-/* ── MAIN LAYOUT ── */
-.forge-body {
-  display: flex;
-  flex: 1;
-  overflow: hidden;
-}
+  /* ═══════════ HEADER ═══════════ */
+  header {
+    background: linear-gradient(180deg, #0D0500 0%, #1A0A00 60%, #2D1500 100%);
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 4px solid var(--gold);
+  }
 
-/* ── LEFT: QUERY PANEL ── */
-.forge-query {
-  width: 340px;
-  flex-shrink: 0;
-  display: flex;
-  flex-direction: column;
-  border-right: 1px solid var(--forge-border);
-  background: rgba(8,10,22,0.9);
-  overflow-y: auto;
-}
+  header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 20% 50%, rgba(196,130,26,0.15) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 50%, rgba(196,130,26,0.15) 0%, transparent 60%);
+    pointer-events: none;
+  }
 
-.fq-section {
-  padding: 14px 16px;
-  border-bottom: 1px solid var(--forge-border2);
-}
-.fq-label {
-  font-size: 0.48rem;
-  font-weight: 700;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: var(--forge-gold);
-  margin-bottom: 8px;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-.fq-label::after { content: ''; flex: 1; height: 1px; background: var(--forge-border); }
+  .header-ornament {
+    text-align: center;
+    font-size: 1.4rem;
+    color: var(--gold);
+    letter-spacing: 0.5em;
+    padding: 18px 0 0;
+    opacity: 0.7;
+  }
 
-/* Query textarea */
-.forge-query-input {
-  width: 100%;
-  min-height: 100px;
-  background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(255,255,255,0.07);
-  padding: 10px 12px;
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 0.85rem;
-  color: var(--forge-text);
-  resize: vertical;
-  outline: none;
-  line-height: 1.6;
-  transition: border-color 0.2s;
-}
-.forge-query-input:focus { border-color: rgba(197,160,89,0.4); }
-.forge-query-input::placeholder { color: #2a2d40; font-style: italic; }
+  .header-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 24px 32px 30px;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+  }
 
-/* Source chips */
-.source-chips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 5px;
-  margin-top: 8px;
-}
-.src-chip {
-  padding: 4px 9px;
-  border: 1px solid rgba(255,255,255,0.07);
-  border-radius: 2px;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.42rem;
-  color: var(--forge-muted);
-  cursor: pointer;
-  transition: all 0.2s;
-  user-select: none;
-}
-.src-chip:hover { color: var(--forge-text); border-color: rgba(255,255,255,0.15); }
-.src-chip.selected { border-color: var(--forge-teal); color: var(--forge-teal); background: rgba(45,212,160,0.05); }
+  .header-devanagari {
+    font-family: 'Noto Sans Devanagari', serif;
+    font-size: 1.5rem;
+    color: var(--gold);
+    letter-spacing: 0.15em;
+    margin-bottom: 8px;
+    opacity: 0.85;
+  }
 
-/* Depth slider */
-.depth-row {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-top: 6px;
-}
-.depth-slider {
-  flex: 1;
-  accent-color: var(--forge-gold);
-}
-.depth-label {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.5rem;
-  color: var(--forge-gold);
-  min-width: 60px;
-  text-align: right;
-}
+  header h1 {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(1.8rem, 4vw, 3rem);
+    color: var(--parchment-light);
+    letter-spacing: 0.06em;
+    line-height: 1.2;
+    text-shadow: 0 2px 20px rgba(212,160,23,0.4);
+  }
 
-/* Generate button */
-.forge-gen-btn {
-  width: 100%;
-  padding: 12px;
-  background: linear-gradient(135deg, rgba(197,160,89,0.15), rgba(197,160,89,0.05));
-  border: 1px solid rgba(197,160,89,0.4);
-  color: var(--forge-gold);
-  font-family: 'Montserrat', sans-serif;
-  font-size: 0.55rem;
-  font-weight: 700;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: all 0.25s;
-  position: relative;
-  overflow: hidden;
-  margin-top: 10px;
-}
-.forge-gen-btn::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(90deg, transparent, rgba(197,160,89,0.1), transparent);
-  transform: translateX(-100%);
-  transition: transform 0.5s;
-}
-.forge-gen-btn:hover::before { transform: translateX(100%); }
-.forge-gen-btn:hover:not(:disabled) { background: rgba(197,160,89,0.2); border-color: var(--forge-gold); }
-.forge-gen-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+  header h1 span {
+    color: var(--gold);
+  }
 
-/* No-API mode info */
-.noapi-info {
-  background: rgba(45,212,160,0.04);
-  border: 1px solid rgba(45,212,160,0.15);
-  padding: 10px 12px;
-  border-radius: 2px;
-  font-size: 0.5rem;
-  color: #2dd490;
-  line-height: 1.7;
-  margin-top: 8px;
-}
-.noapi-info .ni-title { font-weight: 700; letter-spacing: 1px; text-transform: uppercase; font-size: 0.48rem; margin-bottom: 4px; }
+  .header-subtitle {
+    font-family: 'Cinzel', serif;
+    font-size: 0.95rem;
+    color: var(--saffron-light);
+    letter-spacing: 0.3em;
+    margin-top: 10px;
+    text-transform: uppercase;
+    opacity: 0.8;
+  }
 
-/* Log */
-.forge-log {
-  flex: 1;
-  padding: 10px 12px;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.46rem;
-  line-height: 1.8;
-  overflow-y: auto;
-  min-height: 80px;
-  max-height: 160px;
-}
-.log-line { display: flex; gap: 6px; }
-.log-time { color: #282c3a; flex-shrink: 0; }
-.log-line.ok .log-msg { color: var(--forge-teal); }
-.log-line.warn .log-msg { color: #f59e0b; }
-.log-line.err .log-msg { color: var(--forge-red); }
-.log-line.info .log-msg { color: #60a5fa; }
+  .header-border-ornament {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 16px;
+    opacity: 0.5;
+  }
 
-/* ── CENTER: RESULTS ── */
-.forge-results {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-}
+  .header-border-ornament .line {
+    flex: 1;
+    max-width: 200px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
 
-.fr-tabs {
-  display: flex;
-  border-bottom: 1px solid var(--forge-border);
-  background: rgba(255,255,255,0.01);
-  flex-shrink: 0;
-}
-.fr-tab {
-  padding: 10px 18px;
-  font-size: 0.48rem;
-  font-weight: 700;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  color: var(--forge-muted);
-  cursor: pointer;
-  border-bottom: 2px solid transparent;
-  transition: all 0.2s;
-  background: none;
-  border-top: none;
-  border-left: none;
-  border-right: none;
-  font-family: 'Montserrat', sans-serif;
-}
-.fr-tab.active { color: var(--forge-gold); border-bottom-color: var(--forge-gold); }
-.fr-tab:hover:not(.active) { color: var(--forge-text); }
+  .header-border-ornament .gem { color: var(--gold); font-size: 1rem; }
 
-.fr-content {
-  flex: 1;
-  overflow-y: auto;
-  padding: 20px;
-  scrollbar-width: thin;
-  scrollbar-color: rgba(197,160,89,0.15) transparent;
-}
+  /* ═══════════ MODE TOGGLE ═══════════ */
+  .mode-bar {
+    background: var(--sandal-mid);
+    border-bottom: 2px solid var(--saffron-dark);
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
 
-/* Empty state */
-.fr-empty {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-  opacity: 0.35;
-  gap: 12px;
-}
-.fr-empty-icon {
-  width: 60px; height: 60px;
-  background: linear-gradient(135deg, var(--forge-gold), #5a3e12);
-  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 1.4rem;
-}
-.fr-empty-text { font-size: 0.55rem; letter-spacing: 2px; text-transform: uppercase; color: var(--forge-muted); }
+  .mode-label {
+    font-family: 'Cinzel', serif;
+    font-size: 0.78rem;
+    color: var(--parchment-dark);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
 
-/* Result content */
-.result-block {
-  background: var(--forge-surface);
-  border: 1px solid var(--forge-border);
-  border-radius: 3px;
-  margin-bottom: 16px;
-  overflow: hidden;
-  animation: fadeSlideIn 0.3s ease;
-}
-@keyframes fadeSlideIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+  .mode-toggle {
+    display: flex;
+    background: rgba(0,0,0,0.3);
+    border: 1px solid var(--saffron-dark);
+    border-radius: 30px;
+    overflow: hidden;
+  }
 
-.rb-header {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 10px 14px;
-  border-bottom: 1px solid var(--forge-border2);
-  background: rgba(255,255,255,0.02);
-}
-.rb-badge {
-  padding: 2px 8px;
-  border-radius: 2px;
-  font-size: 0.42rem;
-  font-weight: 700;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  font-family: 'JetBrains Mono', monospace;
-}
-.rb-badge.synthesis { background: rgba(197,160,89,0.15); color: var(--forge-gold); }
-.rb-badge.sources { background: rgba(45,212,160,0.12); color: var(--forge-teal); }
-.rb-badge.noapi { background: rgba(96,165,250,0.12); color: var(--forge-blue); }
-.rb-badge.github { background: rgba(167,139,250,0.12); color: var(--forge-purple); }
-.rb-title { font-size: 0.6rem; font-weight: 600; color: var(--forge-text); flex: 1; }
-.rb-source { font-family: 'JetBrains Mono', monospace; font-size: 0.42rem; color: var(--forge-muted); }
-.rb-body { padding: 14px 16px; font-size: 0.65rem; line-height: 1.8; color: var(--forge-text); }
-.rb-body h2, .rb-body h3 { color: var(--forge-gold2); margin: 12px 0 6px; font-size: 0.7rem; }
-.rb-body p { margin-bottom: 8px; }
-.rb-body ul, .rb-body ol { margin: 6px 0 10px 16px; }
-.rb-body li { margin-bottom: 4px; }
-.rb-body code { background: rgba(255,255,255,0.05); padding: 1px 5px; font-family: 'JetBrains Mono', monospace; font-size: 0.55rem; color: #a78bfa; }
-.rb-body strong { color: var(--forge-gold2); }
-.rb-body blockquote { border-left: 2px solid var(--forge-gold); padding-left: 12px; color: var(--forge-muted); font-style: italic; margin: 8px 0; }
-.rb-body a { color: var(--forge-teal); text-decoration: none; }
-.rb-body a:hover { text-decoration: underline; }
+  .mode-btn {
+    padding: 6px 20px;
+    font-family: 'Cinzel', serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    cursor: pointer;
+    border: none;
+    background: transparent;
+    color: var(--parchment-dark);
+    transition: all 0.3s;
+  }
 
-/* Source cards grid */
-.source-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 10px; padding: 12px; }
-.source-card {
-  background: rgba(255,255,255,0.02);
-  border: 1px solid var(--forge-border2);
-  border-radius: 2px;
-  padding: 12px;
-  transition: all 0.2s;
-}
-.source-card:hover { border-color: rgba(197,160,89,0.25); background: rgba(255,255,255,0.04); }
-.sc-domain { font-family: 'JetBrains Mono', monospace; font-size: 0.42rem; color: var(--forge-teal); margin-bottom: 5px; }
-.sc-title { font-size: 0.55rem; font-weight: 600; color: var(--forge-text); margin-bottom: 5px; line-height: 1.4; }
-.sc-snippet { font-size: 0.5rem; color: var(--forge-muted); line-height: 1.6; }
-.sc-link { display: inline-block; margin-top: 6px; font-size: 0.42rem; color: var(--forge-gold); text-decoration: none; }
-.sc-link:hover { text-decoration: underline; }
+  .mode-btn.active {
+    background: var(--saffron);
+    color: var(--sandal);
+    font-weight: 700;
+  }
 
-/* Loading animation */
-.forge-loading {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 40px;
-  gap: 16px;
-}
-.loading-hex {
-  width: 50px; height: 50px;
-  background: linear-gradient(135deg, rgba(197,160,89,0.3), rgba(197,160,89,0.05));
-  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
-  animation: spin 2s linear infinite;
-}
-@keyframes spin { to { transform: rotate(360deg); } }
-.loading-text { font-family: 'JetBrains Mono', monospace; font-size: 0.5rem; color: var(--forge-gold); letter-spacing: 2px; }
-.loading-sub { font-size: 0.45rem; color: var(--forge-muted); font-family: 'JetBrains Mono', monospace; }
+  /* ═══════════ TABS ═══════════ */
+  .tabs-wrapper {
+    background: var(--sandal);
+    border-bottom: 3px solid var(--gold-dark);
+    padding: 0 16px;
+    position: sticky;
+    top: 47px;
+    z-index: 99;
+    overflow-x: auto;
+  }
 
-/* ── RIGHT: KEY VAULT ── */
-.forge-keys {
-  width: 280px;
-  flex-shrink: 0;
-  background: rgba(8,10,22,0.95);
-  border-left: 1px solid var(--forge-border);
-  overflow-y: auto;
-  scrollbar-width: thin;
-  scrollbar-color: rgba(197,160,89,0.15) transparent;
-  display: flex;
-  flex-direction: column;
-}
-.forge-keys::-webkit-scrollbar { width: 3px; }
-.forge-keys::-webkit-scrollbar-thumb { background: rgba(197,160,89,0.15); border-radius: 2px; }
+  .tabs {
+    display: flex;
+    gap: 0;
+    max-width: 1100px;
+    margin: 0 auto;
+    white-space: nowrap;
+  }
 
-.fk-header {
-  padding: 12px 14px;
-  border-bottom: 1px solid var(--forge-border);
-  background: rgba(255,255,255,0.02);
-  position: sticky;
-  top: 0;
-  z-index: 10;
-}
-.fk-title {
-  font-family: 'Montserrat', sans-serif;
-  font-size: 0.55rem;
-  font-weight: 700;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: var(--forge-gold);
-  margin-bottom: 3px;
-}
-.fk-subtitle {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.42rem;
-  color: #333;
-  line-height: 1.6;
-}
+  .tab-btn {
+    font-family: 'Cinzel', serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    padding: 13px 18px;
+    border: none;
+    background: transparent;
+    color: rgba(245,230,192,0.55);
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    margin-bottom: -3px;
+    transition: all 0.3s;
+    text-transform: uppercase;
+  }
 
-.fk-body { padding: 8px 10px; flex: 1; }
+  .tab-btn:hover { color: var(--saffron-light); }
 
-.key-slot-20 {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  margin-bottom: 4px;
-  padding: 3px 0;
-  border-bottom: 1px solid rgba(255,255,255,0.025);
-}
-.ks20-num {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.42rem;
-  color: #2a2d3a;
-  min-width: 16px;
-  text-align: right;
-  flex-shrink: 0;
-}
-.ks20-input {
-  flex: 1;
-  background: rgba(255,255,255,0.025);
-  border: 1px solid rgba(255,255,255,0.06);
-  padding: 5px 6px;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.44rem;
-  color: #666;
-  outline: none;
-  transition: border-color 0.2s, background 0.2s;
-  min-width: 0;
-  border-radius: 1px;
-}
-.ks20-input:focus { border-color: rgba(197,160,89,0.5); background: rgba(255,255,255,0.05); color: var(--forge-text); }
-.ks20-input::placeholder { color: #1e2030; font-size: 0.38rem; }
-.ks20-input.ks-locked {
-  color: transparent;
-  text-shadow: 0 0 8px rgba(45,212,160,0.55);
-  border-color: rgba(45,212,160,0.2);
-  background: rgba(5,18,14,0.5);
-  pointer-events: none;
-  user-select: none;
-}
-.ks20-btn {
-  width: 20px; height: 20px;
-  background: none;
-  border: 1px solid rgba(255,255,255,0.06);
-  color: #2a2d3a;
-  font-size: 0.55rem;
-  cursor: pointer;
-  transition: all 0.2s;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  border-radius: 1px;
-}
-.ks20-btn:hover { border-color: rgba(197,160,89,0.4); color: var(--forge-gold); }
-.ks20-btn.ks-locked { border-color: rgba(45,212,160,0.3); color: #2dd4a0; }
+  .tab-btn.active {
+    color: var(--gold);
+    border-bottom-color: var(--gold);
+    background: rgba(196,130,26,0.08);
+  }
 
-.fk-stats {
-  padding: 10px 12px;
-  border-top: 1px solid var(--forge-border);
-  background: rgba(255,255,255,0.01);
-  position: sticky;
-  bottom: 0;
-}
-.fks-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px; }
-.fks-label { font-family: 'Montserrat', sans-serif; font-size: 0.44rem; letter-spacing: 1px; text-transform: uppercase; color: #333; }
-.fks-val { font-family: 'JetBrains Mono', monospace; font-size: 0.5rem; color: var(--forge-teal); }
+  /* ═══════════ MAIN CONTENT ═══════════ */
+  .main {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 36px 24px 60px;
+    position: relative;
+    z-index: 1;
+  }
 
-.fk-clear-btn {
-  width: 100%;
-  margin-top: 6px;
-  padding: 6px;
-  background: rgba(248,113,113,0.04);
-  border: 1px solid rgba(248,113,113,0.12);
-  color: #333;
-  font-family: 'Montserrat', sans-serif;
-  font-size: 0.44rem;
-  font-weight: 700;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: all 0.2s;
-  border-radius: 1px;
-}
-.fk-clear-btn:hover { color: var(--forge-red); border-color: rgba(248,113,113,0.35); }
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
 
-/* ── STATUS BAR ── */
-.forge-status-bar {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 6px 16px;
-  border-top: 1px solid var(--forge-border);
-  background: rgba(5,7,15,0.95);
-  flex-shrink: 0;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.42rem;
-}
-.provider-pill {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  padding: 3px 8px;
-  border: 1px solid rgba(255,255,255,0.07);
-  border-radius: 2px;
-  font-size: 0.4rem;
-  color: var(--forge-muted);
-  transition: all 0.2s;
-}
-.provider-pill.vault-pill { color: var(--forge-gold); border-color: rgba(197,160,89,0.25); }
-.pill-dot { width: 5px; height: 5px; border-radius: 50%; background: #2a2d3a; }
-.pill-dot.ok { background: var(--forge-teal); box-shadow: 0 0 4px var(--forge-teal); }
-.pill-dot.empty { background: #333; }
-.fsb-sep { color: #222; }
-.fsb-item { color: var(--forge-muted); }
-.fsb-total { color: var(--forge-gold); margin-left: auto; }
+  /* Mode content */
+  .mode-content { display: none; }
+  .mode-content.active { display: block; }
 
-/* scrollbar */
-::-webkit-scrollbar { width: 4px; }
-::-webkit-scrollbar-thumb { background: rgba(197,160,89,0.12); border-radius: 2px; }
+  /* ═══════════ SECTION HEADERS ═══════════ */
+  .section-title {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 1.65rem;
+    color: var(--crimson);
+    margin-bottom: 6px;
+    letter-spacing: 0.04em;
+  }
 
-/* ── MODAL ── */
-.modal-overlay {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,5,0.85);
-  z-index: 200;
-  align-items: center;
-  justify-content: center;
-  backdrop-filter: blur(4px);
-}
-.modal-overlay.open { display: flex; }
-.modal-box {
-  background: var(--forge-surface2);
-  border: 1px solid var(--forge-border);
-  width: 480px;
-  max-width: 95vw;
-  padding: 24px;
-}
-.modal-title { font-size: 0.7rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--forge-gold); margin-bottom: 10px; }
-.modal-body { font-size: 0.6rem; color: var(--forge-muted); line-height: 1.8; margin-bottom: 16px; }
-.modal-close {
-  padding: 8px 20px;
-  background: rgba(197,160,89,0.1);
-  border: 1px solid rgba(197,160,89,0.3);
-  color: var(--forge-gold);
-  font-family: 'Montserrat', sans-serif;
-  font-size: 0.5rem;
-  font-weight: 700;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-.modal-close:hover { background: rgba(197,160,89,0.2); }
+  .section-divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 28px;
+  }
 
-/* Utility */
-.hidden { display: none !important; }
+  .section-divider .div-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, var(--saffron), transparent);
+  }
+
+  .section-divider .div-gem { color: var(--saffron); font-size: 0.9rem; }
+
+  /* ═══════════ CARDS ═══════════ */
+  .card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-light);
+    border-radius: 4px;
+    padding: 24px 28px;
+    margin-bottom: 22px;
+    box-shadow: 2px 3px 14px var(--shadow);
+    position: relative;
+  }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 4px; height: 100%;
+    background: linear-gradient(180deg, var(--saffron), var(--crimson));
+    border-radius: 4px 0 0 4px;
+  }
+
+  .card-title {
+    font-family: 'Cinzel', serif;
+    font-size: 1rem;
+    color: var(--saffron-dark);
+    letter-spacing: 0.12em;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .card-title .icon { font-size: 1.1rem; }
+
+  .card p {
+    font-size: 1.05rem;
+    line-height: 1.82;
+    color: var(--ink);
+    margin-bottom: 10px;
+  }
+
+  .card p:last-child { margin-bottom: 0; }
+
+  .card em { color: var(--crimson); font-style: italic; }
+  .card strong { color: var(--saffron-dark); font-weight: 600; }
+
+  /* ═══════════ HYPOTHESIS BRIEF ═══════════ */
+  .hypothesis-box {
+    background: linear-gradient(135deg, #2D1500, #1A0A00);
+    border: 1px solid var(--gold-dark);
+    border-radius: 4px;
+    padding: 22px 28px;
+    margin-bottom: 22px;
+    color: var(--parchment-light);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hypothesis-box::after {
+    content: '॥';
+    position: absolute;
+    right: 20px; top: 50%;
+    transform: translateY(-50%);
+    font-family: 'Noto Sans Devanagari', serif;
+    font-size: 4rem;
+    color: rgba(212,160,23,0.1);
+    pointer-events: none;
+  }
+
+  .hyp-label {
+    font-family: 'Cinzel', serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .hyp-title {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 1.15rem;
+    color: var(--saffron-light);
+    margin-bottom: 12px;
+  }
+
+  .hyp-body {
+    font-size: 1rem;
+    line-height: 1.75;
+    color: var(--parchment-dark);
+  }
+
+  /* ═══════════ EQUATIONS ═══════════ */
+  .eq-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 18px;
+    margin-bottom: 24px;
+  }
+
+  .eq-card {
+    background: var(--sandal-mid);
+    border: 1px solid var(--saffron-dark);
+    border-radius: 4px;
+    padding: 18px 20px;
+    color: var(--parchment-light);
+  }
+
+  .eq-name {
+    font-family: 'Cinzel', serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .eq-formula {
+    font-family: 'EB Garamond', serif;
+    font-size: 1.35rem;
+    font-style: italic;
+    color: var(--saffron-light);
+    margin-bottom: 10px;
+    text-align: center;
+    letter-spacing: 0.05em;
+    padding: 10px;
+    background: rgba(0,0,0,0.25);
+    border-radius: 3px;
+    border: 1px solid rgba(196,130,26,0.2);
+  }
+
+  .eq-explain {
+    font-size: 0.9rem;
+    line-height: 1.65;
+    color: var(--parchment-dark);
+  }
+
+  .eq-vars {
+    margin-top: 8px;
+    font-size: 0.85rem;
+    color: rgba(245,230,192,0.65);
+    line-height: 1.6;
+  }
+
+  .eq-vars span { color: var(--saffron-light); }
+
+  /* ═══════════ SWARA TABLE ═══════════ */
+  .swara-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 10px;
+    margin-bottom: 24px;
+  }
+
+  @media (max-width: 700px) {
+    .swara-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  .swara-card {
+    background: linear-gradient(180deg, var(--sandal-mid), #0D0500);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 14px 10px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .swara-card:hover, .swara-card.playing {
+    border-color: var(--gold);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(212,160,23,0.3);
+  }
+
+  .swara-card.playing { background: linear-gradient(180deg, #3D2010, #0D0500); }
+
+  .swara-letter {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 1.6rem;
+    color: var(--gold);
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .swara-name {
+    font-family: 'Cinzel', serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    color: var(--saffron-light);
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 6px;
+  }
+
+  .swara-ratio {
+    font-family: 'EB Garamond', serif;
+    font-size: 1rem;
+    color: var(--parchment-light);
+    font-style: italic;
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .swara-hz {
+    font-size: 0.72rem;
+    color: var(--saffron);
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .swara-body {
+    font-size: 0.68rem;
+    color: rgba(245,230,192,0.5);
+    display: block;
+    letter-spacing: 0.05em;
+  }
+
+  .play-ring {
+    position: absolute;
+    inset: 0;
+    border: 2px solid var(--gold);
+    border-radius: 4px;
+    opacity: 0;
+    transform: scale(0.95);
+    transition: all 0.3s;
+    pointer-events: none;
+  }
+
+  .swara-card.playing .play-ring { opacity: 0.6; transform: scale(1); }
+
+  /* ═══════════ FREQUENCY CANVAS ═══════════ */
+  .canvas-wrap {
+    background: var(--sandal-mid);
+    border: 1px solid var(--saffron-dark);
+    border-radius: 4px;
+    padding: 20px;
+    margin-bottom: 22px;
+  }
+
+  .canvas-title {
+    font-family: 'Cinzel', serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    text-align: center;
+  }
+
+  #freqCanvas {
+    width: 100%;
+    height: 180px;
+    display: block;
+    border-radius: 3px;
+  }
+
+  /* ═══════════ DATA TABLE ═══════════ */
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 24px;
+    font-size: 0.95rem;
+  }
+
+  .data-table th {
+    font-family: 'Cinzel', serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--parchment-light);
+    background: var(--sandal-mid);
+    padding: 12px 14px;
+    text-align: left;
+    border-bottom: 2px solid var(--saffron-dark);
+  }
+
+  .data-table td {
+    padding: 11px 14px;
+    border-bottom: 1px solid var(--parchment-dark);
+    color: var(--ink);
+    vertical-align: top;
+    line-height: 1.6;
+  }
+
+  .data-table tr:nth-child(odd) td { background: rgba(255,255,255,0.3); }
+  .data-table tr:nth-child(even) td { background: var(--card-bg); }
+
+  .data-table .highlight { color: var(--crimson); font-weight: 600; font-family: 'Cinzel', serif; }
+  .data-table .mono { font-style: italic; color: var(--saffron-dark); }
+
+  /* ═══════════ KARANA GRID ═══════════ */
+  .karana-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 14px;
+    margin-bottom: 24px;
+  }
+
+  .karana-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-light);
+    border-radius: 4px;
+    padding: 14px 16px;
+    position: relative;
+    transition: all 0.25s;
+  }
+
+  .karana-card:hover {
+    border-color: var(--saffron);
+    box-shadow: 2px 4px 12px var(--shadow);
+    transform: translateY(-2px);
+  }
+
+  .k-number {
+    position: absolute;
+    top: 10px; right: 12px;
+    font-family: 'Cinzel', serif;
+    font-size: 0.72rem;
+    color: var(--saffron);
+    opacity: 0.6;
+  }
+
+  .k-name {
+    font-family: 'Cinzel', serif;
+    font-size: 0.88rem;
+    color: var(--crimson);
+    margin-bottom: 6px;
+    letter-spacing: 0.05em;
+  }
+
+  .k-rasa {
+    display: inline-block;
+    font-size: 0.7rem;
+    padding: 2px 8px;
+    border-radius: 10px;
+    margin-bottom: 8px;
+    font-family: 'Cinzel', serif;
+    letter-spacing: 0.08em;
+  }
+
+  .k-desc {
+    font-size: 0.85rem;
+    color: var(--ink-light);
+    line-height: 1.55;
+  }
+
+  .k-freq {
+    margin-top: 6px;
+    font-size: 0.75rem;
+    color: var(--saffron-dark);
+    font-style: italic;
+  }
+
+  /* Rasa colors */
+  .rasa-shringara { background: rgba(180,60,80,0.12); color: #8B1A2A; border: 1px solid rgba(180,60,80,0.3); }
+  .rasa-veera     { background: rgba(120,80,20,0.15); color: #7A5010; border: 1px solid rgba(120,80,20,0.3); }
+  .rasa-karuna    { background: rgba(50,80,150,0.10); color: #2A4A8B; border: 1px solid rgba(50,80,150,0.2); }
+  .rasa-adbhuta   { background: rgba(80,50,150,0.10); color: #4A2A8B; border: 1px solid rgba(80,50,150,0.2); }
+  .rasa-hasya     { background: rgba(60,130,50,0.12); color: #2A6A1A; border: 1px solid rgba(60,130,50,0.3); }
+  .rasa-raudra    { background: rgba(160,30,30,0.12); color: #8B1010; border: 1px solid rgba(160,30,30,0.3); }
+  .rasa-bhayanaka { background: rgba(40,30,60,0.12); color: #2A1A4A; border: 1px solid rgba(40,30,60,0.3); }
+  .rasa-bibhatsa  { background: rgba(80,100,20,0.12); color: #4A5A0A; border: 1px solid rgba(80,100,20,0.3); }
+  .rasa-shanta    { background: rgba(80,130,100,0.12); color: #2A6A4A; border: 1px solid rgba(80,130,100,0.3); }
+
+  /* ═══════════ UNIFIED BRIDGE TABLE ═══════════ */
+  .schema-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 24px;
+    font-size: 0.9rem;
+  }
+
+  .schema-table th {
+    font-family: 'Cinzel', serif;
+    font-size: 0.68rem;
+    letter-spacing: 0.15em;
+    color: var(--gold);
+    background: var(--sandal);
+    padding: 11px 14px;
+    text-transform: uppercase;
+    border-bottom: 2px solid var(--gold-dark);
+  }
+
+  .schema-table td {
+    padding: 10px 14px;
+    border-bottom: 1px solid rgba(196,130,26,0.15);
+    color: var(--ink);
+    line-height: 1.6;
+  }
+
+  .schema-table tr:nth-child(odd) td { background: rgba(255,255,255,0.35); }
+  .schema-table tr:nth-child(even) td { background: var(--card-bg); }
+
+  .schema-table .dim { font-family: 'Cinzel', serif; font-size: 0.8rem; color: var(--saffron-dark); }
+  .schema-table .val { color: var(--crimson); font-style: italic; }
+  .schema-table .ex { color: var(--ink-light); font-size: 0.88rem; }
+
+  /* ═══════════ INFO CALLOUT ═══════════ */
+  .callout {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    padding: 16px 20px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+  }
+
+  .callout.physics {
+    background: rgba(61,107,53,0.08);
+    border-left: 3px solid var(--forest);
+  }
+
+  .callout.ancient {
+    background: rgba(196,130,26,0.08);
+    border-left: 3px solid var(--saffron);
+  }
+
+  .callout.bridge {
+    background: rgba(122,26,26,0.07);
+    border-left: 3px solid var(--crimson);
+  }
+
+  .callout-icon { font-size: 1.3rem; flex-shrink: 0; margin-top: 2px; }
+  .callout-body { font-size: 0.97rem; line-height: 1.75; color: var(--ink-light); }
+  .callout-body strong { color: var(--ink); }
+
+  /* ═══════════ RASA DASHBOARD ═══════════ */
+  .rasa-dashboard {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+
+  @media (max-width: 600px) { .rasa-dashboard { grid-template-columns: 1fr; } }
+
+  .rasa-tile {
+    border-radius: 4px;
+    padding: 14px 16px;
+    border: 1px solid transparent;
+    transition: all 0.25s;
+  }
+
+  .rasa-tile:hover { transform: translateY(-2px); box-shadow: 2px 4px 12px var(--shadow); }
+
+  .rasa-tile .r-name {
+    font-family: 'Cinzel', serif;
+    font-size: 0.88rem;
+    letter-spacing: 0.08em;
+    margin-bottom: 4px;
+  }
+
+  .rasa-tile .r-meaning {
+    font-size: 0.78rem;
+    opacity: 0.7;
+    margin-bottom: 6px;
+  }
+
+  .rasa-tile .r-freq {
+    font-size: 0.75rem;
+    font-style: italic;
+    font-family: 'EB Garamond', serif;
+  }
+
+  /* ═══════════ WAVEFORM VIZ ═══════════ */
+  .wave-container {
+    background: var(--sandal-mid);
+    border: 1px solid var(--saffron-dark);
+    border-radius: 4px;
+    padding: 16px 20px;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  #waveCanvas { width: 100%; height: 100px; }
+
+  /* ═══════════ BADGE PILLS ═══════════ */
+  .pill-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
+
+  .pill {
+    font-family: 'Cinzel', serif;
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    padding: 4px 12px;
+    border-radius: 20px;
+    background: var(--sandal-mid);
+    color: var(--saffron-light);
+    border: 1px solid var(--saffron-dark);
+  }
+
+  /* ═══════════ SCROLL NAV ═══════════ */
+  .scroll-nav {
+    position: fixed;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    z-index: 200;
+  }
+
+  .scroll-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--bronze);
+    border: 1px solid var(--saffron-dark);
+    cursor: pointer;
+    transition: all 0.25s;
+  }
+
+  .scroll-dot.active, .scroll-dot:hover { background: var(--gold); transform: scale(1.3); }
+
+  /* ═══════════ FOOTER ═══════════ */
+  footer {
+    background: var(--sandal);
+    border-top: 3px solid var(--gold-dark);
+    padding: 24px 32px;
+    text-align: center;
+  }
+
+  .footer-text {
+    font-family: 'Cinzel', serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    color: rgba(245,230,192,0.4);
+    text-transform: uppercase;
+  }
+
+  .footer-deva {
+    font-family: 'Noto Sans Devanagari', serif;
+    font-size: 1.2rem;
+    color: var(--gold);
+    opacity: 0.4;
+    margin-bottom: 8px;
+  }
+
+  /* ═══════════ ANIMATIONS ═══════════ */
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .tab-panel.active { animation: fadeIn 0.35s ease; }
+
+  @keyframes pulse-ring {
+    0% { transform: scale(1); opacity: 0.6; }
+    100% { transform: scale(1.15); opacity: 0; }
+  }
+
+  .swara-card.playing::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border: 2px solid var(--gold);
+    border-radius: 4px;
+    animation: pulse-ring 0.8s ease-out infinite;
+  }
+
+  @keyframes wave-anim {
+    0% { transform: scaleY(0.3); }
+    50% { transform: scaleY(1); }
+    100% { transform: scaleY(0.3); }
+  }
+
+  /* ═══════════ RESPONSIVE ═══════════ */
+  @media (max-width: 768px) {
+    .eq-grid { grid-template-columns: 1fr; }
+    .karana-grid { grid-template-columns: repeat(2,1fr); }
+    .swara-grid { grid-template-columns: repeat(4,1fr); }
+    .header-border-ornament { display: none; }
+  }
+
+  /* Tooltip */
+  [data-tip] {
+    position: relative;
+    cursor: help;
+    text-decoration: underline dotted var(--saffron);
+  }
+  [data-tip]:hover::after {
+    content: attr(data-tip);
+    position: absolute;
+    bottom: calc(100% + 6px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--sandal);
+    color: var(--parchment-light);
+    font-size: 0.78rem;
+    padding: 6px 10px;
+    border-radius: 3px;
+    border: 1px solid var(--saffron-dark);
+    white-space: nowrap;
+    z-index: 999;
+    pointer-events: none;
+    font-style: normal;
+    font-family: 'EB Garamond', serif;
+  }
+
+  /* Separator */
+  .ornament-sep {
+    text-align: center;
+    color: var(--saffron);
+    letter-spacing: 1em;
+    font-size: 0.8rem;
+    margin: 20px 0;
+    opacity: 0.5;
+  }
+
+  /* ═══════════ KEY VAULT — Forge vars remapped to temple palette ═══════════ */
+  :root {
+    --forge-border: rgba(196,130,26,0.22);
+    --forge-gold: #D4A017;
+  }
+
+  /* Vault toggle button in mode-bar */
+  .vault-toggle-btn {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    background: rgba(196,130,26,0.08);
+    border: 1px solid var(--saffron-dark);
+    border-radius: 3px;
+    font-family: 'Cinzel', serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    color: var(--parchment-dark);
+    cursor: pointer;
+    transition: all 0.25s;
+  }
+  .vault-toggle-btn:hover { border-color: var(--gold); color: var(--gold); }
+  .vault-toggle-btn .vt-dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: #444;
+    transition: background 0.3s;
+    flex-shrink: 0;
+  }
+  .vault-toggle-btn .vt-dot.active { background: #2dd4a0; box-shadow: 0 0 5px rgba(45,212,160,0.5); }
+
+  /* Vault drawer (slide from right) */
+  .vault-drawer {
+    position: fixed;
+    top: 0; right: -320px;
+    width: 310px;
+    height: 100vh;
+    background: rgba(8,4,0,0.97);
+    border-left: 1px solid var(--forge-border);
+    z-index: 500;
+    display: flex;
+    flex-direction: column;
+    transition: right 0.35s cubic-bezier(0.25,0.46,0.45,0.94);
+    backdrop-filter: blur(8px);
+  }
+  .vault-drawer.open { right: 0; }
+
+  /* Drawer backdrop */
+  .vault-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.45);
+    z-index: 499;
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .vault-backdrop.open { display: block; opacity: 1; }
+
+  /* Drawer header */
+  .vd-header {
+    padding: 16px 16px 12px;
+    border-bottom: 1px solid var(--forge-border);
+    background: rgba(255,255,255,0.02);
+    flex-shrink: 0;
+  }
+  .vd-title-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 4px;
+  }
+  .vd-title {
+    font-family: 'Cinzel', serif;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+  .vd-close {
+    background: none;
+    border: 1px solid rgba(255,255,255,0.08);
+    color: #555;
+    width: 24px; height: 24px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 2px;
+    transition: all 0.2s;
+  }
+  .vd-close:hover { border-color: rgba(248,113,113,0.4); color: #f87171; }
+  .vd-subtitle {
+    font-family: 'EB Garamond', monospace;
+    font-size: 0.72rem;
+    color: #444;
+    line-height: 1.5;
+    font-style: italic;
+  }
+
+  /* Scrollable slot body */
+  .vd-body {
+    flex: 1;
+    overflow-y: auto;
+    padding: 10px 12px;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(197,160,89,0.15) transparent;
+  }
+  .vd-body::-webkit-scrollbar { width: 3px; }
+  .vd-body::-webkit-scrollbar-thumb { background: rgba(197,160,89,0.15); border-radius: 2px; }
+
+  /* Slot rows */
+  .key-slot-20 {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 5px;
+    padding: 3px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.03);
+  }
+  .ks20-num {
+    font-family: 'EB Garamond', serif;
+    font-size: 0.65rem;
+    color: #333;
+    min-width: 20px;
+    text-align: right;
+    flex-shrink: 0;
+    font-style: italic;
+  }
+  .ks20-input {
+    flex: 1;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.07);
+    padding: 6px 8px;
+    font-family: 'EB Garamond', serif;
+    font-size: 0.78rem;
+    color: #888;
+    outline: none;
+    transition: border-color 0.2s, background 0.2s;
+    min-width: 0;
+  }
+  .ks20-input:focus { border-color: rgba(196,130,26,0.5); background: rgba(255,255,255,0.05); }
+  .ks20-input::placeholder { color: #2a2a2a; font-size: 0.68rem; font-style: italic; }
+  .ks20-input.ks-locked {
+    color: transparent;
+    text-shadow: 0 0 8px rgba(45,212,160,0.6);
+    border-color: rgba(45,212,160,0.25);
+    background: rgba(5,20,15,0.6);
+    pointer-events: none;
+    user-select: none;
+  }
+  .ks20-btn {
+    width: 22px; height: 22px;
+    background: none;
+    border: 1px solid rgba(255,255,255,0.07);
+    color: #333;
+    font-size: 0.6rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    border-radius: 2px;
+  }
+  .ks20-btn:hover { border-color: rgba(196,130,26,0.4); color: var(--gold); }
+  .ks20-btn.ks-locked { border-color: rgba(45,212,160,0.35); color: #2dd4a0; }
+
+  /* Drawer footer / status */
+  .vd-footer {
+    padding: 10px 14px;
+    border-top: 1px solid var(--forge-border);
+    background: rgba(255,255,255,0.01);
+    flex-shrink: 0;
+  }
+  .vdf-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+  }
+  .vdf-label {
+    font-family: 'Cinzel', serif;
+    font-size: 0.58rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #444;
+  }
+  .vdf-val {
+    font-family: 'EB Garamond', serif;
+    font-size: 0.8rem;
+    color: #2dd4a0;
+    font-style: italic;
+  }
+  .vdf-provider {
+    font-family: 'EB Garamond', serif;
+    font-size: 0.78rem;
+    color: var(--saffron);
+    font-style: italic;
+  }
+  .vdf-clear {
+    width: 100%;
+    padding: 7px;
+    background: rgba(248,113,113,0.04);
+    border: 1px solid rgba(248,113,113,0.15);
+    color: #555;
+    font-family: 'Cinzel', serif;
+    font-size: 0.58rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-top: 6px;
+  }
+  .vdf-clear:hover { color: #f87171; border-color: rgba(248,113,113,0.4); }
+
+  /* Log strip inside vault */
+  .vd-log {
+    font-family: 'EB Garamond', serif;
+    font-size: 0.72rem;
+    font-style: italic;
+    padding: 6px 0 2px;
+    min-height: 22px;
+    color: #444;
+    transition: color 0.3s;
+  }
+  .vd-log.ok   { color: #2dd4a0; }
+  .vd-log.warn { color: #f59e0b; }
+  .vd-log.err  { color: #f87171; }
 </style>
 </head>
 <body>
 
-<!-- HEADER -->
-<div class="forge-header">
-  <div class="forge-logo">
-    <div class="forge-logo-icon">⬡</div>
-    <div>
-      <div class="forge-logo-text">Research Forge</div>
-      <div class="forge-logo-sub">Cultural Musings · Computational Codex</div>
+<!-- ════════ HEADER ════════ -->
+<header>
+  <div class="header-ornament">❧ ॐ ❧</div>
+  <div class="header-inner">
+    <div class="header-devanagari">नाद ब्रह्मन् — ध्वनि का विज्ञान</div>
+    <h1>Nāda Brahman <span>·</span> Bio-Acoustic Codex</h1>
+    <div class="header-subtitle">Sound · Body · Motion · Consciousness</div>
+    <div class="header-border-ornament">
+      <div class="line"></div>
+      <span class="gem">✦ ✦ ✦</span>
+      <div class="line"></div>
     </div>
   </div>
+</header>
 
-  <div class="forge-ref-chips">
-    <a class="ref-chip" href="https://www.culturalmusings.com" target="_blank"><span class="chip-dot"></span>culturalmusings.com</a>
-    <a class="ref-chip" href="https://computationalcodex.culturalmusings.com" target="_blank"><span class="chip-dot"></span>computationalcodex</a>
-    <a class="ref-chip" href="https://github.com/ramachandra1975" target="_blank"><span class="chip-dot"></span>github/ramachandra1975</a>
+<!-- ════════ MODE TOGGLE ════════ -->
+<div class="mode-bar">
+  <span class="mode-label">Exploration Mode</span>
+  <div class="mode-toggle">
+    <button class="mode-btn active" onclick="setMode('detailed')" id="btn-detailed">⊕ Detailed</button>
+    <button class="mode-btn" onclick="setMode('brief')" id="btn-brief">⊗ Brief + Equations</button>
   </div>
+  <button class="vault-toggle-btn" id="vaultToggleBtn" onclick="openVault()">
+    <span class="vt-dot" id="vaultDot"></span>
+    🗝 Key Vault
+  </button>
+</div>
 
-  <div class="forge-mode-toggle">
-    <button class="mode-btn active" id="modeNoApi" onclick="switchMode('noapi')">⬡ No-API Mode</button>
-    <button class="mode-btn" id="modeApi" onclick="switchMode('api')">⚡ API Mode</button>
+<!-- ════════ KEY VAULT BACKDROP ════════ -->
+<div class="vault-backdrop" id="vaultBackdrop" onclick="closeVault()"></div>
+
+<!-- ════════ KEY VAULT DRAWER ════════ -->
+<div class="vault-drawer" id="vaultDrawer">
+  <div class="vd-header">
+    <div class="vd-title-row">
+      <span class="vd-title">🗝 Key Vault — 20 Slots</span>
+      <button class="vd-close" onclick="closeVault()">✕</button>
+    </div>
+    <div class="vd-subtitle">Paste any key (Groq · Gemini · OpenRouter · Anthropic). Auto-detected. Persists on reload.</div>
+  </div>
+  <div class="vd-body" id="forgeKeyBody"><!-- slots rendered by JS --></div>
+  <div class="vd-footer">
+    <div class="vdf-row">
+      <span class="vdf-label">Active Keys</span>
+      <span class="vdf-val" id="fkActiveCount">0</span>
+    </div>
+    <div class="vdf-row">
+      <span class="vdf-label">Requests Sent</span>
+      <span class="vdf-val" id="fkReqCount">0</span>
+    </div>
+    <div class="vdf-row">
+      <span class="vdf-label">Last Provider</span>
+      <span class="vdf-provider" id="fkCurProvider">—</span>
+    </div>
+    <div class="vd-log" id="vaultLog">Vault ready.</div>
+    <button class="vdf-clear" onclick="clearAllKeys()">⊗ Clear All Keys</button>
   </div>
 </div>
 
-<!-- BODY -->
-<div class="forge-body">
-
-  <!-- LEFT: QUERY PANEL -->
-  <div class="forge-query">
-
-    <div class="fq-section">
-      <div class="fq-label">Query</div>
-      <textarea class="forge-query-input" id="queryInput" placeholder="Enter your research question… e.g. 'What is the physics of 108 karanas in Natya Shastra?'" rows="5"></textarea>
-    </div>
-
-    <div class="fq-section">
-      <div class="fq-label">Sources</div>
-      <div class="source-chips" id="sourceChips">
-        <div class="src-chip selected" data-src="culturalmusings">culturalmusings.com</div>
-        <div class="src-chip selected" data-src="computationalcodex">computationalcodex</div>
-        <div class="src-chip selected" data-src="github">github/ramachandra1975</div>
-        <div class="src-chip" data-src="wikipedia">wikipedia</div>
-        <div class="src-chip" data-src="scholar">google scholar</div>
-        <div class="src-chip" data-src="archive">archive.org</div>
-        <div class="src-chip" data-src="jstor">jstor</div>
-        <div class="src-chip" data-src="arxiv">arxiv</div>
-      </div>
-    </div>
-
-    <div class="fq-section">
-      <div class="fq-label">Research Depth</div>
-      <div class="depth-row">
-        <input type="range" class="depth-slider" id="depthSlider" min="1" max="5" value="3" oninput="updateDepth(this.value)">
-        <span class="depth-label" id="depthLabel">Deep (3)</span>
-      </div>
-    </div>
-
-    <div class="fq-section" id="noApiSection">
-      <div class="noapi-info">
-        <div class="ni-title">⬡ No-API Mode</div>
-        Forge curated reference links from selected sources. Opens search pages and provides direct research links — no API key required. Best for exploration.
-      </div>
-      <button class="forge-gen-btn" id="generateBtn" onclick="doResearch()">⬡ Generate Research Links</button>
-    </div>
-
-    <div class="fq-section hidden" id="apiSection">
-      <div class="noapi-info" style="background:rgba(197,160,89,0.04);border-color:rgba(197,160,89,0.2);color:var(--forge-gold)">
-        <div class="ni-title">⚡ API Mode</div>
-        Uses your API key (Groq / Gemini / OpenRouter / Anthropic) to synthesize a full research report with citations.
-      </div>
-      <button class="forge-gen-btn" id="generateBtnApi" onclick="doApiResearch()">⚡ Synthesize with AI</button>
-    </div>
-
-    <!-- LOG -->
-    <div class="fq-section" style="flex:1;padding-bottom:0">
-      <div class="fq-label">Log</div>
-      <div class="forge-log" id="forgeLog">
-        <div class="log-line info"><span class="log-time">00:00</span><span class="log-msg">Research Forge initialized. Select mode and enter query.</span></div>
-      </div>
-    </div>
-
-  </div>
-
-  <!-- CENTER: RESULTS -->
-  <div class="forge-results">
-    <div class="fr-tabs">
-      <button class="fr-tab active" onclick="switchTab('synthesis')">Synthesis</button>
-      <button class="fr-tab" onclick="switchTab('sources')">Sources</button>
-      <button class="fr-tab" onclick="switchTab('github')">GitHub</button>
-      <button class="fr-tab" onclick="switchTab('export')">Export</button>
-    </div>
-    <div class="fr-content" id="frContent">
-      <div class="fr-empty" id="emptyState">
-        <div class="fr-empty-icon">⬡</div>
-        <div class="fr-empty-text">Awaiting Research Query</div>
-        <div style="font-size:0.42rem;color:#252840;font-family:'JetBrains Mono',monospace;text-align:center;line-height:1.8">
-          Enter a query · Select sources · Choose mode<br>culturalmusings.com · github/ramachandra1975
-        </div>
-      </div>
-      <div id="resultContent" style="display:none"></div>
-    </div>
-  </div>
-
-  <!-- RIGHT: KEY VAULT -->
-  <div class="forge-keys">
-    <div class="fk-header">
-      <div class="fk-title">⬡ Key Vault</div>
-      <div class="fk-subtitle" id="fk-subtitle-text">Paste Groq/Gemini/OpenRouter/Anthropic keys. Auto-detected. Persists on reload.</div>
-    </div>
-    <div class="fk-body" id="forgeKeyBody">
-      <!-- 20 slots rendered by JS -->
-    </div>
-    <div class="fk-stats">
-      <div class="fks-row">
-        <span class="fks-label">Active Keys</span>
-        <span class="fks-val" id="fkActiveCount">0</span>
-      </div>
-      <div class="fks-row">
-        <span class="fks-label">Requests</span>
-        <span class="fks-val" id="fkReqCount">0</span>
-      </div>
-      <div class="fks-row">
-        <span class="fks-label">Last Used</span>
-        <span class="fks-val" id="fkCurProvider">—</span>
-      </div>
-      <button class="fk-clear-btn" onclick="clearAllKeys()">⬡ Clear All Keys</button>
-    </div>
-  </div>
-
-</div>
-
-<!-- STATUS BAR -->
-<div class="forge-status-bar" id="forgeStatusBar">
-  <span class="provider-pill vault-pill idle" id="vaultPill"><span class="pill-dot empty" id="vaultDot"></span>Key Vault 0/20</span>
-  <span class="fsb-sep">·</span>
-  <span class="fsb-item" id="fsbMode">Mode: No-API</span>
-  <span class="fsb-sep">·</span>
-  <span class="fsb-item">culturalmusings.com</span>
-  <span class="fsb-sep">·</span>
-  <span class="fsb-item">github/ramachandra1975</span>
-  <span class="fsb-total" id="fkTotalLabel">0 keys active</span>
-</div>
-
-<!-- MODAL -->
-<div class="modal-overlay" id="modal">
-  <div class="modal-box">
-    <div class="modal-title" id="modalTitle">Notice</div>
-    <div class="modal-body" id="modalBody"></div>
-    <button class="modal-close" onclick="closeModal()">Close</button>
+<!-- ════════ TABS ════════ -->
+<div class="tabs-wrapper">
+  <div class="tabs">
+    <button class="tab-btn active" onclick="setTab('physics')">⊛ Sound Physics</button>
+    <button class="tab-btn" onclick="setTab('swaras')">♪ Seven Swaras</button>
+    <button class="tab-btn" onclick="setTab('alankaras')">⊕ Alankaras</button>
+    <button class="tab-btn" onclick="setTab('karanas')">⊞ 108 Karanas</button>
+    <button class="tab-btn" onclick="setTab('equations')">∑ Equations</button>
+    <button class="tab-btn" onclick="setTab('bridge')">⊗ Unified Bridge</button>
   </div>
 </div>
+
+<!-- ════════ MAIN ════════ -->
+<div class="main">
+
+<!-- ══════════════════════════════════════════════════════════
+     TAB 1: SOUND PHYSICS
+═══════════════════════════════════════════════════════════════ -->
+<div class="tab-panel active" id="tab-physics">
+
+  <!-- BRIEF MODE -->
+  <div class="mode-content" id="brief-physics">
+    <div class="section-title">Bio-Acoustic Physics</div>
+    <div class="section-divider"><div class="div-line"></div><span class="div-gem">✦</span></div>
+
+    <div class="hypothesis-box">
+      <div class="hyp-label">Core Hypothesis</div>
+      <div class="hyp-title">The Body is a Multi-Resonant Acoustic Chamber</div>
+      <div class="hyp-body">Sound is not merely heard — it is <em>physically absorbed</em> by the body's tissues, bones, and cells at frequency-specific resonance points. Ancient Indian music theory (<em>Nada Brahman</em>) encodes this truth: the cosmos itself is vibration, and the body is tuned to receive it. The seven swaras correspond directly to anatomical resonance zones.</div>
+    </div>
+
+    <div class="eq-grid">
+      <div class="eq-card">
+        <div class="eq-name">Wave Speed</div>
+        <div class="eq-formula">v = f · λ</div>
+        <div class="eq-explain">Sound travels at 343 m/s in air. Frequency and wavelength are inversely proportional — higher notes have shorter wavelengths.</div>
+        <div class="eq-vars"><span>v</span> = speed (m/s) · <span>f</span> = frequency (Hz) · <span>λ</span> = wavelength (m)</div>
+      </div>
+      <div class="eq-card">
+        <div class="eq-name">Natural Resonance</div>
+        <div class="eq-formula">f₀ = (1/2π)√(k/m)</div>
+        <div class="eq-explain">Every physical structure has a natural frequency determined by its stiffness and mass. Bones, organs, and cells each have their own <em>f₀</em>.</div>
+        <div class="eq-vars"><span>k</span> = stiffness · <span>m</span> = mass · <span>f₀</span> = resonant frequency</div>
+      </div>
+      <div class="eq-card">
+        <div class="eq-name">Acoustic Intensity</div>
+        <div class="eq-formula">I = P² / (2ρv)</div>
+        <div class="eq-explain">Intensity measures acoustic power per area. Pressure amplitude squared drives intensity — doubling amplitude quadruples intensity.</div>
+        <div class="eq-vars"><span>P</span> = pressure amplitude · <span>ρ</span> = medium density</div>
+      </div>
+      <div class="eq-card">
+        <div class="eq-name">Harmonic Series</div>
+        <div class="eq-formula">fₙ = n · f₁</div>
+        <div class="eq-explain">Harmonics are integer multiples of the fundamental. The Swara system exploits this — Pa (3:2) is the 3rd harmonic in a 2-note series.</div>
+        <div class="eq-vars"><span>n</span> = harmonic number · <span>f₁</span> = fundamental frequency</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DETAILED MODE -->
+  <div class="mode-content active" id="detailed-physics">
+    <div class="section-title">Bio-Acoustic Physics of Sound & Vibration</div>
+    <div class="section-divider"><div class="div-line"></div><span class="div-gem">✦</span></div>
+
+    <div class="pill-row">
+      <span class="pill">Cellular Resonance</span>
+      <span class="pill">Skeletal Conduction</span>
+      <span class="pill">Neural Entrainment</span>
+      <span class="pill">Nada Brahman</span>
+      <span class="pill">Standing Waves</span>
+    </div>
+
+    <div class="callout ancient">
+      <span class="callout-icon">🪔</span>
+      <div class="callout-body"><strong>Layman's Entry:</strong> Sound is vibration. When something shakes, it pushes the air around it in waves. Those waves enter your ear, make your eardrum vibrate, and your brain turns that into music. But your body is not just a listener — it <em>resonates</em> with sound. Bones, organs, and even individual cells have their own natural frequencies. You are an instrument.</div>
+    </div>
+
+    <div class="callout physics">
+      <span class="callout-icon">⚛</span>
+      <div class="callout-body"><strong>Scientific Framing:</strong> Sound is a longitudinal mechanical wave propagating through an elastic medium via pressure oscillations. Bio-acoustics studies how living systems generate, transmit, and respond to these pressure waves. The human body is a <strong>multi-resonant cavity</strong> — different anatomical structures respond to different frequency bands.</div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span class="icon">🔬</span> Cellular Resonance</div>
+      <p>Individual cells have membrane resonance frequencies in the range of <strong>1–100 Hz</strong>. Sound waves can induce cytoskeletal vibrations, directly affecting cell signalling pathways. This is the physical basis of <em data-tip="The study of visible patterns created by sound vibrations in physical media">cymatics</em> and contemporary sound healing research.</p>
+      <p>The longstanding 432 Hz vs 440 Hz tuning debate is fundamentally about which base frequency creates more harmonic cellular resonance — a question now being pursued in biophysics laboratories.</p>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span class="icon">🦴</span> Cranial & Skeletal Resonance</div>
+      <p>Bone conducts sound <strong>15× faster than air</strong>. The skull resonates at <strong>100–200 Hz</strong>; the chest cavity at <strong>40–80 Hz</strong>. When a vocalist sings <em>Sa</em> (the tonic), they activate their thoracic cavity as a resonance chamber.</p>
+      <p>This is precisely why Carnatic voice training begins with correct seated posture — the body must be aligned to function as an optimal resonance chamber before any note is produced.</p>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span class="icon">🧠</span> Neural Entrainment</div>
+      <p>Binaural beats — two slightly different frequencies presented to each ear — cause brainwaves to synchronize (entrain) to the difference frequency. <strong>Alpha waves (8–12 Hz)</strong> produce meditative focus; <strong>Theta waves (4–7 Hz)</strong> produce deep meditation states.</p>
+      <p>This neurological mechanism explains why rhythmic music played in specific ragas can demonstrably alter states of consciousness — this is physics, not mysticism.</p>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span class="icon">🕉</span> Nada Brahman — Ancient Physics Doctrine</div>
+      <p>Ancient Indian acoustics described two types of <em>nada</em> (sound): <strong>Āhata</strong> (struck sound — external, audible music) and <strong>Anāhata</strong> (unstruck sound — internal, the body's own vibrational field, the "heart chakra" sound).</p>
+      <p>Modern physics offers a parallel: the electromagnetic and acoustic <em>biofield</em> — measurable energy fields around living organisms — provides a physical correlate to the Anāhata concept. The cosmos's fundamental oscillation finds its echo in the body's resonance architecture.</p>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span class="icon">🏛</span> Standing Waves in Performance Space</div>
+      <p>A performance space — temple hall or <em>Sabha Mandapam</em> — acts as a resonance chamber. The karanas of the Natya Shastra were codified in exactly these acoustic environments. Standing waves form when the wavelength fits the room dimensions, causing harmonics to build constructively.</p>
+      <p>Standing wave condition: <strong>L = n·(λ/2)</strong>, where L = room length, n = mode number. This is documented in <em>Manasara</em> and <em>Silpa Shastra</em> — ancient texts encoding these architectural-acoustic ratios explicitly. The architecture IS the instrument.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+     TAB 2: SEVEN SWARAS
+═══════════════════════════════════════════════════════════════ -->
+<div class="tab-panel" id="tab-swaras">
+
+  <!-- BRIEF MODE -->
+  <div class="mode-content" id="brief-swaras">
+    <div class="section-title">The Seven Swaras</div>
+    <div class="section-divider"><div class="div-line"></div><span class="div-gem">✦</span></div>
+
+    <div class="hypothesis-box">
+      <div class="hyp-label">Core Hypothesis</div>
+      <div class="hyp-title">Seven Natural Consonance Points in the Acoustic Continuum</div>
+      <div class="hyp-body">The swaras are not arbitrary choices — they are the seven frequencies in an octave where two simultaneously sounding tones produce <em>minimum acoustic beating</em> (maximum constructive interference). Each corresponds to a ratio of small integers, a body resonance zone, and an emotional-rasa state. Indian music is a physical map of the body's acoustic response surface.</div>
+    </div>
+
+    <div class="eq-grid">
+      <div class="eq-card">
+        <div class="eq-name">Just Intonation Ratio</div>
+        <div class="eq-formula">fₙ = f_Sa · (p/q)</div>
+        <div class="eq-explain">Each swara is a ratio of small integers (p/q) above the tonic Sa. Ratios of integers produce cleaner resonance than irrational ratios used in Western equal temperament.</div>
+        <div class="eq-vars"><span>p, q</span> = small integers · <span>f_Sa</span> = tonic (261.63 Hz at C4)</div>
+      </div>
+      <div class="eq-card">
+        <div class="eq-name">Acoustic Beating</div>
+        <div class="eq-formula">f_beat = |f₁ − f₂|</div>
+        <div class="eq-explain">When two frequencies are close, their interference creates "beats" — amplitude fluctuations. Integer ratios minimize beats, producing the smoothest, most resonant intervals.</div>
+        <div class="eq-vars"><span>f₁, f₂</span> = two sounding frequencies</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DETAILED MODE -->
+  <div class="mode-content active" id="detailed-swaras">
+    <div class="section-title">The Seven Swaras — Physics, Biology & Meaning</div>
+    <div class="section-divider"><div class="div-line"></div><span class="div-gem">✦</span></div>
+
+    <div class="callout ancient">
+      <span class="callout-icon">🪈</span>
+      <div class="callout-body"><strong>Click any swara card below to hear its frequency.</strong> The swaras are identified by which natural sound each specific interval resembles — they map to frequency ratios creating minimum acoustic beating (consonance), to specific body resonance zones, and to emotional-rasa states.</div>
+    </div>
+
+    <div class="swara-grid" id="swaraGrid"></div>
+
+    <div class="canvas-wrap">
+      <div class="canvas-title">⊛ Frequency Ratio Spectrum — Just Intonation</div>
+      <canvas id="freqCanvas"></canvas>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span class="icon">🎵</span> The 22 Shrutis — Why Not 12 or 24?</div>
+      <p>Western music divided the octave into <strong>12 equal parts</strong> using irrational ratios (the 12th root of 2 ≈ 1.05946...). Indian classical music identified <strong>22 natural consonance points</strong> using only integer ratios — the exact frequencies where two simultaneously sounding strings produce minimal acoustic beating.</p>
+      <p>These 22 shrutis represent the physical grammar of biological resonance. The body's cells, nerves, and bones are most "comfortable" at these frequencies — they are not cultural conventions but acoustic facts discoverable by any acoustician.</p>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span class="icon">⚖️</span> Just Intonation vs Equal Temperament</div>
+      <table class="data-table">
+        <thead>
+          <tr><th>Property</th><th>Just Intonation (Indian)</th><th>Equal Temperament (Western)</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Ratios used</td><td class="highlight">Small integers (3:2, 5:4...)</td><td class="mono">Irrational (2^(7/12)...)</td></tr>
+          <tr><td>Acoustic beating</td><td class="highlight">Minimal → pure consonance</td><td class="mono">Some beating in all intervals</td></tr>
+          <tr><td>Body resonance</td><td class="highlight">Cleaner standing waves</td><td class="mono">Approximate resonance</td></tr>
+          <tr><td>Transposability</td><td class="mono">Each key sounds slightly different</td><td class="highlight">Identical in all keys</td></tr>
+          <tr><td>Emotional texture</td><td class="highlight">Rich, alive, context-sensitive</td><td class="mono">Uniform, standardized</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+     TAB 3: ALANKARAS
+═══════════════════════════════════════════════════════════════ -->
+<div class="tab-panel" id="tab-alankaras">
+
+  <!-- BRIEF MODE -->
+  <div class="mode-content" id="brief-alankaras">
+    <div class="section-title">Alankaras</div>
+    <div class="section-divider"><div class="div-line"></div><span class="div-gem">✦</span></div>
+
+    <div class="hypothesis-box">
+      <div class="hyp-label">Core Hypothesis</div>
+      <div class="hyp-title">Alankaras as Neural Transfer Function Training</div>
+      <div class="hyp-body">An alankara is not a warm-up exercise — it is a <em>precision neural training protocol</em>. Each pattern trains laryngeal muscles for interval navigation, the motor cortex for high-speed sequencing, and the proprioceptive system to physically feel each swara's resonance. The gamaka (glide) IS the signal — it trains the voice to inhabit the acoustic space between quantized notes.</div>
+    </div>
+
+    <div class="eq-grid">
+      <div class="eq-card">
+        <div class="eq-name">Motor Cortex Sequencing</div>
+        <div class="eq-formula">T_reaction ∝ 1/√(practice · n)</div>
+        <div class="eq-explain">Reaction time for learned motor sequences decreases as a function of practice and sequence complexity. Alankaras systematically train this reduction across all intervals.</div>
+        <div class="eq-vars"><span>T</span> = reaction time · <span>n</span> = sequence complexity</div>
+      </div>
+      <div class="eq-card">
+        <div class="eq-name">Gamaka Glide (Portamento)</div>
+        <div class="eq-formula">f(t) = f₁ + (f₂−f₁)·g(t)</div>
+        <div class="eq-explain">The gamaka is a continuous frequency glide between two swaras. The glide function g(t) (linear, exponential, or shaped) encodes the emotional character of the transition.</div>
+        <div class="eq-vars"><span>f₁, f₂</span> = start/end swaras · <span>g(t)</span> = glide profile</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DETAILED MODE -->
+  <div class="mode-content active" id="detailed-alankaras">
+    <div class="section-title">Alankaras — Ornaments of Sound & Neural Architecture</div>
+    <div class="section-divider"><div class="div-line"></div><span class="div-gem">✦</span></div>
+
+    <div class="pill-row">
+      <span class="pill">Laryngeal Training</span>
+      <span class="pill">Motor Cortex</span>
+      <span class="pill">Proprioception</span>
+      <span class="pill">Gamaka</span>
+      <span class="pill">Interval Navigation</span>
+    </div>
+
+    <div class="callout ancient">
+      <span class="callout-icon">🪈</span>
+      <div class="callout-body">The word <em>alankara</em> (Sanskrit: अलंकार) means "ornament" or "that which makes beautiful." But its technical function is far more precise — it is a systematically constructed pattern of swaras designed to build specific neuromuscular capabilities in the vocalist or instrumentalist.</div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span class="icon">🧬</span> The Three Training Targets</div>
+      <p><strong>1. Laryngeal Muscle Precision:</strong> Each alankara trains the muscles controlling vocal fold tension to navigate specific frequency intervals with biomechanical accuracy. The interval from Sa to Pa (3:2) requires a precisely calibrated change in fold tension — alankaras build this through repetition at varied speeds.</p>
+      <p><strong>2. Neural Motor Sequencing:</strong> The motor cortex must learn to sequence swara transitions at high speed without conscious deliberation. Alankaras practiced at increasing tempos (from vilamba to madhya to druta kala) are literally programming the motor cortex's procedural memory — identical to how a pianist builds finger independence.</p>
+      <p><strong>3. Proprioceptive Feedback:</strong> The vocalist learns to <em>feel</em> each swara as a physical sensation in a specific part of the body — the chest resonance of Sa, the nasal resonance of Ga. This proprioceptive map allows real-time self-correction during performance without conscious pitch monitoring.</p>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span class="icon">〜</span> The Gamaka — Physics of the Glide</div>
+      <p>The <em>gamaka</em> (ornamental glide between notes) is perhaps the most acoustically significant element in Carnatic music. Unlike the discrete note-steps of Western music, the gamaka is a <strong>continuous frequency trajectory</strong> between swaras.</p>
+      <p>This glide trains the voice to inhabit the <em>space between</em> the 22 quantized shrutis — the continuous acoustic manifold. In signal processing terms, it is a bandlimited frequency modulation. The glide IS the information: the shape, speed, and endpoint of each gamaka carries emotional content that cannot be expressed by discrete notes alone.</p>
+      <p>This is why Carnatic music sounds more <em>alive</em> than equal-tempered Western music — the gamaka adds a dimension of continuous expression that discrete pitch systems cannot access.</p>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span class="icon">📊</span> Primary Alankara Types & Their Acoustic Functions</div>
+      <table class="data-table">
+        <thead>
+          <tr><th>Alankara</th><th>Sanskrit</th><th>Pattern</th><th>Acoustic Function</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="highlight">Sarali</td><td class="mono">सरली</td><td>S R G M P D N Ṡ</td><td>Scalar interval training; establishes the resonance map of the octave</td></tr>
+          <tr><td class="highlight">Janta</td><td class="mono">जन्त</td><td>SS RR GG MM...</td><td>Trains consecutive identical-pitch attacks; builds laryngeal control and articulation precision</td></tr>
+          <tr><td class="highlight">Melsthayi</td><td class="mono">मेलस्थायी</td><td>S Ṡ R Ṡ G Ṡ...</td><td>Octave jump training; develops the acoustic bridge between chest and head resonance</td></tr>
+          <tr><td class="highlight">Gamaka</td><td class="mono">गमक</td><td>S∼R G∼M P∼D...</td><td>Continuous frequency glide; trains the voice in the acoustic continuum between shrutis</td></tr>
+          <tr><td class="highlight">Daatu</td><td class="mono">दातु</td><td>S G R M G P...</td><td>Non-linear interval jumps; builds fast neuromuscular switching between non-adjacent swaras</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+     TAB 4: 108 KARANAS
+═══════════════════════════════════════════════════════════════ -->
+<div class="tab-panel" id="tab-karanas">
+
+  <!-- BRIEF MODE -->
+  <div class="mode-content" id="brief-karanas">
+    <div class="section-title">108 Karanas</div>
+    <div class="section-divider"><div class="div-line"></div><span class="div-gem">✦</span></div>
+
+    <div class="hypothesis-box">
+      <div class="hyp-label">Core Hypothesis</div>
+      <div class="hyp-title">108 as a Complete Basis Set for Movement Space</div>
+      <div class="hyp-body">The Natya Shastra's 108 karanas are a <em>basis set</em> — like the x, y, z axes of 3D space — from which any complex dance movement can be decomposed. The number 108 encodes (4 hand types) × (27 body states), where 27 = 3³ captures the three planes of movement (sagittal, frontal, transverse) at three levels each. Each karana also has a dominant acoustic signature generated when performed on a resonant stage.</div>
+    </div>
+
+    <div class="eq-grid">
+      <div class="eq-card">
+        <div class="eq-name">Karana Combinatorics</div>
+        <div class="eq-formula">108 = 4 × 27 = 4 × 3³</div>
+        <div class="eq-explain">4 hasta (hand) types × 27 body configurations (3 planes × 3 levels × 3 orientations) = complete movement basis in classical dance-space.</div>
+        <div class="eq-vars"><span>3³</span> = sagittal · frontal · transverse planes at 3 levels each</div>
+      </div>
+      <div class="eq-card">
+        <div class="eq-name">Floor Vibration Frequency</div>
+        <div class="eq-formula">f_floor = v_wood / (2L_step)</div>
+        <div class="eq-explain">Each karana generates measurable floor vibration when performed on a resonant wooden stage. Stance width (L_step) determines the dominant frequency band generated by the foot strike.</div>
+        <div class="eq-vars"><span>v_wood</span> ≈ 3500–5000 m/s · <span>L_step</span> = stance width</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DETAILED MODE -->
+  <div class="mode-content active" id="detailed-karanas">
+    <div class="section-title">108 Karanas — Complete Grammar of Sacred Movement</div>
+    <div class="section-divider"><div class="div-line"></div><span class="div-gem">✦</span></div>
+
+    <div class="callout ancient">
+      <span class="callout-icon">🏛</span>
+      <div class="callout-body">The <strong>Natya Shastra</strong> (2nd c. BCE – 2nd c. CE), attributed to Bharata Muni, describes 108 <em>karanas</em> — fundamental units of movement combining hasta (hand), pada (foot), and śarīra (body) into complete, sculptural gesture-units. They are carved in stone at Chidambaram, Gangaikonda Cholapuram, and other Chola temples — a physical archive preserved in granite.</div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span class="icon">⚙</span> The Basis Set Principle</div>
+      <p>The karanas are best understood as a <strong>basis set</strong> — like the x, y, z axes of 3D space, any complex dance movement can be decomposed into karanas. The number 108 is not numerological decoration. It encodes the combinatorial space of <strong>(4 hasta types) × (27 body states)</strong>, where 27 = 3³ captures three planes of movement (sagittal, frontal, transverse) at three levels each (low, mid, high).</p>
+      <p>This is structurally identical to how quantum mechanics uses a basis of eigenstates to span all possible states of a system — complete, minimal, and non-redundant.</p>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span class="icon">🎶</span> Rasa-Frequency Signatures</div>
+      <p>Each karana has a dominant frequency signature — the acoustic band it generates when performed on a resonant wooden performance stage. This is not tradition — it follows directly from biomechanics:</p>
+      <p><strong>Veera rasa (heroic) karanas:</strong> wide, grounded stances → large mass displacement → low-frequency floor vibrations, <em>200–400 Hz</em> range.</p>
+      <p><strong>Śringāra (love/beauty) karanas:</strong> light, aerial movements, soft footwork → high-frequency transients, <em>800–2000 Hz</em> range.</p>
+      <p><strong>Karuṇa (compassion) karanas:</strong> flowing, moderate-pace movements → mid-range sustained frequencies, <em>400–800 Hz</em> range.</p>
+    </div>
+
+    <div class="karana-grid" id="karanaGrid"></div>
+
+    <div class="card">
+      <div class="card-title"><span class="icon">🗿</span> Temple Sculpture as Data Archive</div>
+      <p>The Chidambaram Nataraja temple preserves 81 of the 108 karanas carved in stone on its gopuram panels. This was a deliberate encoding strategy — sculpture is more durable than manuscript. Each panel shows the karana with the associated <em>nritta hasta</em>, <em>sthāna</em>, and <em>cāri</em> (hand, stance, footwork).</p>
+      <p>The Gangaikonda Cholapuram and Darasuram temples provide additional panels covering the remaining karanas — together constituting a distributed, stone-encoded reference library that has survived over 1,000 years.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+     TAB 5: EQUATIONS
+═══════════════════════════════════════════════════════════════ -->
+<div class="tab-panel" id="tab-equations">
+
+  <div class="mode-content" id="brief-equations">
+    <div class="section-title">Governing Equations — Brief Reference</div>
+    <div class="section-divider"><div class="div-line"></div><span class="div-gem">✦</span></div>
+
+    <div class="hypothesis-box">
+      <div class="hyp-label">Master Hypothesis</div>
+      <div class="hyp-title">One Physics, Three Expressions</div>
+      <div class="hyp-body">The equations of acoustics, resonance, and wave mechanics govern equally: the physics of sound in air, the bio-acoustic response of the human body, and the vibrational patterns generated by Bharatanatyam karanas on a resonant stage. The swaras, alankaras, and karanas are applied instances of one unified vibrational physics.</div>
+    </div>
+  </div>
+
+  <div class="mode-content active" id="detailed-equations">
+    <div class="section-title">Complete Equation Reference</div>
+    <div class="section-divider"><div class="div-line"></div><span class="div-gem">✦</span></div>
+  </div>
+
+  <!-- Equations always shown in both modes -->
+  <div class="eq-grid" style="margin-top:24px">
+    <div class="eq-card">
+      <div class="eq-name">Wave Propagation</div>
+      <div class="eq-formula">v = f · λ</div>
+      <div class="eq-explain">Sound travels as longitudinal pressure waves. In air at 20°C, v = 343 m/s. In bone, v ≈ 4000 m/s — 15× faster, which is why skeletal resonance is profoundly affected by sound.</div>
+      <div class="eq-vars"><span>v</span> = 343 m/s (air) · <span>f</span> = frequency (Hz) · <span>λ</span> = wavelength (m)</div>
+    </div>
+
+    <div class="eq-card">
+      <div class="eq-name">Natural Resonance Frequency</div>
+      <div class="eq-formula">f₀ = (1/2π)√(k/m)</div>
+      <div class="eq-explain">Every physical body vibrates preferentially at its natural frequency. For the chest cavity: f₀ ≈ 40–80 Hz. For the skull: f₀ ≈ 100–200 Hz. Sa activates chest; Ni activates cranial resonance.</div>
+      <div class="eq-vars"><span>k</span> = stiffness (N/m) · <span>m</span> = mass (kg)</div>
+    </div>
+
+    <div class="eq-card">
+      <div class="eq-name">Acoustic Intensity</div>
+      <div class="eq-formula">I = P² / (2ρv)</div>
+      <div class="eq-explain">Acoustic energy delivered to tissue. The square relationship means that doubling vocal pressure amplitude delivers 4× the acoustic intensity to the body — this is why trained singers feel sound physically.</div>
+      <div class="eq-vars"><span>P</span> = pressure amplitude (Pa) · <span>ρ</span> = density (kg/m³)</div>
+    </div>
+
+    <div class="eq-card">
+      <div class="eq-name">Harmonic Series</div>
+      <div class="eq-formula">fₙ = n · f₁</div>
+      <div class="eq-explain">Integer harmonics are the arithmetic backbone of the swara system. Pa at 3:2 is the 3rd harmonic of the sub-octave fundamental. This is why Pa feels "stable" — it is a natural harmonic.</div>
+      <div class="eq-vars"><span>n</span> = 1, 2, 3, ... · <span>f₁</span> = fundamental (Sa)</div>
+    </div>
+
+    <div class="eq-card">
+      <div class="eq-name">Standing Wave (Room)</div>
+      <div class="eq-formula">L = n · (λ/2)</div>
+      <div class="eq-explain">Room resonance amplifies specific frequencies when wavelength fits the room dimension. Temple halls were built at specific L to resonate with Sa — the architecture tunes the acoustic environment to the music.</div>
+      <div class="eq-vars"><span>L</span> = room length · <span>n</span> = mode · <span>λ</span> = wavelength</div>
+    </div>
+
+    <div class="eq-card">
+      <div class="eq-name">Acoustic Beating</div>
+      <div class="eq-formula">f_beat = |f₁ − f₂|</div>
+      <div class="eq-explain">When two frequencies differ, their interference produces amplitude pulsation at the difference frequency. The 22 shrutis minimize this beating — the ancient tuning system is an empirical minimization of acoustic dissonance.</div>
+      <div class="eq-vars"><span>f₁, f₂</span> = two sounding tones</div>
+    </div>
+
+    <div class="eq-card">
+      <div class="eq-name">Just Intonation Ratio</div>
+      <div class="eq-formula">f_swara = f_Sa · (p/q)</div>
+      <div class="eq-explain">Each swara is defined by a ratio of small integers above the tonic. Sa=1:1, Ri=9:8, Ga=5:4, Ma=4:3, Pa=3:2, Dha=5:3, Ni=15:8. These minimize beating and maximize body resonance.</div>
+      <div class="eq-vars"><span>p, q</span> ∈ ℤ⁺ · small integers · <span>f_Sa</span> = tonic</div>
+    </div>
+
+    <div class="eq-card">
+      <div class="eq-name">Neural Entrainment (Binaural)</div>
+      <div class="eq-formula">f_brain = |f_L − f_R|</div>
+      <div class="eq-explain">Binaural beats entrain brainwaves to the difference frequency. If left ear hears 200 Hz and right ear hears 208 Hz, the brain generates an 8 Hz alpha wave — meditative focus. Raga structures exploit this principle.</div>
+      <div class="eq-vars"><span>f_L, f_R</span> = left/right ear frequencies</div>
+    </div>
+
+    <div class="eq-card">
+      <div class="eq-name">Gamaka (Frequency Glide)</div>
+      <div class="eq-formula">f(t) = f₁ + (f₂−f₁)·g(t)</div>
+      <div class="eq-explain">The gamaka is a continuous frequency trajectory g(t) between two swaras. Linear g(t) = t/T; exponential g(t) = (eᵗ−1)/(e^T−1). The shape of g(t) encodes the emotional character of the ornament.</div>
+      <div class="eq-vars"><span>f₁→f₂</span> = swara pair · <span>g(t)</span> = glide function</div>
+    </div>
+
+    <div class="eq-card">
+      <div class="eq-name">Floor Vibration (Karana)</div>
+      <div class="eq-formula">f_impact = √(k_floor / m_body) / (2π)</div>
+      <div class="eq-explain">Each karana foot-strike generates a damped oscillation in the performance floor. Wider, heavier stances reduce the effective spring constant k_floor, producing lower impact frequencies — mapping stance type to frequency band.</div>
+      <div class="eq-vars"><span>k_floor</span> = floor stiffness · <span>m_body</span> = body mass loading</div>
+    </div>
+
+    <div class="eq-card">
+      <div class="eq-name">Karana Basis Set</div>
+      <div class="eq-formula">108 = 4 × 3³</div>
+      <div class="eq-explain">4 hasta types × 3³ body configurations = complete spanning set for movement space. Just as three orthogonal axes span 3D physical space, the 108 karanas span the 3³-dimensional space of classical Indian dance posture.</div>
+      <div class="eq-vars">3³ = planes × levels × orientations</div>
+    </div>
+
+    <div class="eq-card">
+      <div class="eq-name">Rayleigh Resonance (Vocal Tract)</div>
+      <div class="eq-formula">F₁ = v / (4L_tract)</div>
+      <div class="eq-explain">The vocal tract's first formant (primary resonance) is inversely proportional to its length. Each swara requires a slightly different vocal tract shaping — the ancient swara-body mapping encodes the acoustic geometry of the tract for each note.</div>
+      <div class="eq-vars"><span>L_tract</span> ≈ 17 cm (adult) · <span>v</span> = 343 m/s</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+     TAB 6: UNIFIED BRIDGE
+═══════════════════════════════════════════════════════════════ -->
+<div class="tab-panel" id="tab-bridge">
+
+  <!-- BRIEF MODE -->
+  <div class="mode-content" id="brief-bridge">
+    <div class="section-title">Unified Bridge</div>
+    <div class="section-divider"><div class="div-line"></div><span class="div-gem">✦</span></div>
+
+    <div class="hypothesis-box">
+      <div class="hyp-label">Master Synthesis Hypothesis</div>
+      <div class="hyp-title">Sound, Body & Motion as One Vibrational System</div>
+      <div class="hyp-body">The swaras (acoustic frequencies), alankaras (neuromuscular training protocols), and karanas (movement basis vectors) are not separate traditions — they are three coordinate representations of one physical system: the human body as a vibrational instrument. The <em>Nada Brahman</em> doctrine ("God is sound") is a physics statement: all matter is vibrational, and the body is tuned to this vibration at every scale from cell membrane to cranial cavity to performance hall.</div>
+    </div>
+
+    <div class="eq-grid">
+      <div class="eq-card">
+        <div class="eq-name">Master Resonance Equation</div>
+        <div class="eq-formula">Ψ_body = Σₙ aₙ · φₙ(f)</div>
+        <div class="eq-explain">The body's total acoustic response Ψ is a superposition of its resonant modes φₙ weighted by amplitude aₙ. Music selectively excites specific modes — raga selection is mode selection.</div>
+        <div class="eq-vars"><span>φₙ</span> = body resonance mode · <span>aₙ</span> = amplitude · <span>f</span> = frequency</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DETAILED MODE -->
+  <div class="mode-content active" id="detailed-bridge">
+    <div class="section-title">Unified Bridge — One System, Three Dimensions</div>
+    <div class="section-divider"><div class="div-line"></div><span class="div-gem">✦</span></div>
+
+    <div class="callout bridge">
+      <span class="callout-icon">🌐</span>
+      <div class="callout-body"><strong>The Core Unification:</strong> The entire architecture rests on one physical truth — sound is vibration, and vibration is life. The swaras, the alankaras, and the karanas are encoding this truth from three different angles: acoustic, neuromuscular, and kinematic. A computational codex can encode each karana as a multi-dimensional record queryable across all three dimensions simultaneously.</div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span class="icon">🔗</span> The Core Architecture — One Physics, Three Encodings</div>
+      <p><strong>Sound → Body (Bio-acoustic physics):</strong> When you sing Sa, your thoracic cavity resonates at its natural frequency. When you sing Pa (the 3:2 ratio above Sa), the two frequencies produce almost zero "beating" — they lock into constructive interference inside the body. This is not metaphor — it is measurable with a microphone placed against the chest.</p>
+      <p><strong>Body → Movement (Karana biomechanics):</strong> The same resonance physics governs dance. Each karana generates specific frequency signatures in the floor and in the dancer's body — wide, grounded stances generate low-frequency events; light, aerial movements generate high-frequency transients. The body is both the instrument and the dancer.</p>
+      <p><strong>Movement → Rasa (Emotional physics):</strong> The nine rasas are not arbitrary emotional categories. Each rasa corresponds to a specific range of movement frequencies, muscle activation patterns, and acoustic signatures. Emotion is encoded in the physics of body movement — Bharata Muni's system is a physics theory of emotional communication.</p>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span class="icon">📐</span> The Computational Codex Schema</div>
+      <p>Each karana can be encoded as a multi-dimensional record in a computational codex, enabling queries across all dimensions simultaneously:</p>
+      <table class="schema-table" style="margin-top:14px">
+        <thead>
+          <tr><th>Dimension</th><th>Value Type</th><th>Example (Karana 49: Bhrāmarī)</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="dim">Karana ID</td><td class="val">Integer 1–108</td><td class="ex">49</td></tr>
+          <tr><td class="dim">Sanskrit Name</td><td class="val">Devanāgarī string</td><td class="ex">भ्रामरी (Bhrāmarī)</td></tr>
+          <tr><td class="dim">Dominant Rasa</td><td class="val">Enum (9 rasas)</td><td class="ex">Śringāra (Love/Beauty)</td></tr>
+          <tr><td class="dim">Associated Shruti</td><td class="val">Frequency ratio</td><td class="ex">3:2 (Pañcama)</td></tr>
+          <tr><td class="dim">Biomechanical Signature</td><td class="val">Joint angle + CoM vector</td><td class="ex">Spiral rotation · CoM elevated · Angular momentum = high</td></tr>
+          <tr><td class="dim">Tala Position</td><td class="val">Beat + subdivision</td><td class="ex">Beat 1, Tiśra Nādai</td></tr>
+          <tr><td class="dim">Acoustic Band</td><td class="val">Hz range</td><td class="ex">800–1600 Hz (aerial movement)</td></tr>
+          <tr><td class="dim">Temple Sculpture Ref</td><td class="val">Location + panel</td><td class="ex">Chidambaram Gopuram North · Panel 49</td></tr>
+          <tr><td class="dim">Hasta (Hand Type)</td><td class="val">Enum (28 types)</td><td class="ex">Bhramara hasta</td></tr>
+          <tr><td class="dim">Movement Plane</td><td class="val">Sagittal / Frontal / Transverse</td><td class="ex">Transverse (rotational)</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span class="icon">🔍</span> Generative Queries — The Codex as a Knowledge Engine</div>
+      <p>This multi-dimensional schema enables queries that no single-discipline archive could support:</p>
+      <p>→ <em>"Show all karanas associated with Karuṇa rasa that appear on beats 3–4 of Rūpaka tāla in the mid-frequency acoustic band (400–800 Hz)."</em></p>
+      <p>→ <em>"Which swaras produce maximum thoracic resonance, and which karanas are choreographically paired with those swaras in the Natya Shastra's composition guidelines?"</em></p>
+      <p>→ <em>"Map the progression of acoustic frequency bands across a 72-minute classical recital — does the raga choice track the body's circadian resonance shifts?"</em></p>
+      <p>This is what makes the codex <strong>generative rather than merely archival</strong> — it can produce new knowledge by traversing connections across dimensions that were never explicitly stated by Bharata Muni or any subsequent theorist.</p>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span class="icon">🌌</span> Nada Brahman — The Unified Field</div>
+      <p>The ancient declaration <em>Nāda Brahman</em> — "God is Sound" / "The cosmos is vibration" — is a physics statement. The cosmic microwave background radiation peaks at frequencies that, when scaled to audible range, produce harmonic relationships identical to the swara ratios. The hydrogen atom's electromagnetic emission spectrum produces frequency ratios matching the harmonic series. The body's resonance architecture is not separate from cosmic vibration — it is an instance of it.</p>
+      <p>The Carnatic musician, the Bharatanatyam dancer, and the contemplative meditating on <em>Anāhata nāda</em> are all engaging, at different scales and through different means, with the same underlying vibrational physics that governs the cosmos. This is the Unified Bridge.</p>
+    </div>
+
+    <div class="rasa-dashboard" id="rasaDashboard"></div>
+  </div>
+</div>
+
+</div><!-- /main -->
+
+<!-- ════════ FOOTER ════════ -->
+<footer>
+  <div class="footer-deva">नाद ब्रह्मन्</div>
+  <div class="footer-text">Nāda Brahman Bio-Acoustic Codex · Sound · Body · Motion · Consciousness</div>
+</footer>
 
 <script>
-/* ════════════════════════════════════
-   STATE
-════════════════════════════════════ */
-let _currentMode = 'noapi';
-let _currentTab = 'synthesis';
-let _selectedSources = new Set(['culturalmusings','computationalcodex','github']);
-let _researchDepth = 3;
-let _researchResults = {};
+/* ══════════════════════════════════════════════
+   DATA
+══════════════════════════════════════════════ */
+const SWARAS = [
+  { letter:'Sa', name:'Shadja', ratio:'1:1', ratio_n:1.0,     hz:261.63, body:'Throat',   desc:'The foundation, the tonic. All other swaras are defined relative to Sa. Activates the thoracic cavity at its deepest resonance.' },
+  { letter:'Ri', name:'Rishabha', ratio:'9:8', ratio_n:9/8,   hz:294.33, body:'Chest',    desc:'The "bull" note. Named for the cry of a bull. Creates chest cavity resonance distinct from Sa, adding warmth.' },
+  { letter:'Ga', name:'Gandhara', ratio:'5:4', ratio_n:5/4,   hz:327.04, body:'Nose',     desc:'The "heavenly" note. Named for the celestial region Gandharva. Produces nasal and sinus resonance.' },
+  { letter:'Ma', name:'Madhyama', ratio:'4:3', ratio_n:4/3,   hz:348.83, body:'Mouth',    desc:'The "middle" note. Pivotal note of the scale — it divides the octave and activates the oral cavity resonance.' },
+  { letter:'Pa', name:'Panchama', ratio:'3:2', ratio_n:3/2,   hz:392.44, body:'Navel',    desc:'The "fifth". Universally the most consonant interval after the octave. Produces deep abdominal resonance.' },
+  { letter:'Dha', name:'Dhaivata', ratio:'5:3', ratio_n:5/3,  hz:436.04, body:'Forehead', desc:'Named for the "Dha" syllable. Creates frontal resonance, activating the forehead and sinuses.' },
+  { letter:'Ni', name:'Nishada', ratio:'15:8', ratio_n:15/8,  hz:490.55, body:'Crown',    desc:'The "leading tone" — creates tension that resolves to the upper Sa. Activates crown resonance.' }
+];
 
-const VAULT_KEY = 'forge_vault_v1';
-const SLOT_COUNT = 20;
+const KARANAS_SAMPLE = [
+  { id:1,  name:'Talasankhita',   rasa:'veera',     desc:'Striking the palms — initiates the heroic movement sequence with percussive energy.', freq:'200–350 Hz' },
+  { id:4,  name:'Ākshipta',       rasa:'adbhuta',   desc:'Thrown outward — expansive gesture expressing wonder and cosmic vastness.', freq:'600–1200 Hz' },
+  { id:8,  name:'Āviddha',        rasa:'shringara', desc:'Revolving — circular movement expressing grace, beauty, and the dance of attraction.', freq:'800–1600 Hz' },
+  { id:12, name:'Sūcī',           rasa:'karuna',    desc:'The needle — a pointed, precise gesture of focused compassion and emotional specificity.', freq:'400–700 Hz' },
+  { id:16, name:'Ardhasuci',      rasa:'karuna',    desc:'Half-needle — a softer variant of Sūcī conveying compassionate restraint.', freq:'350–650 Hz' },
+  { id:21, name:'Alāta',          rasa:'shringara', desc:'Rotating like fire — a circling movement carrying the warmth of love and beauty.', freq:'700–1400 Hz' },
+  { id:27, name:'Katisama',       rasa:'veera',     desc:'Equal hips — the balanced warrior stance; generates symmetric low-frequency ground vibration.', freq:'150–280 Hz' },
+  { id:33, name:'Apaviddha',      rasa:'raudra',    desc:'Thrown away — an explosive, outward-dismissing gesture of fierce rejection.', freq:'300–600 Hz' },
+  { id:38, name:'Nikuttita',      rasa:'hasya',     desc:'Stamping — rhythmic foot strikes create percussive humor and playful engagement.', freq:'180–400 Hz' },
+  { id:44, name:'Atikrānta',      rasa:'veera',     desc:'Crossing over — the decisive stride of heroic forward movement.', freq:'200–380 Hz' },
+  { id:49, name:'Bhrāmarī',       rasa:'shringara', desc:'The bee — a spiraling, circular movement of exquisite delicacy and beauty.', freq:'800–1600 Hz' },
+  { id:56, name:'Pārśvakrānta',   rasa:'bhayanaka', desc:'Crossing to the side — a furtive lateral movement; generates asymmetric frequency patterns.', freq:'250–500 Hz' },
+  { id:62, name:'Ūrūdvritta',     rasa:'adbhuta',   desc:'Thigh rotation — a powerful rotational movement expressing awe and cosmic wonder.', freq:'150–350 Hz' },
+  { id:71, name:'Lalita',         rasa:'shringara', desc:'The graceful — embodies beauty and elegance; generates the highest frequency acoustic signature.', freq:'900–2000 Hz' },
+  { id:78, name:'Danda',          rasa:'veera',     desc:'The staff — a powerful vertical alignment generating a strong, singular low-frequency resonance.', freq:'120–250 Hz' },
+  { id:85, name:'Skhalita',       rasa:'hasya',     desc:'The stumble — a controlled off-balance movement generating playful irregular rhythms.', freq:'200–500 Hz' },
+  { id:92, name:'Nūpura',         rasa:'shanta',    desc:'Anklet sound — an ultra-subtle shift generating the softest, most meditative frequency signature.', freq:'1000–2500 Hz' },
+  { id:101, name:'Vṛścika',       rasa:'raudra',    desc:'The scorpion — an arched back posture of fierce readiness; generates mid-high frequency tension.', freq:'400–900 Hz' },
+  { id:108, name:'Utsandita',     rasa:'shanta',    desc:'Final rising — the culminating karana; generates a complete broadband acoustic event signifying resolution.', freq:'All bands' }
+];
+
+const RASAS = [
+  { name:'Śringāra', meaning:'Love · Beauty · Erotic', freq:'700–2000 Hz', bg:'rgba(180,60,80,0.1)', border:'rgba(180,60,80,0.35)', color:'#8B1A2A', deva:'शृंगार' },
+  { name:'Hāsya',    meaning:'Joy · Humor · Comic',    freq:'200–500 Hz',  bg:'rgba(60,130,50,0.1)',  border:'rgba(60,130,50,0.35)',  color:'#2A6A1A', deva:'हास्य' },
+  { name:'Karuṇa',   meaning:'Compassion · Grief',     freq:'350–800 Hz',  bg:'rgba(50,80,150,0.1)',  border:'rgba(50,80,150,0.3)',   color:'#2A4A8B', deva:'करुण' },
+  { name:'Raudra',   meaning:'Fury · Rage · Fierce',   freq:'200–700 Hz',  bg:'rgba(160,30,30,0.1)',  border:'rgba(160,30,30,0.35)',  color:'#8B1010', deva:'रौद्र' },
+  { name:'Vīra',     meaning:'Heroic · Courageous',    freq:'150–400 Hz',  bg:'rgba(120,80,20,0.12)', border:'rgba(120,80,20,0.35)', color:'#7A5010', deva:'वीर' },
+  { name:'Bhayānaka',meaning:'Terror · Fear · Dark',   freq:'60–300 Hz',   bg:'rgba(40,30,60,0.12)',  border:'rgba(40,30,60,0.3)',    color:'#2A1A4A', deva:'भयानक' },
+  { name:'Bībhatsa', meaning:'Disgust · Repulsion',    freq:'100–400 Hz',  bg:'rgba(80,100,20,0.1)',  border:'rgba(80,100,20,0.3)',   color:'#4A5A0A', deva:'बीभत्स' },
+  { name:'Adbhuta',  meaning:'Wonder · Amazement',     freq:'500–1500 Hz', bg:'rgba(80,50,150,0.1)',  border:'rgba(80,50,150,0.3)',   color:'#4A2A8B', deva:'अद्भुत' },
+  { name:'Śānta',    meaning:'Peace · Serenity · Bliss',freq:'800–3000 Hz',bg:'rgba(80,130,100,0.1)',border:'rgba(80,130,100,0.3)',  color:'#2A6A4A', deva:'शांत' }
+];
+
+/* ══════════════════════════════════════════════
+   MODE & TAB SWITCHING
+══════════════════════════════════════════════ */
+let currentMode = 'detailed';
+let currentTab = 'physics';
+
+function setMode(mode) {
+  currentMode = mode;
+  document.getElementById('btn-detailed').classList.toggle('active', mode === 'detailed');
+  document.getElementById('btn-brief').classList.toggle('active', mode === 'brief');
+  document.querySelectorAll('.mode-content').forEach(el => {
+    el.classList.remove('active');
+  });
+  document.querySelectorAll(`.${mode}-physics, .${mode}-swaras, .${mode}-alankaras, .${mode}-karanas, .${mode}-equations, .${mode}-bridge`).forEach(el => {
+    el.classList.add('active');
+  });
+}
+
+function setTab(tab) {
+  currentTab = tab;
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + tab).classList.add('active');
+  document.querySelectorAll('.tab-btn').forEach(b => {
+    if (b.textContent.toLowerCase().includes(tab === 'physics' ? 'sound' : tab === 'swaras' ? 'swara' : tab === 'alankaras' ? 'alankara' : tab === 'karanas' ? 'karana' : tab === 'equations' ? 'equat' : 'bridge')) {
+      b.classList.add('active');
+    }
+  });
+}
+
+/* ══════════════════════════════════════════════
+   RENDER SWARA CARDS
+══════════════════════════════════════════════ */
+function buildSwaraGrid() {
+  const grid = document.getElementById('swaraGrid');
+  SWARAS.forEach((s, i) => {
+    const div = document.createElement('div');
+    div.className = 'swara-card';
+    div.title = s.desc;
+    div.innerHTML = `
+      <div class="play-ring"></div>
+      <span class="swara-letter">${s.letter}</span>
+      <span class="swara-name">${s.name}</span>
+      <span class="swara-ratio">${s.ratio}</span>
+      <span class="swara-hz">${s.hz.toFixed(1)} Hz</span>
+      <span class="swara-body">${s.body}</span>
+    `;
+    div.addEventListener('click', () => playSwara(s.hz, div));
+    grid.appendChild(div);
+  });
+}
+
+/* ══════════════════════════════════════════════
+   WEB AUDIO — SWARA PLAYBACK
+══════════════════════════════════════════════ */
+let audioCtx = null;
+let activeSwara = null;
+
+function playSwara(hz, card) {
+  if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  
+  if (activeSwara) {
+    activeSwara.classList.remove('playing');
+    activeSwara = null;
+  }
+
+  const osc = audioCtx.createOscillator();
+  const gain = audioCtx.createGain();
+  const osc2 = audioCtx.createOscillator(); // overtone
+  const gain2 = audioCtx.createGain();
+
+  osc.type = 'sine';
+  osc.frequency.value = hz;
+  osc2.type = 'sine';
+  osc2.frequency.value = hz * 2;
+
+  gain.gain.setValueAtTime(0, audioCtx.currentTime);
+  gain.gain.linearRampToValueAtTime(0.38, audioCtx.currentTime + 0.05);
+  gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 1.8);
+
+  gain2.gain.setValueAtTime(0, audioCtx.currentTime);
+  gain2.gain.linearRampToValueAtTime(0.12, audioCtx.currentTime + 0.05);
+  gain2.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 1.4);
+
+  osc.connect(gain);
+  osc2.connect(gain2);
+  gain.connect(audioCtx.destination);
+  gain2.connect(audioCtx.destination);
+
+  osc.start(); osc2.start();
+  osc.stop(audioCtx.currentTime + 1.8);
+  osc2.stop(audioCtx.currentTime + 1.8);
+
+  card.classList.add('playing');
+  activeSwara = card;
+  setTimeout(() => { card.classList.remove('playing'); if(activeSwara===card) activeSwara=null; }, 1800);
+}
+
+/* ══════════════════════════════════════════════
+   FREQUENCY CHART (Canvas)
+══════════════════════════════════════════════ */
+function drawFreqChart() {
+  const canvas = document.getElementById('freqCanvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const dpr = window.devicePixelRatio || 1;
+  const rect = canvas.parentElement.getBoundingClientRect();
+  canvas.width = rect.width * dpr;
+  canvas.height = 180 * dpr;
+  ctx.scale(dpr, dpr);
+
+  const W = rect.width, H = 180;
+  ctx.clearRect(0, 0, W, H);
+
+  const maxHz = 530;
+  const barW = (W - 80) / SWARAS.length;
+  const barGap = 8;
+
+  // Grid lines
+  ctx.strokeStyle = 'rgba(196,130,26,0.15)';
+  ctx.lineWidth = 1;
+  for (let i = 0; i <= 5; i++) {
+    const y = 20 + (H - 50) * (1 - i/5);
+    ctx.beginPath(); ctx.moveTo(50, y); ctx.lineTo(W - 20, y); ctx.stroke();
+    ctx.fillStyle = 'rgba(245,230,192,0.35)';
+    ctx.font = '10px EB Garamond, serif';
+    ctx.fillText(Math.round(i/5 * maxHz) + ' Hz', 2, y + 4);
+  }
+
+  SWARAS.forEach((s, i) => {
+    const bh = ((s.hz / maxHz) * (H - 50));
+    const x = 50 + i * barW + barGap/2;
+    const y = H - 30 - bh;
+    const bw = barW - barGap;
+
+    // Gradient bar
+    const grad = ctx.createLinearGradient(x, y + bh, x, y);
+    grad.addColorStop(0, 'rgba(139,90,10,0.8)');
+    grad.addColorStop(0.5, 'rgba(196,130,26,0.9)');
+    grad.addColorStop(1, 'rgba(212,160,23,0.95)');
+    ctx.fillStyle = grad;
+    ctx.fillRect(x, y, bw, bh);
+
+    // Ratio label inside bar
+    ctx.fillStyle = 'rgba(253,243,220,0.7)';
+    ctx.font = 'italic 10px EB Garamond, serif';
+    ctx.textAlign = 'center';
+    ctx.fillText(s.ratio, x + bw/2, y + 14);
+
+    // Swara letter below
+    ctx.fillStyle = '#C4821A';
+    ctx.font = 'bold 13px Cinzel Decorative, serif';
+    ctx.textAlign = 'center';
+    ctx.fillText(s.letter, x + bw/2, H - 14);
+
+    // Hz label
+    ctx.fillStyle = 'rgba(245,230,192,0.5)';
+    ctx.font = '9px EB Garamond, serif';
+    ctx.fillText(s.hz.toFixed(0), x + bw/2, H - 2);
+  });
+}
+
+/* ══════════════════════════════════════════════
+   KARANA GRID
+══════════════════════════════════════════════ */
+function buildKaranaGrid() {
+  const grid = document.getElementById('karanaGrid');
+  if (!grid) return;
+  KARANAS_SAMPLE.forEach(k => {
+    const div = document.createElement('div');
+    div.className = 'karana-card';
+    div.innerHTML = `
+      <div class="k-number">#${k.id}</div>
+      <div class="k-name">${k.name}</div>
+      <div class="k-rasa rasa-${k.rasa}">${k.rasa.charAt(0).toUpperCase()+k.rasa.slice(1)}</div>
+      <div class="k-desc">${k.desc}</div>
+      <div class="k-freq">⊛ Acoustic band: ${k.freq}</div>
+    `;
+    grid.appendChild(div);
+  });
+}
+
+/* ══════════════════════════════════════════════
+   RASA DASHBOARD
+══════════════════════════════════════════════ */
+function buildRasaDashboard() {
+  const dash = document.getElementById('rasaDashboard');
+  if (!dash) return;
+  RASAS.forEach(r => {
+    const div = document.createElement('div');
+    div.className = 'rasa-tile';
+    div.style.cssText = `background:${r.bg};border-color:${r.border}`;
+    div.innerHTML = `
+      <div class="r-name" style="color:${r.color}">${r.deva} · ${r.name}</div>
+      <div class="r-meaning" style="color:${r.color}">${r.meaning}</div>
+      <div class="r-freq" style="color:${r.color}">Acoustic: ${r.freq}</div>
+    `;
+    dash.appendChild(div);
+  });
+}
+
+/* ══════════════════════════════════════════════
+   TAB BUTTON MAPPING (better)
+══════════════════════════════════════════════ */
+function initTabButtons() {
+  const tabBtns = document.querySelectorAll('.tab-btn');
+  const tabIds = ['physics','swaras','alankaras','karanas','equations','bridge'];
+  tabBtns.forEach((btn, i) => {
+    btn.addEventListener('click', () => {
+      tabBtns.forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('tab-' + tabIds[i]).classList.add('active');
+      if (tabIds[i] === 'swaras') { setTimeout(drawFreqChart, 50); }
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  });
+}
+
+/* ══════════════════════════════════════════════
+   INIT
+══════════════════════════════════════════════ */
+window.addEventListener('DOMContentLoaded', () => {
+  buildSwaraGrid();
+  buildKaranaGrid();
+  buildRasaDashboard();
+  initTabButtons();
+  setTimeout(drawFreqChart, 300);
+});
+
+window.addEventListener('resize', () => {
+  if (currentTab === 'swaras') drawFreqChart();
+});
+
+/* ══════════════════════════════════════════════
+   KEY VAULT ENGINE — 20-Slot localStorage-backed
+══════════════════════════════════════════════ */
+const VAULT_KEY   = 'forge_vault_v1';
+const SLOT_COUNT  = 20;
+
 let _vault = Array.from({length: SLOT_COUNT}, () => ({key:'', used:0, errors:0}));
-let _vaultRequests = 0;
+let _vaultRequests  = 0;
 let _vaultCurrentSlot = '—';
 
-/* ════════════════════════════════════
-   VAULT ENGINE
-════════════════════════════════════ */
+/* ── Persistence ── */
 function vaultSave() {
-  const data = _vault.map(s => ({key: s.key}));
-  try { localStorage.setItem(VAULT_KEY, JSON.stringify(data)); } catch(e) {}
+  try { localStorage.setItem(VAULT_KEY, JSON.stringify(_vault.map(s => ({key:s.key})))); } catch(e) {}
 }
 function vaultLoad() {
   try {
     const raw = localStorage.getItem(VAULT_KEY);
     if (!raw) return;
-    const data = JSON.parse(raw);
-    data.forEach((item, i) => { if (i < SLOT_COUNT && item.key) _vault[i].key = item.key; });
+    JSON.parse(raw).forEach((item, i) => { if (i < SLOT_COUNT && item.key) _vault[i].key = item.key; });
   } catch(e) {}
 }
+
+/* ── Active key helpers ── */
 function vaultGetActive() {
   return _vault.map((s,i) => ({...s, index:i})).filter(s => s.key && s.errors < 3);
 }
 function vaultGetNext() {
-  const active = vaultGetActive();
-  if (!active.length) return null;
-  return active.reduce((a,b) => a.used <= b.used ? a : b);
+  const a = vaultGetActive();
+  return a.length ? a.reduce((x,y) => x.used <= y.used ? x : y) : null;
 }
-function vaultMarkError(index) {
-  _vault[index].errors++;
-  vaultUpdateStatusBar();
-}
+function vaultMarkError(index) { _vault[index].errors++; vaultUpdateUI(); }
 function vaultMarkUsed(index) {
   _vault[index].used++;
   _vault[index].errors = 0;
   _vaultRequests++;
   _vaultCurrentSlot = `Slot ${index + 1}`;
-  const el = document.getElementById('fkReqCount');
-  if (el) el.textContent = _vaultRequests;
-  const pEl = document.getElementById('fkCurProvider');
-  if (pEl) pEl.textContent = _vaultCurrentSlot;
-  vaultUpdateStatusBar();
+  const rc = document.getElementById('fkReqCount');  if (rc) rc.textContent = _vaultRequests;
+  const cp = document.getElementById('fkCurProvider'); if (cp) cp.textContent = _vaultCurrentSlot;
+  vaultUpdateUI();
 }
 
-async function callAI(prompt, maxTokens=2000) {
+/* ── callAI — multi-provider auto-detect ── */
+async function callAI(prompt, maxTokens=1200) {
   const slot = vaultGetNext();
-  if (!slot) throw new Error('No API keys available. Add keys in the Key Vault panel.');
-  const key = slot.key;
-  const index = slot.index;
+  if (!slot) throw new Error('No API keys in vault. Click 🗝 Key Vault to add one.');
+  const {key, index} = slot;
   try {
     let result;
-    if (key.startsWith('gsk_') || key.startsWith('gsk-')) {
-      result = await _callGroq(key, prompt, maxTokens);
-    } else if (key.startsWith('AIzaSy') || key.startsWith('AIza')) {
-      result = await _callGemini(key, prompt, maxTokens);
-    } else if (key.startsWith('sk-or')) {
-      result = await _callOpenRouter(key, prompt, maxTokens);
-    } else if (key.startsWith('sk-ant')) {
-      result = await _callAnthropic(key, prompt, maxTokens);
-    } else {
-      try { result = await _callGroq(key, prompt, maxTokens); }
-      catch(e2) { result = await _callOpenRouter(key, prompt, maxTokens); }
-    }
+    if      (key.startsWith('gsk_') || key.startsWith('gsk-'))          result = await _callGroq(key, prompt, maxTokens);
+    else if (key.startsWith('AIzaSy') || key.startsWith('AIza'))         result = await _callGemini(key, prompt, maxTokens);
+    else if (key.startsWith('sk-or'))                                     result = await _callOpenRouter(key, prompt, maxTokens);
+    else if (key.startsWith('sk-ant'))                                    result = await _callAnthropic(key, prompt, maxTokens);
+    else { try { result = await _callGroq(key, prompt, maxTokens); } catch(e) { result = await _callOpenRouter(key, prompt, maxTokens); } }
     vaultMarkUsed(index);
     return result;
   } catch(err) {
-    forgeLog(`Slot ${index+1} error: ${err.message}`, 'err');
+    forgeLog(`Slot ${index+1}: ${err.message}`, 'err');
     vaultMarkError(index);
     const next = vaultGetNext();
     if (next && next.index !== index) return callAI(prompt, maxTokens);
-    throw new Error('All available keys failed. ' + err.message);
+    throw new Error('All vault keys failed. ' + err.message);
   }
 }
 
 async function _callGroq(key, prompt, maxTokens) {
   const r = await fetch('https://api.groq.com/openai/v1/chat/completions', {
-    method:'POST',
-    headers:{'Content-Type':'application/json','Authorization':`Bearer ${key}`},
-    body: JSON.stringify({model:'llama-3.3-70b-versatile', max_tokens: Math.min(maxTokens,8000), messages:[{role:'user',content:prompt}]})
+    method:'POST', headers:{'Content-Type':'application/json','Authorization':`Bearer ${key}`},
+    body: JSON.stringify({model:'llama-3.3-70b-versatile', max_tokens:Math.min(maxTokens,8000), messages:[{role:'user',content:prompt}]})
   });
   if (!r.ok) throw new Error(`Groq HTTP ${r.status}`);
-  const d = await r.json();
-  return d.choices?.[0]?.message?.content || '';
+  const d = await r.json(); return d.choices?.[0]?.message?.content || '';
 }
 async function _callGemini(key, prompt, maxTokens) {
   const r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${key}`,{
@@ -856,18 +2068,16 @@ async function _callGemini(key, prompt, maxTokens) {
     body: JSON.stringify({contents:[{parts:[{text:prompt}]}], generationConfig:{maxOutputTokens:Math.min(maxTokens,8192)}})
   });
   if (!r.ok) throw new Error(`Gemini HTTP ${r.status}`);
-  const d = await r.json();
-  return d.candidates?.[0]?.content?.parts?.[0]?.text || '';
+  const d = await r.json(); return d.candidates?.[0]?.content?.parts?.[0]?.text || '';
 }
 async function _callOpenRouter(key, prompt, maxTokens) {
   const r = await fetch('https://openrouter.ai/api/v1/chat/completions',{
     method:'POST',
-    headers:{'Content-Type':'application/json','Authorization':`Bearer ${key}`,'HTTP-Referer':'https://culturalmusings.com','X-Title':'Research Forge'},
+    headers:{'Content-Type':'application/json','Authorization':`Bearer ${key}`,'HTTP-Referer':'https://culturalmusings.com','X-Title':'Nada Brahman Codex'},
     body: JSON.stringify({model:'meta-llama/llama-3.3-70b-instruct:free', max_tokens:Math.min(maxTokens,8000), messages:[{role:'user',content:prompt}]})
   });
   if (!r.ok) throw new Error(`OpenRouter HTTP ${r.status}`);
-  const d = await r.json();
-  return d.choices?.[0]?.message?.content || '';
+  const d = await r.json(); return d.choices?.[0]?.message?.content || '';
 }
 async function _callAnthropic(key, prompt, maxTokens) {
   const r = await fetch('https://api.anthropic.com/v1/messages',{
@@ -876,530 +2086,104 @@ async function _callAnthropic(key, prompt, maxTokens) {
     body: JSON.stringify({model:'claude-3-haiku-20240307', max_tokens:Math.min(maxTokens,4096), messages:[{role:'user',content:prompt}]})
   });
   if (!r.ok) throw new Error(`Anthropic HTTP ${r.status}`);
-  const d = await r.json();
-  return d.content?.[0]?.text || '';
+  const d = await r.json(); return d.content?.[0]?.text || '';
 }
 
-/* ════════════════════════════════════
-   KEY PANEL UI
-════════════════════════════════════ */
+/* ── Drawer open / close ── */
+function openVault()  {
+  document.getElementById('vaultDrawer').classList.add('open');
+  document.getElementById('vaultBackdrop').classList.add('open');
+}
+function closeVault() {
+  document.getElementById('vaultDrawer').classList.remove('open');
+  document.getElementById('vaultBackdrop').classList.remove('open');
+}
+
+/* ── Log helper ── */
+function forgeLog(msg, type='ok') {
+  const el = document.getElementById('vaultLog');
+  if (!el) return;
+  el.textContent = msg;
+  el.className = 'vd-log ' + type;
+  clearTimeout(el._lt);
+  el._lt = setTimeout(() => { el.textContent = 'Vault ready.'; el.className = 'vd-log'; }, 4000);
+}
+
+/* ── Slot UI ── */
 function buildKeyPanel() {
   const body = document.getElementById('forgeKeyBody');
   if (!body) return;
   body.innerHTML = Array.from({length: SLOT_COUNT}, (_, i) => {
-    const slot = _vault[i];
-    const isLocked = !!slot.key;
-    const displayVal = isLocked ? (slot.key.slice(0,4) + '••••••••' + slot.key.slice(-3)) : '';
-    return `<div class="key-slot-20" id="kslot-row-${i}">
+    const s = _vault[i];
+    const locked = !!s.key;
+    const disp   = locked ? (s.key.slice(0,4)+'••••••••'+s.key.slice(-3)) : '';
+    return `
+    <div class="key-slot-20" id="kslot-row-${i}">
       <span class="ks20-num">${String(i+1).padStart(2,'0')}</span>
-      <input type="text" class="ks20-input${isLocked?' ks-locked':''}" id="kslot-${i}"
-        value="${displayVal}" placeholder="Paste key…" autocomplete="off" spellcheck="false"
-        ${isLocked?'readonly':''}
-        onpaste="vaultHandlePaste(event,${i})"
-        onkeydown="vaultHandleEnter(event,${i})">
-      <button class="ks20-btn${isLocked?' ks-locked':''}" id="kslot-btn-${i}"
-        title="${isLocked?'Click to remove':'Press Enter or paste key'}"
-        onclick="vaultToggleSlot(${i})">${isLocked?'✓':'+'}</button>
+      <input type="text" class="ks20-input${locked?' ks-locked':''}" id="kslot-${i}"
+        value="${disp}" placeholder="Paste any API key…"
+        autocomplete="off" spellcheck="false" ${locked?'readonly':''}
+        onpaste="vaultHandlePaste(event,${i})" onkeydown="vaultHandleEnter(event,${i})">
+      <button class="ks20-btn${locked?' ks-locked':''}" id="kslot-btn-${i}"
+        title="${locked?'Click to remove':'Enter or paste'}"
+        onclick="vaultToggleSlot(${i})">${locked?'✓':'+'}</button>
     </div>`;
   }).join('');
-  vaultUpdateStatusBar();
 }
 
-function vaultHandlePaste(e, i) {
+function vaultHandlePaste(e, index) {
   e.preventDefault();
   const raw = (e.clipboardData||window.clipboardData).getData('text').trim();
-  if (raw.length >= 8) vaultLockSlot(i, raw);
+  if (raw.length >= 8) vaultLockSlot(index, raw);
 }
-function vaultHandleEnter(e, i) {
+function vaultHandleEnter(e, index) {
   if (e.key === 'Enter') {
-    const inp = document.getElementById('kslot-'+i);
-    if (inp && inp.value.trim().length >= 8) vaultLockSlot(i, inp.value.trim());
+    const inp = document.getElementById('kslot-'+index);
+    if (inp && inp.value.trim().length >= 8) vaultLockSlot(index, inp.value.trim());
   }
 }
-function vaultToggleSlot(i) {
-  if (_vault[i].key) {
-    if (!confirm(`Remove key from Slot ${i+1}?`)) return;
-    _vault[i] = {key:'', used:0, errors:0};
-    const inp = document.getElementById('kslot-'+i);
-    const btn = document.getElementById('kslot-btn-'+i);
+function vaultToggleSlot(index) {
+  if (_vault[index].key) {
+    if (!confirm(`Remove key from Slot ${index+1}?`)) return;
+    _vault[index] = {key:'', used:0, errors:0};
+    const inp = document.getElementById('kslot-'+index);
+    const btn = document.getElementById('kslot-btn-'+index);
     if (inp) { inp.value=''; inp.classList.remove('ks-locked'); inp.removeAttribute('readonly'); }
-    if (btn) { btn.textContent='+'; btn.classList.remove('ks-locked'); }
-    vaultSave(); vaultUpdateStatusBar();
-    forgeLog(`Slot ${i+1} key removed`, 'warn');
+    if (btn) { btn.textContent='+'; btn.classList.remove('ks-locked'); btn.title='Enter or paste'; }
+    vaultSave(); vaultUpdateUI();
+    forgeLog(`Slot ${index+1} removed`, 'warn');
   }
 }
-function vaultLockSlot(i, key) {
-  _vault[i].key = key; _vault[i].errors = 0;
-  const inp = document.getElementById('kslot-'+i);
-  const btn = document.getElementById('kslot-btn-'+i);
+function vaultLockSlot(index, key) {
+  _vault[index].key = key; _vault[index].errors = 0;
+  const inp = document.getElementById('kslot-'+index);
+  const btn = document.getElementById('kslot-btn-'+index);
   if (inp) { inp.value = key.slice(0,4)+'••••••••'+key.slice(-3); inp.classList.add('ks-locked'); inp.setAttribute('readonly',''); }
-  if (btn) { btn.textContent='✓'; btn.classList.add('ks-locked'); btn.title='Click to remove key'; }
-  vaultSave(); vaultUpdateStatusBar();
-  forgeLog(`Slot ${i+1} locked ✓`, 'ok');
+  if (btn) { btn.textContent='✓'; btn.classList.add('ks-locked'); btn.title='Click to remove'; }
+  vaultSave(); vaultUpdateUI();
+  forgeLog(`Slot ${index+1} locked ✓`, 'ok');
 }
 function clearAllKeys() {
-  if (!confirm('Clear all 20 API keys?')) return;
-  _vault.forEach((s,i)=>{
-    s.key=''; s.used=0; s.errors=0;
-    const inp=document.getElementById('kslot-'+i), btn=document.getElementById('kslot-btn-'+i);
-    if(inp){inp.value='';inp.classList.remove('ks-locked');inp.removeAttribute('readonly');}
-    if(btn){btn.textContent='+';btn.classList.remove('ks-locked');}
-  });
-  vaultSave(); vaultUpdateStatusBar();
-  forgeLog('All vault keys cleared','warn');
+  if (!confirm('Clear all 20 keys from vault?')) return;
+  _vault.forEach((_,i) => { _vault[i]={key:'',used:0,errors:0}; });
+  buildKeyPanel(); vaultSave(); vaultUpdateUI();
+  forgeLog('All keys cleared', 'warn');
 }
-function vaultUpdateStatusBar() {
+
+/* ── UI state sync ── */
+function vaultUpdateUI() {
   const active = vaultGetActive().length;
-  const pill = document.getElementById('vaultPill');
+  const ac = document.getElementById('fkActiveCount'); if (ac) ac.textContent = active;
   const dot = document.getElementById('vaultDot');
-  if (pill) { pill.innerHTML = `<span class="pill-dot ${active>0?'ok':'empty'}" id="vaultDot"></span>Key Vault ${active}/20`; pill.className = `provider-pill vault-pill ${active>0?'active':'idle'}`; }
-  const cnt = document.getElementById('fkActiveCount'); if(cnt) cnt.textContent = active;
-  const tot = document.getElementById('fkTotalLabel'); if(tot) tot.textContent = `${active} key${active!==1?'s':''} active`;
-  const btn = document.getElementById('generateBtnApi'); if(btn) btn.disabled = active === 0 && _currentMode==='api';
+  if (dot) dot.className = 'vt-dot' + (active > 0 ? ' active' : '');
 }
 
-/* ════════════════════════════════════
-   UI HELPERS
-════════════════════════════════════ */
-let _logStart = Date.now();
-function forgeLog(msg, type='info') {
-  const el = document.getElementById('forgeLog');
-  const secs = Math.floor((Date.now()-_logStart)/1000);
-  const mm = String(Math.floor(secs/60)).padStart(2,'0');
-  const ss = String(secs%60).padStart(2,'0');
-  const line = document.createElement('div');
-  line.className = `log-line ${type}`;
-  line.innerHTML = `<span class="log-time">${mm}:${ss}</span><span class="log-msg">${msg}</span>`;
-  el.appendChild(line);
-  el.scrollTop = el.scrollHeight;
-}
-
-function switchMode(mode) {
-  _currentMode = mode;
-  document.getElementById('modeNoApi').classList.toggle('active', mode==='noapi');
-  document.getElementById('modeApi').classList.toggle('active', mode==='api');
-  document.getElementById('noApiSection').classList.toggle('hidden', mode!=='noapi');
-  document.getElementById('apiSection').classList.toggle('hidden', mode!=='api');
-  document.getElementById('fsbMode').textContent = `Mode: ${mode==='noapi'?'No-API':'API'}`;
-  forgeLog(`Switched to ${mode==='noapi'?'No-API':'API'} mode`, 'info');
-}
-
-function switchTab(tab) {
-  _currentTab = tab;
-  document.querySelectorAll('.fr-tab').forEach(t => t.classList.remove('active'));
-  document.querySelectorAll('.fr-tab').forEach(t => { if(t.textContent.toLowerCase().includes(tab)) t.classList.add('active'); });
-  renderCurrentTab();
-}
-
-function updateDepth(v) {
-  _researchDepth = parseInt(v);
-  const labels = {1:'Surface (1)', 2:'Standard (2)', 3:'Deep (3)', 4:'Expert (4)', 5:'Exhaustive (5)'};
-  document.getElementById('depthLabel').textContent = labels[v] || `Depth ${v}`;
-}
-
-document.querySelectorAll('.src-chip').forEach(chip => {
-  chip.addEventListener('click', () => {
-    const src = chip.dataset.src;
-    chip.classList.toggle('selected');
-    if (chip.classList.contains('selected')) _selectedSources.add(src);
-    else _selectedSources.delete(src);
-  });
-});
-
-function showModal(title, body) {
-  document.getElementById('modalTitle').textContent = title;
-  document.getElementById('modalBody').innerHTML = body;
-  document.getElementById('modal').classList.add('open');
-}
-function closeModal() { document.getElementById('modal').classList.remove('open'); }
-
-function showLoading(msg) {
-  document.getElementById('emptyState').style.display = 'none';
-  document.getElementById('resultContent').style.display = 'none';
-  const c = document.getElementById('frContent');
-  let loader = document.getElementById('frLoader');
-  if (!loader) { loader = document.createElement('div'); loader.id='frLoader'; loader.className='forge-loading'; c.appendChild(loader); }
-  loader.innerHTML = `<div class="loading-hex"></div><div class="loading-text">${msg}</div><div class="loading-sub">Depth level ${_researchDepth} · ${[..._selectedSources].length} sources</div>`;
-  loader.style.display = 'flex';
-}
-function hideLoading() {
-  const l = document.getElementById('frLoader');
-  if (l) l.style.display = 'none';
-}
-function showResults() {
-  hideLoading();
-  document.getElementById('emptyState').style.display = 'none';
-  document.getElementById('resultContent').style.display = 'block';
-}
-
-/* ════════════════════════════════════
-   SOURCE DEFINITIONS
-════════════════════════════════════ */
-const SOURCE_DEFS = {
-  culturalmusings: {
-    label: 'culturalmusings.com',
-    base: 'https://www.culturalmusings.com',
-    searchUrl: q => `https://www.culturalmusings.com/?s=${encodeURIComponent(q)}`,
-    color: 'var(--forge-gold)',
-    desc: 'Primary reference: Cultural Musings — Indian classical arts, history, and theory.',
-    links: [
-      {title:'Home', url:'https://www.culturalmusings.com'},
-      {title:'About', url:'https://www.culturalmusings.com/about'},
-      {title:'Articles', url:'https://www.culturalmusings.com/articles'},
-    ]
-  },
-  computationalcodex: {
-    label: 'Computational Codex',
-    base: 'https://computationalcodex.culturalmusings.com',
-    searchUrl: q => `https://computationalcodex.culturalmusings.com/?s=${encodeURIComponent(q)}`,
-    color: 'var(--forge-teal)',
-    desc: 'Computational Codex — Structured knowledge base for classical arts research.',
-    links: [
-      {title:'Codex Home', url:'https://computationalcodex.culturalmusings.com'},
-    ]
-  },
-  github: {
-    label: 'GitHub / ramachandra1975',
-    base: 'https://github.com/ramachandra1975',
-    searchUrl: q => `https://github.com/search?q=user:ramachandra1975+${encodeURIComponent(q)}&type=repositories`,
-    color: 'var(--forge-purple)',
-    desc: 'GitHub repositories by ramachandra1975 — code and structured data for cultural research.',
-    links: [
-      {title:'GitHub Profile', url:'https://github.com/ramachandra1975'},
-      {title:'Repositories', url:'https://github.com/ramachandra1975?tab=repositories'},
-    ]
-  },
-  wikipedia: {
-    label: 'Wikipedia',
-    base: 'https://en.wikipedia.org',
-    searchUrl: q => `https://en.wikipedia.org/wiki/Special:Search?search=${encodeURIComponent(q)}`,
-    color: 'var(--forge-blue)',
-    desc: 'Wikipedia — general encyclopaedic reference.'
-  },
-  scholar: {
-    label: 'Google Scholar',
-    base: 'https://scholar.google.com',
-    searchUrl: q => `https://scholar.google.com/scholar?q=${encodeURIComponent(q)}`,
-    color: '#4ade80',
-    desc: 'Google Scholar — academic papers and citations.'
-  },
-  archive: {
-    label: 'Archive.org',
-    base: 'https://archive.org',
-    searchUrl: q => `https://archive.org/search?query=${encodeURIComponent(q)}`,
-    color: '#fb923c',
-    desc: 'Internet Archive — historical texts, scanned manuscripts, and media.'
-  },
-  jstor: {
-    label: 'JSTOR',
-    base: 'https://www.jstor.org',
-    searchUrl: q => `https://www.jstor.org/action/doBasicSearch?Query=${encodeURIComponent(q)}`,
-    color: '#e879f9',
-    desc: 'JSTOR — peer-reviewed academic journal articles.'
-  },
-  arxiv: {
-    label: 'arXiv',
-    base: 'https://arxiv.org',
-    searchUrl: q => `https://arxiv.org/search/?searchtype=all&query=${encodeURIComponent(q)}`,
-    color: '#f87171',
-    desc: 'arXiv — preprints in physics, mathematics, computer science.'
-  }
-};
-
-/* ════════════════════════════════════
-   NO-API RESEARCH MODE
-════════════════════════════════════ */
-function doResearch() {
-  const q = document.getElementById('queryInput').value.trim();
-  if (!q) { showModal('Query Required', 'Please enter a research query before generating links.'); return; }
-  if (_selectedSources.size === 0) { showModal('No Sources', 'Please select at least one source.'); return; }
-
-  forgeLog(`No-API research: "${q.slice(0,60)}…"`, 'info');
-  forgeLog(`Sources: ${[..._selectedSources].join(', ')}`, 'info');
-  showLoading('Generating Research Links…');
-
-  setTimeout(() => {
-    _researchResults = buildNoApiResults(q);
-    showResults();
-    renderCurrentTab();
-    forgeLog('Research links generated ✓', 'ok');
-  }, 600);
-}
-
-function buildNoApiResults(q) {
-  const results = { synthesis: '', sources: [], github: [], query: q };
-
-  // Build synthesis HTML
-  const srcList = [..._selectedSources].map(s => SOURCE_DEFS[s]).filter(Boolean);
-  results.synthesis = `
-    <div class="result-block">
-      <div class="rb-header">
-        <span class="rb-badge noapi">No-API Mode</span>
-        <span class="rb-title">${escHtml(q)}</span>
-        <span class="rb-source">${srcList.length} sources · Depth ${_researchDepth}</span>
-      </div>
-      <div class="rb-body">
-        <h2>Research Guide</h2>
-        <p>Below are curated search links for your query across selected sources. Click any link to open the search results in a new tab.</p>
-        <h3>Primary References (Cultural Musings)</h3>
-        <ul>
-          <li><a href="https://www.culturalmusings.com" target="_blank">culturalmusings.com — Main Portal</a></li>
-          <li><a href="https://computationalcodex.culturalmusings.com" target="_blank">Computational Codex — Structured Research Database</a></li>
-          <li><a href="https://www.culturalmusings.com/?s=${encodeURIComponent(q)}" target="_blank">Search culturalmusings.com for: ${escHtml(q)}</a></li>
-          <li><a href="https://computationalcodex.culturalmusings.com/?s=${encodeURIComponent(q)}" target="_blank">Search Computational Codex for: ${escHtml(q)}</a></li>
-        </ul>
-        <h3>GitHub (ramachandra1975)</h3>
-        <ul>
-          <li><a href="https://github.com/ramachandra1975" target="_blank">GitHub Profile — ramachandra1975</a></li>
-          <li><a href="https://github.com/ramachandra1975?tab=repositories" target="_blank">All Repositories</a></li>
-          <li><a href="https://github.com/search?q=user:ramachandra1975+${encodeURIComponent(q)}&type=repositories" target="_blank">Search repositories for: ${escHtml(q)}</a></li>
-        </ul>
-        ${_researchDepth >= 2 ? `
-        <h3>Academic Sources</h3>
-        <ul>
-          <li><a href="https://scholar.google.com/scholar?q=${encodeURIComponent(q)}" target="_blank">Google Scholar: ${escHtml(q)}</a></li>
-          <li><a href="https://www.jstor.org/action/doBasicSearch?Query=${encodeURIComponent(q)}" target="_blank">JSTOR: ${escHtml(q)}</a></li>
-          <li><a href="https://arxiv.org/search/?searchtype=all&query=${encodeURIComponent(q)}" target="_blank">arXiv: ${escHtml(q)}</a></li>
-          <li><a href="https://archive.org/search?query=${encodeURIComponent(q)}" target="_blank">Internet Archive: ${escHtml(q)}</a></li>
-        </ul>` : ''}
-        ${_researchDepth >= 3 ? `
-        <h3>Extended Search Strategies</h3>
-        <ul>
-          <li><a href="https://en.wikipedia.org/wiki/Special:Search?search=${encodeURIComponent(q)}" target="_blank">Wikipedia: ${escHtml(q)}</a></li>
-          <li><a href="https://www.google.com/search?q=${encodeURIComponent(q)}+site:culturalmusings.com" target="_blank">Google: ${escHtml(q)} (site:culturalmusings.com)</a></li>
-          <li><a href="https://www.google.com/search?q=${encodeURIComponent(q)}+filetype:pdf" target="_blank">Google: PDF papers on ${escHtml(q)}</a></li>
-          <li><a href="https://www.google.com/search?q=${encodeURIComponent(q)}+Natya+Shastra" target="_blank">Google: ${escHtml(q)} + Natya Shastra</a></li>
-        </ul>` : ''}
-        ${_researchDepth >= 4 ? `
-        <h3>Deep Research Links</h3>
-        <ul>
-          <li><a href="https://www.google.com/search?q=${encodeURIComponent(q)}+Bharatanatyam" target="_blank">Search: ${escHtml(q)} + Bharatanatyam</a></li>
-          <li><a href="https://www.google.com/search?q=${encodeURIComponent(q)}+Chidambaram+temple" target="_blank">Search: ${escHtml(q)} + Chidambaram temple</a></li>
-          <li><a href="https://www.google.com/search?q=${encodeURIComponent(q)}+108+karanas" target="_blank">Search: ${escHtml(q)} + 108 karanas</a></li>
-          <li><a href="https://www.google.com/search?q=${encodeURIComponent(q)}+computational+analysis" target="_blank">Search: ${escHtml(q)} + computational analysis</a></li>
-        </ul>` : ''}
-        ${_researchDepth >= 5 ? `
-        <h3>Manuscript & Archive Research</h3>
-        <ul>
-          <li><a href="https://archive.org/search?query=${encodeURIComponent(q)}+Natya+Shastra" target="_blank">Archive.org: Natya Shastra manuscripts related to ${escHtml(q)}</a></li>
-          <li><a href="https://archive.org/search?query=${encodeURIComponent('Bharata Muni')}+${encodeURIComponent(q)}" target="_blank">Archive.org: Bharata Muni + ${escHtml(q)}</a></li>
-          <li><a href="https://scholar.google.com/scholar?q=${encodeURIComponent(q)}+%22Natya+Shastra%22&as_ylo=2010" target="_blank">Scholar: Recent papers (2010+) on ${escHtml(q)} + Natya Shastra</a></li>
-          <li><a href="https://www.jstor.org/action/doBasicSearch?Query=${encodeURIComponent(q)}+%22Indian+classical%22" target="_blank">JSTOR: ${escHtml(q)} in Indian classical contexts</a></li>
-        </ul>` : ''}
-        <blockquote>
-          Tip: Switch to <strong>API Mode</strong> and add a Groq / Gemini / OpenRouter key to get a full AI-synthesized research report with analysis.
-        </blockquote>
-      </div>
-    </div>`;
-
-  // Build source cards
-  results.sources = srcList.map(s => ({
-    domain: s.label,
-    title: `Search ${s.label} for "${q}"`,
-    snippet: s.desc,
-    url: s.searchUrl(q),
-    color: s.color
-  }));
-
-  // GitHub result
-  results.github = [
-    { title: 'ramachandra1975 — GitHub Profile', url: 'https://github.com/ramachandra1975', desc: 'View all repositories, contributions, and projects by ramachandra1975.' },
-    { title: `Search: "${q}" in ramachandra1975 repos`, url: `https://github.com/search?q=user:ramachandra1975+${encodeURIComponent(q)}&type=repositories`, desc: 'Repository search scoped to ramachandra1975.' },
-    { title: 'Computational Codex Repository', url: 'https://github.com/ramachandra1975', desc: 'Cultural Musings computational project — computational codex for classical arts.' }
-  ];
-
-  return results;
-}
-
-/* ════════════════════════════════════
-   API RESEARCH MODE
-════════════════════════════════════ */
-async function doApiResearch() {
-  const q = document.getElementById('queryInput').value.trim();
-  if (!q) { showModal('Query Required', 'Please enter a research query.'); return; }
-  if (vaultGetActive().length === 0) { showModal('No API Keys', 'Please add at least one API key in the Key Vault panel on the right.'); return; }
-
-  forgeLog(`API research: "${q.slice(0,60)}…"`, 'info');
-  showLoading('Synthesizing with AI…');
-
-  const srcNames = [..._selectedSources].map(s => SOURCE_DEFS[s]?.label || s).join(', ');
-  const depthMap = {1:'brief 200-word', 2:'standard 400-word', 3:'detailed 600-word', 4:'comprehensive 900-word', 5:'exhaustive 1200-word'};
-  const depthInstr = depthMap[_researchDepth] || 'detailed';
-
-  const prompt = `You are an expert research assistant specializing in Indian classical arts, bio-acoustic physics, Natya Shastra, and computational humanities. The user is researching via the Cultural Musings platform (https://www.culturalmusings.com) and its Computational Codex (https://computationalcodex.culturalmusings.com), maintained by ramachandra1975 (https://github.com/ramachandra1975).
-
-Research Query: "${q}"
-
-Primary reference sources to cite where relevant:
-- culturalmusings.com — primary platform for Indian classical arts knowledge
-- computationalcodex.culturalmusings.com — structured computational codex
-- github.com/ramachandra1975 — code and data repositories
-- Additional sources: ${srcNames}
-
-Please produce a ${depthInstr} research synthesis on the query. Structure your response with:
-1. Executive Summary (2-3 sentences)
-2. Key Findings (bullet points)
-3. Detailed Analysis (depth level ${_researchDepth}/5)
-4. Connections to Natya Shastra / Indian classical arts (if relevant)
-5. Suggested further reading or research directions
-6. How this topic relates to computational / digital humanities
-
-Format with clear headings using ## and ###. Use **bold** for key terms. Include relevant technical details where appropriate.`;
-
-  try {
-    const result = await callAI(prompt, 1500 * _researchDepth);
-    forgeLog('AI synthesis complete ✓', 'ok');
-
-    _researchResults = buildApiResults(q, result);
-    showResults();
-    renderCurrentTab();
-  } catch(err) {
-    hideLoading();
-    document.getElementById('emptyState').style.display = 'flex';
-    forgeLog(`API error: ${err.message}`, 'err');
-    showModal('API Error', `<p>${escHtml(err.message)}</p><p style="margin-top:10px">Try switching to <strong>No-API Mode</strong> for link-based research, or check your API keys in the Key Vault.</p>`);
-  }
-}
-
-function buildApiResults(q, aiText) {
-  const html = markdownToHtml(aiText);
-  return {
-    synthesis: `
-      <div class="result-block">
-        <div class="rb-header">
-          <span class="rb-badge synthesis">AI Synthesis</span>
-          <span class="rb-title">${escHtml(q)}</span>
-          <span class="rb-source">Depth ${_researchDepth} · ${[..._selectedSources].length} sources</span>
-        </div>
-        <div class="rb-body">${html}</div>
-      </div>`,
-    sources: [..._selectedSources].map(s => {
-      const def = SOURCE_DEFS[s];
-      if (!def) return null;
-      return { domain: def.label, title: `Search ${def.label}`, snippet: def.desc, url: def.searchUrl(q), color: def.color };
-    }).filter(Boolean),
-    github: [
-      { title: 'ramachandra1975 — GitHub Profile', url: 'https://github.com/ramachandra1975', desc: 'All repositories and contributions.' },
-      { title: `Repository search: "${q}"`, url: `https://github.com/search?q=user:ramachandra1975+${encodeURIComponent(q)}`, desc: 'Search within ramachandra1975 repositories.' }
-    ],
-    query: q
-  };
-}
-
-/* ════════════════════════════════════
-   RENDER TABS
-════════════════════════════════════ */
-function renderCurrentTab() {
-  const r = _researchResults;
-  if (!r.query) return;
-  const el = document.getElementById('resultContent');
-
-  if (_currentTab === 'synthesis') {
-    el.innerHTML = r.synthesis || '';
-  }
-  else if (_currentTab === 'sources') {
-    const cards = (r.sources||[]).map(s => `
-      <div class="source-card">
-        <div class="sc-domain" style="color:${s.color||'var(--forge-teal)'}">${escHtml(s.domain)}</div>
-        <div class="sc-title">${escHtml(s.title)}</div>
-        <div class="sc-snippet">${escHtml(s.snippet||'')}</div>
-        <a class="sc-link" href="${escHtml(s.url)}" target="_blank">Open Search →</a>
-      </div>`).join('');
-    el.innerHTML = `<div class="source-cards">${cards}</div>`;
-  }
-  else if (_currentTab === 'github') {
-    const items = (r.github||[]).map(g => `
-      <div class="result-block">
-        <div class="rb-header">
-          <span class="rb-badge github">GitHub</span>
-          <span class="rb-title">${escHtml(g.title)}</span>
-        </div>
-        <div class="rb-body">
-          <p>${escHtml(g.desc)}</p>
-          <a href="${escHtml(g.url)}" target="_blank">→ Open on GitHub</a>
-        </div>
-      </div>`).join('');
-    el.innerHTML = items || '<div class="fr-empty" style="height:200px"><div class="fr-empty-text">No GitHub results</div></div>';
-  }
-  else if (_currentTab === 'export') {
-    const raw = stripHtml(r.synthesis||'');
-    el.innerHTML = `
-      <div class="result-block">
-        <div class="rb-header"><span class="rb-badge noapi">Export</span><span class="rb-title">Research Export — ${escHtml(r.query||'')}</span></div>
-        <div class="rb-body">
-          <h2>Export Options</h2>
-          <p><strong>Query:</strong> ${escHtml(r.query||'')}</p>
-          <p><strong>Sources:</strong> ${[..._selectedSources].join(', ')}</p>
-          <p><strong>Depth:</strong> ${_researchDepth}/5</p>
-          <br>
-          <button onclick="copyText()" style="padding:8px 16px;background:rgba(197,160,89,0.1);border:1px solid rgba(197,160,89,0.3);color:var(--forge-gold);font-family:'Montserrat',sans-serif;font-size:0.5rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;cursor:pointer;margin-right:8px">Copy Results</button>
-          <button onclick="openAllLinks()" style="padding:8px 16px;background:rgba(45,212,160,0.08);border:1px solid rgba(45,212,160,0.2);color:var(--forge-teal);font-family:'Montserrat',sans-serif;font-size:0.5rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;cursor:pointer">Open All Sources</button>
-          <h3 style="margin-top:16px">Raw Text</h3>
-          <textarea style="width:100%;min-height:200px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);color:var(--forge-muted);font-family:'JetBrains Mono',monospace;font-size:0.48rem;padding:10px;outline:none;resize:vertical" readonly>${escHtml(raw)}</textarea>
-        </div>
-      </div>`;
-  }
-}
-
-function copyText() {
-  const ta = document.querySelector('#resultContent textarea');
-  if (ta) { ta.select(); document.execCommand('copy'); forgeLog('Results copied to clipboard', 'ok'); }
-}
-function openAllLinks() {
-  const sources = _researchResults.sources || [];
-  sources.forEach(s => window.open(s.url, '_blank'));
-  forgeLog(`Opened ${sources.length} source links`, 'ok');
-}
-
-/* ════════════════════════════════════
-   UTILITIES
-════════════════════════════════════ */
-function escHtml(s) {
-  if (!s) return '';
-  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-}
-function stripHtml(s) { return s.replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim(); }
-
-function markdownToHtml(md) {
-  if (!md) return '';
-  return md
-    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
-    .replace(/^### (.+)$/gm, '<h3>$1</h3>')
-    .replace(/^## (.+)$/gm, '<h2>$1</h2>')
-    .replace(/^# (.+)$/gm, '<h2>$1</h2>')
-    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
-    .replace(/\*(.+?)\*/g, '<em>$1</em>')
-    .replace(/`(.+?)`/g, '<code>$1</code>')
-    .replace(/^\- (.+)$/gm, '<li>$1</li>')
-    .replace(/^\* (.+)$/gm, '<li>$1</li>')
-    .replace(/^(\d+)\. (.+)$/gm, '<li>$2</li>')
-    .replace(/(<li>.*<\/li>\n?)+/g, m => '<ul>'+m+'</ul>')
-    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank">$1</a>')
-    .replace(/^&gt; (.+)$/gm, '<blockquote>$1</blockquote>')
-    .replace(/\n\n/g, '</p><p>')
-    .replace(/^(?!<[hbulp])(.+)$/gm, '<p>$1</p>')
-    .replace(/<p><\/p>/g,'')
-    .replace(/<p>(<[hbul])/g,'$1')
-    .replace(/(<\/[hbul][^>]*>)<\/p>/g,'$1');
-}
-
-/* ════════════════════════════════════
-   INIT
-════════════════════════════════════ */
+/* ── Bootstrap vault on DOMContentLoaded ── */
 document.addEventListener('DOMContentLoaded', () => {
   vaultLoad();
   buildKeyPanel();
-  vaultUpdateStatusBar();
-  forgeLog('Vault loaded · Sources: culturalmusings.com · github/ramachandra1975', 'ok');
-  forgeLog('Select mode → Enter query → Generate', 'info');
-
-  // Tab click fix
-  document.querySelectorAll('.fr-tab').forEach((btn, i) => {
-    const tabs = ['synthesis','sources','github','export'];
-    btn.onclick = () => switchTab(tabs[i]);
-  });
+  vaultUpdateUI();
 });
 </script>
-
 </body>
 </html>
